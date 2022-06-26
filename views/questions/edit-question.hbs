@@ -3,27 +3,63 @@
 <form method="POST" action="/questions/{{this._id}}/edit">
 
   <label>Question</label>
-  <input type="text" name="question" required minlength="3" maxlength="50" value="{{this.question}}" />
+  <input
+    type="text"
+    name="question"
+    required
+    minlength="3"
+    maxlength="50"
+    value="{{this.question}}"
+  />
 
   <label>Correct Answer</label>
-  <input type="text" name="correct_answer" maxlength="20" value="{{this.correct_answer}}" />
+  <input
+    type="text"
+    name="correct_answer"
+    maxlength="20"
+    value="{{this.correct_answer}}"
+  />
 
   <label>Incorrect Answer1</label>
-  <input type="text" name="incorrect_answers_0" maxlength="20" value="{{this.incorrect_answers_0}}" />
+  <input
+    type="text"
+    name="incorrect_answers_0"
+    maxlength="20"
+    value="{{this.incorrect_answers_0}}"
+  />
 
   <label>Incorrect Answer2</label>
-  <input type="text" name="incorrect_answers_1" maxlength="20" value="{{this.incorrect_answers_1}}" />
+  <input
+    type="text"
+    name="incorrect_answers_1"
+    maxlength="20"
+    value="{{this.incorrect_answers_1}}"
+  />
 
   <label>Category</label>
   <input type="text" name="category" maxlength="20" value="{{this.category}}" />
 
   <label>Difficulty</label>
-  <input type="text" name="difficulty" maxlength="20" value="{{this.difficulty}}" />
+  <input
+    type="text"
+    name="difficulty"
+    maxlength="20"
+    value="{{this.difficulty}}"
+  />
 
   <label>Image</label>
-  <input type="text" name="question_img" maxlength="80" value="{{this.question_img}}" />
+  <input
+    type="text"
+    name="question_img"
+    maxlength="80"
+    value="{{this.question_img}}"
+  />
 
-  <label><input type="checkbox" name="isVisible" value="{{this.isVisible}}" />Visible</label>
+  <label><input
+      type="checkbox"
+      name="isVisible"
+      value="{{this.isVisible}}"
+    />Visible</label>
 
   {{#if error}}
     <p style="color: red;">{{error}}</p>
