@@ -1,8 +1,8 @@
-# App name
+# QuizzesAndMentors
 
 ## Description
 
-This is a project developed by XXX and YYY as the project for the second module at Ironhack. The application...
+This is a project developed by Daniel Gonzalez and Elisa Bascón as the project for the second module at Ironhack. The application is a game that allows users to learn through taking quizzes on the topics they want to improve. You can also contact with the users community to receive or provide help according to your degree of knowledge. Play, learn and mentor others!
 
 ---
 
@@ -36,13 +36,27 @@ npm run start
 What can the user do with the app?
 - User can sign up and create and account
 - User can login
-- User can log ou
-- User can create ...
+- User can log out
+- Admin privileges accounts can create a Quiz by topic and tag it with a difficulty level. A quiz is made up of several questions
+- Admin also can create questions and linked it to a Quiz
+- Admin accounts can do CRUD operations both for topic and for questions data model
+- User when registering gets 100 points in his account
+- User can choose a quiz to play by theme as long as they have overcome the previous difficulty levels
+- User can earn points and climb positions to the general ranking completing differents quiz levels
+- When a user finnish a Quiz will see a screen with evalation of this
+- The user can access the profile and consult their personal information
+- The app will connect (via profile) lower level users with mentors in the area they need to improve
 
 ## User stories (Backlog)
 
 - User can upload a profile picture
-- User can ...
+- Any user (even without being registered) can consult the score ranking of the best players by quiz topic.
+- Any user (even without being registered) can consult the how to play instructions.
+- User can access to the profile and check game statistics.
+- Each question has a maximum associated response time, if it ends it is considered incorrect.
+- For each game, if the user has enough points, he can use jokers that help him get the answer (50% joker, clues, etc.)
+- The user will be able to send a message to their mentor through the platform
+- Connect to an external API to consume data already created by the community
 
 ---
 
