@@ -85,9 +85,7 @@ router.post("/:questionId/delete", async (req, res, next) => {
 router.get("/:questionId/edit", async (req, res, next) => {
   const { questionId } = req.params;
   try {
-    const question = await Question.findById(questionId).lean();
-    question.incorrect_answers_0 = question.incorrect_answers[0];
-    question.incorrect_answers_1 = question.incorrect_answers[1];
+    const question = await Question.findById(questionId);
     res.render("questions/edit-question", question);
   } catch (error) {
     next(error);
