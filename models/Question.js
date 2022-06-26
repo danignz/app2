@@ -23,10 +23,10 @@ const questionSchema = new Schema({
   },
   question_img: {
     type: String,
+    default: "/images/questions/default.jpg",
   },
   isVisible: {
-    type: Boolean,
-    default: true,
+    type: Boolean
   },
 });
 

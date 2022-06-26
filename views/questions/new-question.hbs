@@ -3,25 +3,32 @@
 <form method="POST" action="/questions/create">
 
   <label>Question</label>
-  <input type="text" name="question" />
+  <input type="text" name="question" placeholder="Write a Question" required minlength="3" maxlength="50"/>
 
   <label>Correct Answer</label>
-  <input type="text" name="correct Answer" />
+  <input type="text" name="correct_answer" placeholder="Write a Answer" maxlength="20"/>
 
-  <label>Incorrect Answer</label>
-  <input type="text" name="incorrect Answer" />
+  <label>Incorrect Answer1</label>
+  <input type="text" name="incorrect_answers_0" placeholder="Write IncorrectAnswer1" maxlength="20"/>
+
+  <label>Incorrect Answer2</label>
+  <input type="text" name="incorrect_answers_1" placeholder="Write IncorrectAnswer2" maxlength="20"/>
 
   <label>Category</label>
-  <input type="text" name="category" />
+  <input type="text" name="category" placeholder="Write a Category" maxlength="20"/>
 
   <label>Difficulty</label>
-  <input type="text" name="difficulty" />
+  <input type="text" name="difficulty" placeholder="Write a Difficulty" maxlength="20"/>
 
   <label>Image</label>
-  <input type="text" name="question image" />
+  <input type="text" name="question_img" placeholder="A image is needed" maxlength="80"/>
 
   <label><input type="checkbox" name="isVisible" value="true" />Visible</label>
-  
+
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+
   <button type="submit">Create new Question</button>
 
 </form>
