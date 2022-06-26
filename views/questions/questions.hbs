@@ -1,0 +1,23 @@
+<h1> {{name}} welcome!</h1>
+
+<h1>Engima list</h1>
+
+<h2>Not Solved</h2>
+{{#each enigmas}}
+  {{#unless this.solved}}
+    <ul>
+      <li> <a href="/enigmas/{{this._id}}">{{this.title}}</a></li>
+    </ul>
+  {{/unless}}
+{{/each}}
+
+<h2>Solved</h2>
+{{#each enigmas}}
+  {{#if this.solved}}
+    <ul>
+      <li> <a href="/enigmas/{{this._id}}">{{this.title}}</a></li>
+    </ul>
+  {{/if}}
+{{/each}}
+
+<form action="/auth/logout" method="POST"><button type="submit">Log out</button></form> 
