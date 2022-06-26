@@ -4,7 +4,6 @@ const questionSchema = new Schema({
   question: {
     type: String,
     required: [true, "Question is required"],
-    unique: true,
   },
   correct_answer: {
     type: String,
