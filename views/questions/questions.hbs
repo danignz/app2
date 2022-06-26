@@ -1,23 +1,22 @@
-<h1> {{name}} welcome!</h1>
+<h1> Questions </h1>
 
-<h1>Engima list</h1>
+<div>
+  {{#each questions}}
 
-<h2>Not Solved</h2>
-{{#each enigmas}}
-  {{#unless this.solved}}
-    <ul>
-      <li> <a href="/enigmas/{{this._id}}">{{this.title}}</a></li>
-    </ul>
-  {{/unless}}
-{{/each}}
+    <h3>Question: {{this.question}}</h3>
+    <h4>Correct answer: {{this.correct_answer}}</h4>
+    <h4>Correct answer:{{this.incorrect_answers}}</h4>
+    <h6>Category: {{this.category}}</h6>
+    <h6>Difficulty: {{this.difficulty}}</h6>
+    {{#if this.question_img}}
+      <img src="{{this.question_img}}" alt="Image of question" />
+    {{else}}
+      <img src="images/default" alt="Not image avariable" />
+      <!-- Buscar Imagen default -->
+    {{/if}}
+    <h6>Visibility: {{this.isVisible}}</h6>
 
-<h2>Solved</h2>
-{{#each enigmas}}
-  {{#if this.solved}}
-    <ul>
-      <li> <a href="/enigmas/{{this._id}}">{{this.title}}</a></li>
-    </ul>
-  {{/if}}
-{{/each}}
+  {{/each}}
+</div>
 
-<form action="/auth/logout" method="POST"><button type="submit">Log out</button></form> 
+<a class="homelink" href="/">Back Home Page</a>

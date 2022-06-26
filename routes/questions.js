@@ -4,7 +4,7 @@ const Question = require("../models/Question");
 router.get("/", async (req, res, next) => {
     try {
       const questions = await Question.find({});
-      res.render("/questions", { questions });
+      res.render("questions/questions", { questions });
     } catch (error) {
       next(error);
     }
@@ -15,9 +15,9 @@ router.get("/", async (req, res, next) => {
   });
 
 router.post("/create", async (req, res, next) => {
-    const { question, ccorrect_answer, incorrect_answers, category, difficulty, question_img, isVisible } = req.body;
+    const { question, correct_answer, incorrect_answers, category, difficulty, question_img, isVisible } = req.body;
     try { 
-       await Question.create({ question, ccorrect_answer, incorrect_answers, category, difficulty, question_img, isVisible });
+       await Question.create({ question, correct_answer, incorrect_answers, category, difficulty, question_img, isVisible });
        res.redirect("/questions");
     }  catch (error) {
        next(error);
