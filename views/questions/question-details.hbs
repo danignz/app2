@@ -1,0 +1,24 @@
+<h1>Detail of a Question</h1>
+
+<div>
+  <h3>ID: {{this._id}}</h3>
+  <h3>Question: {{this.question}}</h3>
+  <h4>Correct answer: {{this.correct_answer}}</h4>
+  <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
+  <h4>Category: {{this.category}}</h4>
+  <h4>Difficulty: {{this.difficulty}}</h4>
+  <h4>Visibility: {{this.isVisible}}</h4>
+  {{#if this.question_img}}
+    <img src="{{this.question_img}}" alt="Image of question" />
+  {{else}}
+    <img src="/images/questions/default.jpg" alt="Not image avariable" />
+  {{/if}}
+</div>
+
+<form method="POST" action="/questions/{{this._id}}/delete">
+  <button type="submit">Delete</button>
+</form>
+
+<button onclick="location.href='/questions/{{this._id}}/edit'" type="button">Edit</button>
+
+<a href="/">Back Home Page</a>

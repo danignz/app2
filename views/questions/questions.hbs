@@ -1,19 +1,15 @@
 <h1>List of all Questions </h1>
 
 <div>
-  {{#each questions}}
-    <h3>Question: {{this.question}}</h3>
-    <h4>Correct answer: {{this.correct_answer}}</h4>
-    <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
-    <h4>Category: {{this.category}}</h4>
-    <h4>Difficulty: {{this.difficulty}}</h4>
-    <h4>Visibility: {{this.isVisible}}</h4>
-    {{#if this.question_img}}
-      <img src="{{this.question_img}}" alt="Image of question" />
-    {{else}}
-      <img src="/images/questions/default.jpg" alt="Not image avariable" />
-    {{/if}}
-  {{/each}}
+  {{#if questions}}
+    {{#each questions}}
+      <h3>Question: {{this.question}}</h3>
+      <h4>Category: {{this.category}}</h4>
+      <h3><a href="/questions/{{this._id}}">Click for details</a></h3>
+    {{/each}}
+  {{else}}
+    <h3>Not questions avariable</h3>
+  {{/if}}
 </div>
 
 <a href="/">Back Home Page</a>
