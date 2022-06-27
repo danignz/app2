@@ -53,7 +53,9 @@
   <label><input
       type="checkbox"
       name="isVisible"
-      value="{{this.isVisible}}"
+      {{#if this.isVisible}}
+      checked="{{this.isVisible}}"
+      {{/if}}
     />Visible</label>
 
   <label>Image</label>
