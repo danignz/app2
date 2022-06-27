@@ -1,10 +1,10 @@
-<h1>List of all Questions </h1>
+<h4>List of all Questions </h4>
 
 <div>
   {{#if questions}}
     {{#each questions}}
       <h3>Question: {{this.question}}</h3>
-      <h4>Category: {{this.category}}</h4>
+      <h6>Category: {{this.category}}</h6>
       <h3><a href="/questions/{{this._id}}">Click for details</a></h3>
     {{/each}}
   {{else}}
