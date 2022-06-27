@@ -15,10 +15,12 @@ const questionSchema = new Schema({
   },
   category: {
     type: String,
+    enum: ["JAVASCRIPT", "CSS", "HTML"],
     required: [true, "Category is required"],
   },
   difficulty: {
     type: String,
+    enum: ["BASIC", "MEDIUM", "ADVANCE"],
     required: [true, "Difficulty is required"],
   },
   question_img: {

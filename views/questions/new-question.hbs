@@ -36,21 +36,21 @@
     maxlength="20"
   />
 
-  <label>Category</label>
-  <input
-    type="text"
-    name="category"
-    placeholder="Write a Category"
-    maxlength="20"
-  />
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="JAVASCRIPT">JAVASCRIPT</option>
+    <option value="CSS">CSS</option>
+    <option value="HTML">HTML</option>
+  </select>
 
-  <label>Difficulty</label>
-  <input
-    type="text"
-    name="difficulty"
-    placeholder="Write a Difficulty"
-    maxlength="20"
-  />
+  <label for="difficulty">Difficulty:</label>
+  <select name="difficulty" id="difficulty">
+    <option value="BASIC">BASIC</option>
+    <option value="MEDIUM">MEDIUM</option>
+    <option value="ADVANCE">ADVANCE</option>
+  </select>
+
+  <label><input type="checkbox" name="isVisible" value="true" />Visible</label>
 
   <label>Image</label>
   <input
@@ -60,8 +60,6 @@
     value="/images/questions/default.jpg"
     maxlength="80"
   />
-
-  <label><input type="checkbox" name="isVisible" value="true" />Visible</label>
 
   {{#if error}}
     <p style="color: red;">{{error}}</p>

@@ -36,16 +36,25 @@
     value="{{this.incorrect_answers.[1]}}"
   />
 
-  <label>Category</label>
-  <input type="text" name="category" maxlength="20" value="{{this.category}}" />
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="JAVASCRIPT">JAVASCRIPT</option>
+    <option value="CSS">CSS</option>
+    <option value="HTML">HTML</option>
+  </select>
 
-  <label>Difficulty</label>
-  <input
-    type="text"
-    name="difficulty"
-    maxlength="20"
-    value="{{this.difficulty}}"
-  />
+  <label for="difficulty">Difficulty:</label>
+  <select name="difficulty" id="difficulty">
+    <option value="BASIC">BASIC</option>
+    <option value="MEDIUM">MEDIUM</option>
+    <option value="ADVANCE">ADVANCE</option>
+  </select>
+
+  <label><input
+      type="checkbox"
+      name="isVisible"
+      value="{{this.isVisible}}"
+    />Visible</label>
 
   <label>Image</label>
   <input
@@ -54,12 +63,6 @@
     maxlength="80"
     value="{{this.question_img}}"
   />
-
-  <label><input
-      type="checkbox"
-      name="isVisible"
-      value="{{this.isVisible}}"
-    />Visible</label>
 
   {{#if error}}
     <p style="color: red;">{{error}}</p>
