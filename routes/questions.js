@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
 
+// @desc    Displays List of all Questions
+// @route   GET /questions
+// @access  Restricted to Admin role
 router.get("/", async (req, res, next) => {
   try {
     const questions = await Question.find({});
@@ -10,10 +13,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// @desc    Displays form to add new questions to DB
+// @route   GET /questions/create
+// @access  Restricted to Admin role
 router.get("/create", (req, res, next) => {
   res.render("questions/new-question");
 });
 
+// @desc    Sends data fields related to a question to DB to create a new question
+// @route   POST /questions/create
+// @access  Restricted to Admin role
 router.post("/create", async (req, res, next) => {
   const {
     question,
@@ -28,7 +37,7 @@ router.post("/create", async (req, res, next) => {
 
   const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
-  // Check if user introduced all values
+  // Check if admin introduced all values
   if (
     !question ||
     !correct_answer ||
@@ -62,6 +71,9 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+// @desc    Show all data fields related to a question indicated by the ID
+// @route   GET /questions/questionId
+// @access  Restricted to Admin role
 router.get("/:questionId", async (req, res, next) => {
   const { questionId } = req.params;
   try {
@@ -72,6 +84,9 @@ router.get("/:questionId", async (req, res, next) => {
   }
 });
 
+// @desc    Delete the question indicated by the ID from DB
+// @route   POST /questions/questionId/delete
+// @access  Restricted to Admin role
 router.post("/:questionId/delete", async (req, res, next) => {
   const { questionId } = req.params;
   try {
@@ -82,6 +97,9 @@ router.post("/:questionId/delete", async (req, res, next) => {
   }
 });
 
+// @desc    Displays form to edit all the possible data fields of a question
+// @route   GET /questions/questionId/edit
+// @access  Restricted to Admin role
 router.get("/:questionId/edit", async (req, res, next) => {
   const { questionId } = req.params;
   try {
@@ -92,6 +110,9 @@ router.get("/:questionId/edit", async (req, res, next) => {
   }
 });
 
+// @desc    Sends data fields related to a question to store the new data in the DB
+// @route   POST /questions/questionId/edit
+// @access  Restricted to Admin role
 router.post("/:questionId/edit", async (req, res, next) => {
   const { questionId } = req.params;
   const {
@@ -107,7 +128,7 @@ router.post("/:questionId/edit", async (req, res, next) => {
 
   const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
-  // Check if user introduced all values
+  // Check if admin introduced all values
   if (
     !question ||
     !correct_answer ||

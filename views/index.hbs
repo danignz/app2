@@ -1,9 +1,14 @@
 <h1>Home page</h1>
 
 <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/questions/create">New Question</a></li>
-        <li><a href="/questions">List Questions</a></li>
-      </ul>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/questions/create">New Question</a></li>
+    <li><a href="/questions">List Questions</a></li>
+  </ul>
+  <ul>
+    <li><a href="/auth/signup">Sign Up</a></li>
+    <li><a href="/auth/login">Login</a></li>
+  </ul>
+  <form action="/auth/logout" method="POST"><button type="submit">Log out</button></form>
 </nav>
