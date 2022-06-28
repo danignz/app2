@@ -17,7 +17,16 @@ router.get("/", async (req, res, next) => {
 // @route   GET /questions/create
 // @access  Restricted to Admin role
 router.get("/create", (req, res, next) => {
-  res.render("questions/new-question");
+
+  const enumValuesCategory= Question.schema.path('category').enumValues;
+  const enumValuesDifficulty= Question.schema.path('difficulty').enumValues;
+
+  const enumValues = {
+    category: enumValuesCategory,
+    difficulty: enumValuesDifficulty 
+  }
+
+  res.render("questions/new-question", enumValues);
 });
 
 // @desc    Sends data fields related to a question to DB to create a new question
@@ -102,9 +111,32 @@ router.post("/:questionId/delete", async (req, res, next) => {
 // @access  Restricted to Admin role
 router.get("/:questionId/edit", async (req, res, next) => {
   const { questionId } = req.params;
+
+  const enumValuesCategory= Question.schema.path('category').enumValues;
+  const enumValuesDifficulty= Question.schema.path('difficulty').enumValues;
+
   try {
     const question = await Question.findById(questionId);
-    res.render("questions/edit-question", question);
+
+    const arrayCurrentCategory = enumValuesCategory.map(category => {
+
+      if(category === question.category) {
+        return {category: category, isCurrent : true}
+      }else{
+        return {category: category, isCurrent : false}
+      }      
+    });
+
+    const arrayCurrentDifficulty = enumValuesDifficulty.map(difficulty => {
+
+      if(difficulty === question.difficulty) {
+        return {difficulty: difficulty, isCurrent : true}
+      }else{
+        return {difficulty: difficulty, isCurrent : false}
+      }      
+    });
+
+    res.render("questions/edit-question", {question, arrayCurrentCategory, arrayCurrentDifficulty});
   } catch (error) {
     next(error);
   }

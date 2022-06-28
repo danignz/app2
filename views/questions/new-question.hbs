@@ -36,18 +36,18 @@
     maxlength="20"
   />
 
-  <label for="category">Category:</label>
-  <select name="category" id="category">
-    <option value="JAVASCRIPT">JAVASCRIPT</option>
-    <option value="CSS">CSS</option>
-    <option value="HTML">HTML</option>
+  <label>Category</label>
+  <select name="category" id="category-select">
+      {{#each this.category}}
+          <option value={{this}}>{{this}}</option>
+      {{/each}}
   </select>
 
-  <label for="difficulty">Difficulty:</label>
-  <select name="difficulty" id="difficulty">
-    <option value="BASIC">BASIC</option>
-    <option value="MEDIUM">MEDIUM</option>
-    <option value="ADVANCE">ADVANCE</option>
+  <label>Difficulty</label>
+  <select name="difficulty" id="difficulty-select">
+      {{#each this.difficulty}}
+          <option value={{this}}>{{this}}</option>
+      {{/each}}
   </select>
 
   <label><input type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>

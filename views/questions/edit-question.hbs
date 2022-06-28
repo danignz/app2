@@ -1,6 +1,6 @@
 <h1>Edit Questions</h1>
 
-<form method="POST" action="/questions/{{this._id}}/edit">
+<form method="POST" action="/questions/{{question._id}}/edit">
 
   <label>Question</label>
   <input
@@ -9,7 +9,7 @@
     required
     minlength="3"
     maxlength="50"
-    value="{{this.question}}"
+    value="{{question.question}}"
   />
 
   <label>Correct Answer</label>
@@ -17,7 +17,7 @@
     type="text"
     name="correct_answer"
     maxlength="20"
-    value="{{this.correct_answer}}"
+    value="{{question.correct_answer}}"
   />
 
   <label>Incorrect Answer1</label>
@@ -25,7 +25,7 @@
     type="text"
     name="incorrect_answers_0"
     maxlength="20"
-    value="{{this.incorrect_answers.[0]}}"
+    value="{{question.incorrect_answers.[0]}}"
   />
 
   <label>Incorrect Answer2</label>
@@ -33,28 +33,36 @@
     type="text"
     name="incorrect_answers_1"
     maxlength="20"
-    value="{{this.incorrect_answers.[1]}}"
+    value="{{question.incorrect_answers.[1]}}"
   />
 
-  <label for="category">Category:</label>
-  <select name="category" id="category">
-    <option value="JAVASCRIPT">JAVASCRIPT</option>
-    <option value="CSS">CSS</option>
-    <option value="HTML">HTML</option>
+  <label>Category</label>
+  <select name="category" id="category-select">
+      {{#each arrayCurrentCategory}}
+        {{#if this.isCurrent}}
+          <option value={{this.category}} selected>{{this.category}}</option>
+        {{else}}
+          <option value={{this.category}}>{{this.category}}</option>
+        {{/if}}
+      {{/each}}
   </select>
 
-  <label for="difficulty">Difficulty:</label>
-  <select name="difficulty" id="difficulty">
-    <option value="BASIC">BASIC</option>
-    <option value="MEDIUM">MEDIUM</option>
-    <option value="ADVANCE">ADVANCE</option>
+  <label>Difficulty</label>
+  <select name="difficulty" id="difficulty-select">
+      {{#each arrayCurrentDifficulty}}
+        {{#if this.isCurrent}}
+          <option value={{this.difficulty}} selected>{{this.difficulty}}</option>
+        {{else}}
+          <option value={{this.difficulty}}>{{this.difficulty}}</option>
+        {{/if}}
+      {{/each}}
   </select>
 
   <label><input
       type="checkbox"
       name="isVisible"
-      {{#if this.isVisible}}
-      checked="{{this.isVisible}}"
+      {{#if question.isVisible}}
+      checked="{{question.isVisible}}"
       {{/if}}
     />Visible</label>
 
@@ -63,7 +71,7 @@
     type="text"
     name="question_img"
     maxlength="80"
-    value="{{this.question_img}}"
+    value="{{question.question_img}}"
   />
 
   {{#if error}}
