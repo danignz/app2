@@ -97,7 +97,7 @@ const questions = [
   },
 ];
 
-const quiz = [
+const quizzes = [
   {
     title: "Javascript Medium Quiz 2",
     description: "This is a medium level Javascript Quiz number 2",
@@ -106,7 +106,7 @@ const quiz = [
     points_required: 250,
     question: ["62b9ea9444efe40290cf4018", "62b9ea9444efe40290cf4019", "62b9ea9444efe40290cf401a", "62b9ea9444efe40290cf4015", "62ba0616e66290e6fa85fad2", "62bb092699bdb903c4f9e3df"],
     num_questions: 6,
-    quiz_img: "/images/questions/default.jpg",
+    quiz_img: "/images/quizzes/default.jpg",
     isVisible: true,
   },
 ];
@@ -119,7 +119,7 @@ mongoose
     return Question.create(questions);
   })
   .then(() => {
-    return Quiz.create(quiz);
+    return Quiz.create(quizzes);
   })
   .then(() => {
     console.log("Seed done 🌱");

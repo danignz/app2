@@ -34,7 +34,7 @@ const quizSchema = new Schema({
   },
   quiz_img: {
     type: String,
-    default: "/images/quiz/default.jpg",
+    default: "/images/quizzes/default.jpg",
   },
   isVisible: {
     type: Boolean,

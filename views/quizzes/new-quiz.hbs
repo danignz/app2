@@ -1,0 +1,72 @@
+<h4>New Quiz</h4>
+
+<form method="POST" action="/quizzes/create">
+
+  <label>Title</label>
+  <input
+    type="text"
+    name="title"
+    placeholder="Write a Title"
+    required
+    minlength="2"
+    maxlength="50"
+  />
+
+  <label>Description</label>
+  <input
+    type="text"
+    name="description"
+    placeholder="Write a Description"
+    maxlength="100"
+  />
+
+  <label>Category</label>
+  <select name="category" id="category-select">
+      {{#each this.category}}
+          <option value={{this}}>{{this}}</option>
+      {{/each}}
+  </select>
+
+  <label>Difficulty</label>
+  <select name="difficulty" id="difficulty-select">
+      {{#each this.difficulty}}
+          <option value={{this}}>{{this}}</option>
+      {{/each}}
+  </select>
+
+  <label>Points Required</label>
+  <input
+    type="number"
+    name="points_required"
+    placeholder="Write a Number"
+    min="1" max="250"
+  />
+
+  <label>Num Questions</label>
+  <input
+    type="number"
+    name="num_questions"
+    placeholder="Write a Number"
+    min="1" max="10"
+  />
+
+  <label><input type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+
+  <label>Image</label>
+  <input
+    type="text"
+    name="quiz_img"
+    placeholder="A image is needed"
+    value="/images/quizzes/default.jpg"
+    maxlength="80"
+  />
+
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+
+  <button class= "login" type="submit">Create new Quiz</button>
+
+</form>
+
+<a class="homelink" href="/">Back Home Page</a>
