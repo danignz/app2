@@ -9,24 +9,19 @@ const quizSchema = new Schema({
     type: String,
     required: [true, "Description is required"],
   },
-  difficulty: {
-    type: String,
-    enum: ["BASIC", "MEDIUM", "ADVANCE"],
-    required: [true, "Difficulty is required"],
-  },
   category: {
     type: String,
     enum: ["JAVASCRIPT", "CSS", "HTML"],
     required: [true, "Category is required"],
   },
+  difficulty: {
+    type: String,
+    enum: ["BASIC", "MEDIUM", "ADVANCE"],
+    required: [true, "Difficulty is required"],
+  },
   points_required: {
     type: Number,
-    required: [true, "Poinst are required"],
-  },
-  question: {
-    type: [Schema.Types.ObjectId],
-    ref: 'Question',
-    required: [true, "Questions are required"],
+    required: [true, "Points are required"],
   },
   num_questions: {
     type: Number,
@@ -38,6 +33,11 @@ const quizSchema = new Schema({
   },
   isVisible: {
     type: Boolean,
+  },
+  question: {
+    type: [Schema.Types.ObjectId],
+    ref: "Question",
+    required: [true, "Questions are required"],
   },
 });
 

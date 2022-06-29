@@ -7,7 +7,7 @@ const Quiz = require("../models/Quiz");
 // @access  Restricted to Admin role
 router.get("/", async (req, res, next) => {
   try {
-    const quizzes = await Quiz.find({});
+    const quizzes = await Quiz.find({}).populate("question");
     res.render("quizzes/quizzes", { quizzes });
   } catch (error) {
     next(error);
@@ -36,26 +36,23 @@ router.post("/create", async (req, res, next) => {
   const {
     title,
     description,
-    difficulty,
     category,
+    difficulty,
     points_required,
-    question,
     num_questions,
     quiz_img,
     isVisible,
   } = req.body;
 
-  const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
-
   // Check if admin introduced all values
   if (
-    !quiz ||
-    !correct_answer ||
-    !incorrect_answers_0 ||
-    !incorrect_answers_1 ||
+    !title ||
+    !description ||
     !category ||
     !difficulty ||
-    !question_img
+    !points_required ||
+    !num_questions ||
+    !quiz_img
   ) {
     res.render("quizzes/new-quiz", {
       error:
@@ -64,15 +61,29 @@ router.post("/create", async (req, res, next) => {
     return;
   }
 
+  let questions;
+  try {
+    questions = await Question.find(
+      {
+        $and: [{ category: category }, { difficulty: difficulty }],
+      },
+      { _id: 1 }
+    ).limit(num_questions);
+  } catch (error) {
+    next(error);
+  }
+
   try {
     await Quiz.create({
-      quiz,
-      correct_answer,
-      incorrect_answers,
+      title,
+      description,
       category,
       difficulty,
-      question_img,
+      points_required,
+      num_questions,
+      quiz_img,
       isVisible: Boolean(isVisible),
+      question: questions,
     });
     res.redirect("/quizzes");
   } catch (error) {

@@ -112,9 +112,12 @@ mongoose
       {
         title: "Javascript Medium Quiz 2",
         description: "This is a medium level Javascript Quiz number 2",
-        difficulty: "MEDIUM",
         category: "JAVASCRIPT",
+        difficulty: "MEDIUM",
         points_required: 250,
+        num_questions: 10,
+        quiz_img: "/images/quizzes/default.jpg",
+        isVisible: true,
         question: [
           arrayQuestionsID[0],
           arrayQuestionsID[1],
@@ -127,9 +130,6 @@ mongoose
           arrayQuestionsID[8],
           arrayQuestionsID[9],
         ],
-        num_questions: 10,
-        quiz_img: "/images/quizzes/default.jpg",
-        isVisible: true,
       },
     ];
     return Quiz.insertMany(quizzes);
