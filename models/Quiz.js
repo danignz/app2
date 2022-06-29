@@ -16,7 +16,7 @@ const quizSchema = new Schema({
   },
   difficulty: {
     type: String,
-    enum: ["BASIC", "MEDIUM", "ADVANCE"],
+    enum: ["BASICS", "INTERMEDIATE", "ADVANCED"],
     required: [true, "Difficulty is required"],
   },
   points_required: {

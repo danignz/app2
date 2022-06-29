@@ -20,7 +20,7 @@ const questionSchema = new Schema({
   },
   difficulty: {
     type: String,
-    enum: ["BASIC", "MEDIUM", "ADVANCE"],
+    enum: ["BASICS", "INTERMEDIATE", "ADVANCED"],
     required: [true, "Difficulty is required"],
   },
   question_img: {
@@ -28,7 +28,7 @@ const questionSchema = new Schema({
     default: "/images/questions/default.jpg",
   },
   isVisible: {
-    type: Boolean
+    type: Boolean,
   },
 });
 
