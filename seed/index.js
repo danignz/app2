@@ -97,29 +97,42 @@ const questions = [
   },
 ];
 
-const quizzes = [
-  {
-    title: "Javascript Medium Quiz 2",
-    description: "This is a medium level Javascript Quiz number 2",
-    difficulty: "MEDIUM",
-    category: "JAVASCRIPT",
-    points_required: 250,
-    question: ["62b9ea9444efe40290cf4018", "62b9ea9444efe40290cf4019", "62b9ea9444efe40290cf401a", "62b9ea9444efe40290cf4015", "62ba0616e66290e6fa85fad2", "62bb092699bdb903c4f9e3df"],
-    num_questions: 6,
-    quiz_img: "/images/quizzes/default.jpg",
-    isVisible: true,
-  },
-];
-
-
 mongoose
   .connect(process.env.MONGO_URL)
   .then((x) => console.log(`Connected to ${x.connection.name}`))
   .then(() => {
-    return Question.create(questions);
+    return Question.insertMany(questions);
   })
-  .then(() => {
-    return Quiz.create(quizzes);
+  .then((arrayQuestions) => {
+    const arrayQuestionsID = arrayQuestions.map((question) => {
+      return question.id;
+    });
+
+    const quizzes = [
+      {
+        title: "Javascript Medium Quiz 2",
+        description: "This is a medium level Javascript Quiz number 2",
+        difficulty: "MEDIUM",
+        category: "JAVASCRIPT",
+        points_required: 250,
+        question: [
+          arrayQuestionsID[0],
+          arrayQuestionsID[1],
+          arrayQuestionsID[2],
+          arrayQuestionsID[3],
+          arrayQuestionsID[4],
+          arrayQuestionsID[5],
+          arrayQuestionsID[6],
+          arrayQuestionsID[7],
+          arrayQuestionsID[8],
+          arrayQuestionsID[9],
+        ],
+        num_questions: 10,
+        quiz_img: "/images/quizzes/default.jpg",
+        isVisible: true,
+      },
+    ];
+    return Quiz.insertMany(quizzes);
   })
   .then(() => {
     console.log("Seed done 🌱");
