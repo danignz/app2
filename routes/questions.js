@@ -62,7 +62,7 @@ router.post("/create", async (req, res, next) => {
   ) {
     res.render("questions/new-question", {
       error:
-        "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+        "All fields (except Visible) are mandatory. Please fill them before submitting.",
         enumValues : {
           category: enumValuesCategory,
           difficulty: enumValuesDifficulty,
@@ -180,7 +180,7 @@ router.post("/:questionId/edit", async (req, res, next) => {
   ) {
     res.render("questions/edit-question", {
       error:
-        "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+        "All fields (except Visible) are mandatory. Please fill them before submitting.",
     });
     return;
   }

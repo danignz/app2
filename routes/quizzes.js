@@ -60,13 +60,31 @@ router.post("/create", async (req, res, next) => {
   ) {
     res.render("quizzes/new-quiz", {
       error:
-        "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+        "All fields (except Visible) are mandatory. Please fill them before submitting.",
       enumValues: {
         category: enumValuesCategory,
         difficulty: enumValuesDifficulty,
       },
     });
     return;
+  }
+
+  try {
+    // Check if title exists on our DB
+    const quiz = await Quiz.findOne({ title: title });
+    // If its repeated, send them error message
+    if (quiz) {
+      res.render("quizzes/new-quiz", {
+        error: "Title its busy, try a new one.",
+        enumValues: {
+          category: enumValuesCategory,
+          difficulty: enumValuesDifficulty,
+        },
+      });
+      return;
+    }
+  } catch (error) {
+    next(error);
   }
 
   let questions;
@@ -220,7 +238,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
   ) {
     res.render("quizzes/edit-quiz", {
       error:
-        "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+        "All fields (except Visible) are mandatory. Please fill them before submitting.",
       arrayCurrentCategory: arrayCurrentCategory,
       arrayCurrentDifficulty: arrayCurrentDifficulty,
       quiz: quiz,
@@ -228,16 +246,40 @@ router.post("/:quizId/edit", async (req, res, next) => {
     return;
   }
 
+  if(quiz.title !== title){
+    try {
+      // Check if new title exists on our DB
+      const quizByTitle = await Quiz.findOne({ title: title });
+      // If its repeated, send them error message
+      if (quizByTitle) {
+        res.render("quizzes/edit-quiz", {
+          error: "Title its busy, try a new one.",
+          arrayCurrentCategory: arrayCurrentCategory,
+          arrayCurrentDifficulty: arrayCurrentDifficulty,
+          quiz: quiz,
+        });
+        return;
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
   let questions;
-  try {
-    questions = await Question.find(
-      {
-        $and: [{ category: category }, { difficulty: difficulty }],
-      },
-      { _id: 1 }
-    ).limit(num_questions);
-  } catch (error) {
-    next(error);
+
+  if (parseInt(num_questions) !== quiz.num_questions) {
+    try {
+      questions = await Question.find(
+        {
+          $and: [{ category: category }, { difficulty: difficulty }],
+        },
+        { _id: 1 }
+      ).limit(num_questions);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    questions = quiz.question;
   }
 
   try {
