@@ -46,9 +46,9 @@ router.post("/create", async (req, res, next) => {
 
   const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
-    //Needed values to pass to the view if an error occurs to reload select input correctly
-    const enumValuesCategory = Question.schema.path("category").enumValues;
-    const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
+  //Needed values to pass to the view if an error occurs to reload select input correctly
+  const enumValuesCategory = Question.schema.path("category").enumValues;
+  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
 
   // Check if admin introduced all values
   if (

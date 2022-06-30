@@ -100,4 +100,30 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+// @desc    Show all data fields related to a quiz indicated by the ID
+// @route   GET /quizzes/quizId
+// @access  Restricted to Admin role
+router.get("/:quizId", async (req, res, next) => {
+  const { quizId } = req.params;
+  try {
+    const quiz = await Quiz.findById(quizId).populate("question");
+    res.render("quizzes/quiz-details", quiz);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Delete the quiz indicated by the ID from DB
+// @route   POST /quizzes/quizId/delete
+// @access  Restricted to Admin role
+router.post("/:quizId/delete", async (req, res, next) => {
+  const { quizId } = req.params;
+  try {
+    await Quiz.findByIdAndRemove(quizId);
+    res.redirect("/quizzes");
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

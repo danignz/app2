@@ -1,21 +1,32 @@
-<h4>List of all Quizzes</h4>
+<h1>Detail of a Quiz</h1>
 
 <div>
-  {{#if quizzes}}
-    {{#each quizzes}}
-      <h3>Title: {{this.title}}</h3>
-      <h6>Category: {{this.category}}</h6>
-      {{#each this.question}}
-        <h6>ID: {{this._id}}</h6>
-        <h3>Question: {{this.question}}</h3>
-        <h6>Correct Answer: {{this.correct_answer}}</h6>
-        <h6>Incorrect Answers: {{this.incorrect_answers}}</h6>
-      {{/each}}
-      <h3><a href="/quizzes/{{this._id}}">Click for details</a></h3>
-    {{/each}}
+  <h3>ID: {{this._id}}</h3>
+  <h3>title: {{this.title}}</h3>
+  <h4>description: {{this.description}}</h4>
+  <h4>Category: {{this.category}}</h4>
+  <h4>Difficulty: {{this.difficulty}}</h4>
+  <h4>Points required: {{this.points_required}}</h4>
+  <h4>Number of questions: {{this.num_questions}}</h4>
+  <h4>Visibility: {{this.isVisible}}</h4>
+  {{#if this.quiz_img}}
+    <img src="{{this.quiz_img}}" alt="Image of quiz" />
   {{else}}
-    <h3>Not quizzes avariable</h3>
+    <img src="/images/quizzes/default.jpg" alt="Not image avariable" />
   {{/if}}
+  <h4>List of Questions:</h4>
+  {{#each this.question}}
+    <h3><a href="/questions/{{this._id}}">ID: {{this._id}}</a></h3>
+  {{/each}}
 </div>
+
+<form method="POST" action="/quizzes/{{this._id}}/delete">
+  <button type="submit">Delete</button>
+</form>
+
+<button
+  onclick="location.href='/quizzes/{{this._id}}/edit'"
+  type="button"
+>Edit</button>
 
 <a href="/">Back Home Page</a>

@@ -115,7 +115,7 @@ mongoose
         category: "JAVASCRIPT",
         difficulty: "BASICS",
         points_required: 100,
-        num_questions: 3,
+        num_questions: 5,
         quiz_img: "/images/quizzes/JS-BASICS.jpg",
         isVisible: true,
         question: [
