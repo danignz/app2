@@ -1,14 +1,14 @@
-<h4>List of all Quizzes</h4>
+<h1 class="title">List of Quizzes</h1>
 
 <div>
   {{#if quizzes}}
     {{#each quizzes}}
-      <h3><a href="/quizzes/{{this._id}}">Title: {{this.title}}</a></h3>
-      <h6>Category: {{this.category}}</h6>
-      <h6>Difficulty: {{this.difficulty}}</h6>
-      <h3>List of Questions:</h3>
+      <h4><a href="/quizzes/{{this._id}}">{{this.title}}</a></h4>
+      <h6> - {{this.category}} - </h6>
+      <h6> - {{this.difficulty}} - </h6>
+      <h3 class="details" >List of Questions:</h3>
       {{#each this.question}}
-        <h3><a href="/questions/{{this._id}}">ID: {{this._id}}</a></h3>
+        <h6><a href="/questions/{{this._id}}">ID: {{this._id}}</a></h6>
       {{/each}}
     {{/each}}
   {{else}}
@@ -16,4 +16,4 @@
   {{/if}}
 </div>
 
-<a href="/">Back Home Page</a>
+<a class="homelink" href="/">Back Home</a>

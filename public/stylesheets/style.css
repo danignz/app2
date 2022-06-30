@@ -1,8 +1,12 @@
 body {
   margin: 0;
-  background: rgb(34,193,195);
-  background: radial-gradient(circle, rgba(34,193,195,0.6210526315789473) 0%, rgba(253,187,45,0.4421052631578948) 100%);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle, rgba(34, 193, 195, 0.6210526315789473) 0%, rgba(253, 187, 45, 0.4421052631578948) 100%);
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.container {
+  padding: 10%;
+
 }
 
 .logo-png {
@@ -12,14 +16,14 @@ body {
   margin: 15% 0 0 34%;
 }
 
-.mobile {
+/* .mobile {
   position: relative;
   display: flex;
   margin: auto;
   height: auto;
   justify-content: center;
   flex-wrap: wrap;
-}
+} */
 
 h3 {
   margin-top: 10px;
@@ -27,10 +31,27 @@ h3 {
   text-align: center;
 }
 
-h4 {
-  font-size: 28px;
+.title {
+  font-family: 'Krona One', sans-serif;
+  color: #212121;
   text-align: center;
-  font-weight: bold;
+}
+
+.homelink {
+  font-family: 'Krona One', sans-serif;
+  color: #6D37FF;
+  text-align: center;
+}
+
+.details {
+  color: #fffed5;
+  text-align: center;
+}
+
+h4 {
+  border-radius: 70%;
+  color: #212121;
+  text-align: center;
 }
 
 h6 {
@@ -38,34 +59,31 @@ h6 {
   text-align: center;
 }
 
-nav {
-  position: relative;
-  display: list-item;
-  font-size: 16px;
-  text-align: center;
+a {
+  text-decoration: none;
+  text-align: justify;
+  color: #6D37FF;
   font-weight: bold;
 }
 
-a {
-  text-decoration: none;
-  color: azure;
+h4 {
+  border-radius: 70%;
+  color: #212121;
+  text-align: center;
 }
 
-li {
-  text-decoration: none;
-}
-
-form {
+/* form {
   margin: 10px 0 10px 10%;
-}
+} */
 
 label {
-  display: flex;
-  margin: 10px 0;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 input {
-  width: 80%;
+  width: 94%;
   border: none;
   outline: none;
   padding: 10px;
@@ -73,13 +91,36 @@ input {
   border-bottom: 1px solid #ffff04;
 }
 
+select {
+  width: 100%;
+  padding: 10px;
+}
+
 .login {
-  width: 89%;
+  width: 100%;
   color: white;
   border: none;
   margin: 20px 0 0 0;
   padding: 8px;
-  background: -webkit-linear-gradient(left top, rgb(102, 102, 255), #a64dff);
-  box-shadow: 2px 2px #ffff04;
+  background: -webkit-linear-gradient(left top, rgb(102, 102, 255), #6D37FF);
+  box-shadow: 2px 2px #fffed5;
 }
 
+input.input-check {
+  width: 10%;
+  margin: 0;
+}
+
+/* 
+@media (max-width: 400px) {
+  body {
+    width: 90%;
+
+  }
+}
+
+@media (min-width: 401px) {
+  body {
+    width: 80%;
+  }
+} */

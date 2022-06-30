@@ -1,15 +1,15 @@
-<h4>List of all Questions </h4>
+<h1 class="title">List of Questions</h1>
 
 <div>
   {{#if questions}}
     {{#each questions}}
-      <h3>Question: {{this.question}}</h3>
-      <h6>Category: {{this.category}}</h6>
-      <h3><a href="/questions/{{this._id}}">Click for details</a></h3>
+      <h4> ·{{this.question}}</h4>
+      <h6> - {{this.category}} - </h6>
+      <h3><a class="details" href="/questions/{{this._id}}">See details</a></h3>
     {{/each}}
   {{else}}
     <h3>Not questions avariable</h3>
   {{/if}}
 </div>
 
-<a href="/">Back Home Page</a>
+<a class="homelink" href="/">Back Home</a>

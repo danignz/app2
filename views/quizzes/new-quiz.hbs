@@ -1,72 +1,75 @@
-<h4>New Quiz</h4>
+<div class="container">
+  <h1 class="title">New Quiz</h1>
 
-<form method="POST" action="/quizzes/create">
+  <form method="POST" action="/quizzes/create">
 
-  <label>Title</label>
-  <input
-    type="text"
-    name="title"
-    placeholder="Write a Title"
-    required
-    minlength="2"
-    maxlength="50"
-  />
+    <label>Title</label>
+    <input
+      type="text"
+      name="title"
+      placeholder="Write a Title"
+      required
+      minlength="2"
+      maxlength="50"
+    />
 
-  <label>Description</label>
-  <input
-    type="text"
-    name="description"
-    placeholder="Write a Description"
-    maxlength="100"
-  />
+    <label>Description</label>
+    <input
+      type="text"
+      name="description"
+      placeholder="Write a Description"
+      maxlength="100"
+    />
 
-  <label>Category</label>
-  <select name="category" id="category-select">
-      {{#each enumValues.category}}
-          <option value={{this}}>{{this}}</option>
-      {{/each}}
-  </select>
+    <label>Category</label>
+    <select name="category" id="category-select">
+        {{#each enumValues.category}}
+            <option value={{this}}>{{this}}</option>
+        {{/each}}
+    </select>
 
-  <label>Difficulty</label>
-  <select name="difficulty" id="difficulty-select">
-      {{#each enumValues.difficulty}}
-          <option value={{this}}>{{this}}</option>
-      {{/each}}
-  </select>
+    <label>Difficulty</label>
+    <select name="difficulty" id="difficulty-select">
+        {{#each enumValues.difficulty}}
+            <option value={{this}}>{{this}}</option>
+        {{/each}}
+    </select>
 
-  <label>Points Required</label>
-  <input
-    type="number"
-    name="points_required"
-    placeholder="Write a Number"
-    min="1" max="250"
-  />
+    <label>Points Required</label>
+    <input
+      type="number"
+      name="points_required"
+      placeholder="Write a Number"
+      min="1" max="250"
+    />
 
-  <label>Num Questions (It will be randomly chosen)</label>
-  <input
-    type="number"
-    name="num_questions"
-    placeholder="Write a Number"
-    min="1" max="10"
-  />
+    <label>Num Questions (It will be randomly chosen)</label>
+    <input
+      type="number"
+      name="num_questions"
+      placeholder="Write a Number"
+      min="1" max="10"
+    />
 
-  <label><input type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible for users</label>
 
-  <label>Image</label>
-  <input
-    type="text"
-    name="quiz_img"
-    placeholder="An image is needed"
-    value="/images/quizzes/default.jpg"
-    maxlength="100"
-  />
+    <label>Image</label>
+    <input
+      type="text"
+      name="quiz_img"
+      placeholder="An image is needed"
+      value="/images/quizzes/default.jpg"
+      maxlength="100"
+    />
 
-  {{#if error}}
-    <p style="color: red;">{{error}}</p>
-  {{/if}}
+    {{#if error}}
+      <p style="color: red;">{{error}}</p>
+    {{/if}}
 
-  <button class= "login" type="submit">Create new Quiz</button>
+    <button class= "login" type="submit">Create new Quiz</button>
 
-</form>
-
-<a class="homelink" href="/">Back Home Page</a>
+  </form>
+  <p>
+  <a class="homelink" href="/">&larr; Back Home</a>
+  </p>
+</div>
