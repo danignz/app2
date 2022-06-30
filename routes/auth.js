@@ -68,7 +68,13 @@ router.post("/signup", async (req, res, next) => {
       // Use salt to hash password
       const hashedPassword = await bcrypt.hash(password, salt);
       const user = await User.create({ username, email, hashedPassword });
-      res.render("auth/profile", user);
+      let quizzes;
+      try {
+        quizzes = await Quiz.find({}).populate("question");
+      } catch (error) {
+        next(error);
+      }
+      res.render("auth/profile", { user, quizzes });
     }
   } catch (error) {
     next(error);
@@ -107,7 +113,7 @@ router.post("/login", async (req, res, next) => {
           next(error);
         }
 
-        res.render("auth/profile", {user, quizzes});
+        res.render("auth/profile", { user, quizzes });
       } else {
         res.render("auth/login", { error: "Unable to authenticate user" });
       }
