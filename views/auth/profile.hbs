@@ -1,1 +1,21 @@
-<h1>Welcome {{ username }}</h1>
+<h2>Welcome {{ user.username }}</h2>
+<h2>You have {{ user.points }} points in your account</h2>
+
+<h2>You have enough points to play to the following Quizzes:</h2>
+
+<div>
+  {{#if quizzes}}
+    {{#each quizzes}}
+      <h3><a href="/quizzes/{{this._id}}">Title: {{this.title}}</a></h3>
+      <h6>Category: {{this.category}}</h6>
+      <h6>Difficulty: {{this.difficulty}}</h6>
+      <h6><img src="{{this.quiz_img}}" alt="Image of question" /></h6>
+    {{/each}}
+  {{else}}
+    <h3>Not quizzes avariable</h3>
+  {{/if}}
+</div>
+
+<h2>You don't have enough points to play to the following Quizzes:</h2>
+
+<a href="/">Back Home Page</a>
