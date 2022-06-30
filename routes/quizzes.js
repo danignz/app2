@@ -126,4 +126,142 @@ router.post("/:quizId/delete", async (req, res, next) => {
   }
 });
 
+// @desc    Displays form to edit all the possible data fields of a quiz
+// @route   GET /quizzes/quizId/edit
+// @access  Restricted to Admin role
+router.get("/:quizId/edit", async (req, res, next) => {
+  const { quizId } = req.params;
+
+  const enumValuesCategory = Quiz.schema.path("category").enumValues;
+  const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+
+  try {
+    const quiz = await Quiz.findById(quizId).populate("question");
+
+    const arrayCurrentCategory = enumValuesCategory.map((category) => {
+      if (category === quiz.category) {
+        return { category: category, isCurrent: true };
+      } else {
+        return { category: category, isCurrent: false };
+      }
+    });
+
+    const arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
+      if (difficulty === quiz.difficulty) {
+        return { difficulty: difficulty, isCurrent: true };
+      } else {
+        return { difficulty: difficulty, isCurrent: false };
+      }
+    });
+
+    res.render("quizzes/edit-quiz", {
+      quiz,
+      arrayCurrentCategory,
+      arrayCurrentDifficulty,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Sends data fields related to a quiz to store the new data in the DB
+// @route   POST /quizzes/quizId/edit
+// @access  Restricted to Admin role
+router.post("/:quizId/edit", async (req, res, next) => {
+  const { quizId } = req.params;
+  const {
+    title,
+    description,
+    category,
+    difficulty,
+    points_required,
+    num_questions,
+    quiz_img,
+    isVisible,
+  } = req.body;
+
+  //Needed values to pass to the view if an error occurs to reload select input correctly
+  const enumValuesCategory = Quiz.schema.path("category").enumValues;
+  const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+
+  let quiz, arrayCurrentCategory, arrayCurrentDifficulty;
+
+  try {
+    quiz = await Quiz.findById(quizId).populate("question");
+
+    arrayCurrentCategory = enumValuesCategory.map((category) => {
+      if (category === quiz.category) {
+        return { category: category, isCurrent: true };
+      } else {
+        return { category: category, isCurrent: false };
+      }
+    });
+
+    arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
+      if (difficulty === quiz.difficulty) {
+        return { difficulty: difficulty, isCurrent: true };
+      } else {
+        return { difficulty: difficulty, isCurrent: false };
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+
+  // Check if admin introduced all values
+  if (
+    !title ||
+    !description ||
+    !category ||
+    !difficulty ||
+    !points_required ||
+    !num_questions ||
+    !quiz_img
+  ) {
+    res.render("quizzes/edit-quiz", {
+      error:
+        "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+      arrayCurrentCategory: arrayCurrentCategory,
+      arrayCurrentDifficulty: arrayCurrentDifficulty,
+      quiz: quiz,
+    });
+    return;
+  }
+
+  let questions;
+  try {
+    questions = await Question.find(
+      {
+        $and: [{ category: category }, { difficulty: difficulty }],
+      },
+      { _id: 1 }
+    ).limit(num_questions);
+  } catch (error) {
+    next(error);
+  }
+
+  try {
+    const updatedQuiz = await Quiz.findByIdAndUpdate(
+      quizId,
+      {
+        title,
+        description,
+        category,
+        difficulty,
+        points_required: parseInt(points_required),
+        num_questions: parseInt(num_questions),
+        quiz_img,
+        isVisible: Boolean(isVisible),
+        question: questions,
+      },
+      { new: true }
+    );
+    console.log("Just updated:", updatedQuiz);
+    res.redirect(`/quizzes/${quizId}`);
+  } catch (error) {
+    next(error);
+    res.redirect(`/quizzes/${quizId}`);
+  }
+});
+
 module.exports = router;

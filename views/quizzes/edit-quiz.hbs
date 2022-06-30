@@ -1,1 +1,90 @@
-WIP
+<h1>Edit Quizzes</h1>
+
+<form method="POST" action="/quizzes/{{quiz._id}}/edit">
+
+  <label>Title</label>
+  <input
+    type="text"
+    name="title"
+    placeholder="Write a Title"
+    required
+    minlength="2"
+    maxlength="50"
+    value="{{quiz.title}}"
+  />
+
+  <label>Description</label>
+  <input
+    type="text"
+    name="description"
+    placeholder="Write a Description"
+    maxlength="100"
+    value="{{quiz.description}}"
+  />
+
+  <label>Category</label>
+  <select name="category" id="category-select">
+      {{#each arrayCurrentCategory}}
+        {{#if this.isCurrent}}
+          <option value={{this.category}} selected>{{this.category}}</option>
+        {{else}}
+          <option value={{this.category}}>{{this.category}}</option>
+        {{/if}}
+      {{/each}}
+  </select>
+
+  <label>Difficulty</label>
+  <select name="difficulty" id="difficulty-select">
+      {{#each arrayCurrentDifficulty}}
+        {{#if this.isCurrent}}
+          <option value={{this.difficulty}} selected>{{this.difficulty}}</option>
+        {{else}}
+          <option value={{this.difficulty}}>{{this.difficulty}}</option>
+        {{/if}}
+      {{/each}}
+  </select>
+
+  <label>Points Required</label>
+  <input
+    type="number"
+    name="points_required"
+    placeholder="Write a Number"
+    min="1" max="250"
+    value="{{quiz.points_required}}"
+  />
+
+  <label>Num Questions (It will be randomly chosen)</label>
+  <input
+    type="number"
+    name="num_questions"
+    placeholder="Write a Number"
+    min="1" max="10"
+    value="{{quiz.num_questions}}"
+  />
+
+  <label><input
+      type="checkbox"
+      name="isVisible"
+      {{#if quiz.isVisible}}
+      checked="{{quiz.isVisible}}"
+      {{/if}}
+    />Visible</label>
+
+  <label>Image</label>
+  <input
+    type="text"
+    name="quiz_img"
+    placeholder="An image is needed"
+    value="{{quiz.quiz_img}}"
+    maxlength="100"
+  />
+
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+
+  <button type="submit">Save changes</button>
+
+</form>
+
+<a class="homelink" href="/">Back Home Page</a>
