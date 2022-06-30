@@ -40,6 +40,17 @@ h3 {
   text-align: center;
 }
 
+.details {
+  color: #fffed5;
+  text-align: center;
+}
+
+h4 {
+  border-radius: 70%;
+  color: #212121;
+  text-align: center;
+}
+
 h6 {
   margin-top: 10px;
   text-align: center;
@@ -47,9 +58,15 @@ h6 {
 
 a {
   text-decoration: none;
+  text-align: justify;
   color: #6D37FF;
   font-weight: bold;
-  
+}
+
+h4 {
+  border-radius: 70%;
+  color: #212121;
+  text-align: center;
 }
 
 form {
