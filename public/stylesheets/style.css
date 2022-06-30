@@ -1,9 +1,12 @@
 body {
   margin: 0;
-  width: 375px;
-  height: 812px;
-  background: radial-gradient(circle, rgba(34,193,195,0.6210526315789473) 0%, rgba(253,187,45,0.4421052631578948) 100%);
+  background: radial-gradient(circle, rgba(34, 193, 195, 0.6210526315789473) 0%, rgba(253, 187, 45, 0.4421052631578948) 100%);
   font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.container {
+  padding: 10%;
+
 }
 
 .logo-png {
@@ -13,14 +16,14 @@ body {
   margin: 15% 0 0 34%;
 }
 
-.mobile {
+/* .mobile {
   position: relative;
   display: flex;
   margin: auto;
   height: auto;
   justify-content: center;
   flex-wrap: wrap;
-}
+} */
 
 h3 {
   margin-top: 10px;
@@ -69,17 +72,18 @@ h4 {
   text-align: center;
 }
 
-form {
+/* form {
   margin: 10px 0 10px 10%;
-}
+} */
 
 label {
-  display: flex;
-  margin: 10px 0;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 input {
-  width: 80%;
+  width: 94%;
   border: none;
   outline: none;
   padding: 10px;
@@ -87,8 +91,13 @@ input {
   border-bottom: 1px solid #ffff04;
 }
 
+select {
+  width: 100%;
+  padding: 10px;
+}
+
 .login {
-  width: 89%;
+  width: 100%;
   color: white;
   border: none;
   margin: 20px 0 0 0;
@@ -97,3 +106,21 @@ input {
   box-shadow: 2px 2px #fffed5;
 }
 
+input.input-check {
+  width: 10%;
+  margin: 0;
+}
+
+/* 
+@media (max-width: 400px) {
+  body {
+    width: 90%;
+
+  }
+}
+
+@media (min-width: 401px) {
+  body {
+    width: 80%;
+  }
+} */
