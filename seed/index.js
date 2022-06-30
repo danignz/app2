@@ -110,7 +110,24 @@ mongoose
 
     const quizzes = [
       {
-        title: "Javascript Intermediate Quiz 2",
+        title: "Javascript Basics Quiz",
+        description: "This is a basics level Javascript Quiz number 1",
+        category: "JAVASCRIPT",
+        difficulty: "BASICS",
+        points_required: 100,
+        num_questions: 3,
+        quiz_img: "/images/quizzes/JS-BASICS.jpg",
+        isVisible: true,
+        question: [
+          arrayQuestionsID[5],
+          arrayQuestionsID[6],
+          arrayQuestionsID[7],
+          arrayQuestionsID[8],
+          arrayQuestionsID[9],
+        ],
+      },
+      {
+        title: "Javascript Intermediate Quiz",
         description: "This is a intermediate level Javascript Quiz number 2",
         category: "JAVASCRIPT",
         difficulty: "INTERMEDIATE",

@@ -26,7 +26,7 @@ router.get("/create", (req, res, next) => {
     difficulty: enumValuesDifficulty 
   }
 
-  res.render("questions/new-question", enumValues);
+  res.render("questions/new-question", {enumValues});
 });
 
 // @desc    Sends data fields related to a question to DB to create a new question
@@ -46,6 +46,10 @@ router.post("/create", async (req, res, next) => {
 
   const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
+    //Needed values to pass to the view if an error occurs to reload select input correctly
+    const enumValuesCategory = Question.schema.path("category").enumValues;
+    const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
+
   // Check if admin introduced all values
   if (
     !question ||
@@ -59,6 +63,10 @@ router.post("/create", async (req, res, next) => {
     res.render("questions/new-question", {
       error:
         "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+        enumValues : {
+          category: enumValuesCategory,
+          difficulty: enumValuesDifficulty,
+        }
     });
     return;
   }

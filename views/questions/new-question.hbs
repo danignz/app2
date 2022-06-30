@@ -38,14 +38,14 @@
 
   <label>Category</label>
   <select name="category" id="category-select">
-      {{#each this.category}}
+      {{#each enumValues.category}}
           <option value={{this}}>{{this}}</option>
       {{/each}}
   </select>
 
   <label>Difficulty</label>
   <select name="difficulty" id="difficulty-select">
-      {{#each this.difficulty}}
+      {{#each enumValues.difficulty}}
           <option value={{this}}>{{this}}</option>
       {{/each}}
   </select>

@@ -3,15 +3,13 @@
 <div>
   {{#if quizzes}}
     {{#each quizzes}}
-      <h3>Title: {{this.title}}</h3>
+      <h3><a href="/quizzes/{{this._id}}">Title: {{this.title}}</a></h3>
       <h6>Category: {{this.category}}</h6>
+      <h6>Difficulty: {{this.difficulty}}</h6>
+      <h3>List of Questions:</h3>
       {{#each this.question}}
-        <h6>ID: {{this._id}}</h6>
-        <h3>Question: {{this.question}}</h3>
-        <h6>Correct Answer: {{this.correct_answer}}</h6>
-        <h6>Incorrect Answers: {{this.incorrect_answers}}</h6>
+        <h3><a href="/questions/{{this._id}}">ID: {{this._id}}</a></h3>
       {{/each}}
-      <h3><a href="/quizzes/{{this._id}}">Click for details</a></h3>
     {{/each}}
   {{else}}
     <h3>Not quizzes avariable</h3>

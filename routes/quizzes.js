@@ -26,7 +26,7 @@ router.get("/create", (req, res, next) => {
     difficulty: enumValuesDifficulty,
   };
 
-  res.render("quizzes/new-quiz", enumValues);
+  res.render("quizzes/new-quiz", { enumValues });
 });
 
 // @desc    Sends data fields related to a quiz to DB to create a new quiz
@@ -44,6 +44,10 @@ router.post("/create", async (req, res, next) => {
     isVisible,
   } = req.body;
 
+  //Needed values to pass to the view if an error occurs to reload select input correctly
+  const enumValuesCategory = Quiz.schema.path("category").enumValues;
+  const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+
   // Check if admin introduced all values
   if (
     !title ||
@@ -57,6 +61,10 @@ router.post("/create", async (req, res, next) => {
     res.render("quizzes/new-quiz", {
       error:
         "All fields (except isVisible) are mandatory. Please fill them before submitting.",
+      enumValues: {
+        category: enumValuesCategory,
+        difficulty: enumValuesDifficulty,
+      },
     });
     return;
   }
