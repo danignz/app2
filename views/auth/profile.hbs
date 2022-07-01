@@ -1,21 +1,31 @@
-<h2>Welcome {{ user.username }}</h2>
-<h2>You have {{ user.points }} points in your account</h2>
+<h4>Welcome {{ user.username }}</h4>
+<h4>You have {{ user.points }} points in your account</h4>
 
-<h2>You have enough points to play to the following Quizzes:</h2>
+<h4>You have enough points to play to the following Quizzes:</h4>
 
-<div>
+<div class="card-container">
   {{#if quizzes}}
     {{#each quizzes}}
-      <h3><a href="/quizzes/{{this._id}}">Title: {{this.title}}</a></h3>
-      <h6>Category: {{this.category}}</h6>
-      <h6>Difficulty: {{this.difficulty}}</h6>
-      <h6><img src="{{this.quiz_img}}" alt="Image of question" /></h6>
+      <div class="card">
+        <h4><a href="/quizzes/{{this._id}}">{{this.title}}</a></h4>
+        {{#if this.quiz_img}}
+          <a href="/quizzes/{{this._id}}"><img
+              src="{{this.quiz_img}}"
+              alt="Image of quiz"
+            /></a>
+        {{else}}
+          <img src="/images/quizzes/default.jpg" alt="Not image avariable" />
+        {{/if}}
+        <h6>Questions: {{this.num_questions}}</h6>
+      </div>
     {{/each}}
   {{else}}
     <h3>Not quizzes avariable</h3>
   {{/if}}
 </div>
 
-<h2>You don't have enough points to play to the following Quizzes:</h2>
+<h4>You don't have enough points to play to the following Quizzes:</h4>
 
-<a href="/">Back Home Page</a>
+<div class="link">
+  <a class="homelink" href="/">Back Home</a>
+</div>
