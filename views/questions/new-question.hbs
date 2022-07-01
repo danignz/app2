@@ -1,72 +1,76 @@
-<h1 class="title">New Questions</h1>
+<div class="container">
+  <h1 class="title">New Questions</h1>
 
-<form method="POST" action="/questions/create">
+  <form method="POST" action="/questions/create">
 
-  <label>Question</label>
-  <input
-    type="text"
-    name="question"
-    placeholder="Write a Question"
-    required
-    minlength="3"
-    maxlength="50"
-  />
+    <label>Question</label>
+    <input
+      type="text"
+      name="question"
+      placeholder="Write a Question"
+      required
+      minlength="3"
+      maxlength="50"
+    />
 
-  <label>Correct Answer</label>
-  <input
-    type="text"
-    name="correct_answer"
-    placeholder="Write a Answer"
-    maxlength="20"
-  />
+    <label>Correct Answer</label>
+    <input
+      type="text"
+      name="correct_answer"
+      placeholder="Write a Answer"
+      maxlength="20"
+    />
 
-  <label>Incorrect Answer1</label>
-  <input
-    type="text"
-    name="incorrect_answers_0"
-    placeholder="Write IncorrectAnswer1"
-    maxlength="20"
-  />
+    <label>Incorrect Answer1</label>
+    <input
+      type="text"
+      name="incorrect_answers_0"
+      placeholder="Write IncorrectAnswer1"
+      maxlength="20"
+    />
 
-  <label>Incorrect Answer2</label>
-  <input
-    type="text"
-    name="incorrect_answers_1"
-    placeholder="Write IncorrectAnswer2"
-    maxlength="20"
-  />
+    <label>Incorrect Answer2</label>
+    <input
+      type="text"
+      name="incorrect_answers_1"
+      placeholder="Write IncorrectAnswer2"
+      maxlength="20"
+    />
 
-  <label>Category</label>
-  <select name="category" id="category-select">
+    <label>Category</label>
+    <select name="category" id="category-select">
       {{#each enumValues.category}}
-          <option value={{this}}>{{this}}</option>
+        <option value={{this}}>{{this}}</option>
       {{/each}}
-  </select>
+    </select>
 
-  <label>Difficulty</label>
-  <select name="difficulty" id="difficulty-select">
+    <label>Difficulty</label>
+    <select name="difficulty" id="difficulty-select">
       {{#each enumValues.difficulty}}
-          <option value={{this}}>{{this}}</option>
+        <option value={{this}}>{{this}}</option>
       {{/each}}
-  </select>
+    </select>
 
-  <label><input type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
 
-  <label>Image</label>
-  <input
-    type="text"
-    name="question_img"
-    placeholder="An image is needed"
-    value="/images/questions/default.jpg"
-    maxlength="100"
-  />
 
-  {{#if error}}
-    <p style="color: red;">{{error}}</p>
-  {{/if}}
+    <label>Image</label>
+    <input
+      type="text"
+      name="question_img"
+      placeholder="An image is needed"
+      value="/images/questions/default.jpg"
+      maxlength="100"
+    />
 
-  <button class= "login" type="submit">Create new Question</button>
+    {{#if error}}
+      <p style="color: red;">{{error}}</p>
+    {{/if}}
 
-</form>
+    <button class="login" type="submit">Create</button>
 
-<a class="homelink" href="/">Back Home</a>
+  </form>
+  <p>
+    <a class="homelink" href="/">&larr; Back Home</a>
+  </p>
+</div>
