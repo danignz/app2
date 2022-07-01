@@ -1,15 +1,19 @@
 <h1 class="title">List of Questions</h1>
 
-<div>
+<div class="card-container">
   {{#if questions}}
     {{#each questions}}
-      <h4> ·{{this.question}}</h4>
-      <h6> - {{this.category}} - </h6>
-      <h3><a class="details" href="/questions/{{this._id}}">See details</a></h3>
+      <div class="card">
+        <h4> ·{{this.question}}</h4>
+        <h6> - {{this.category}} - </h6>
+        <h3><a class="details" href="/questions/{{this._id}}">See details</a></h3>
+      </div>
     {{/each}}
   {{else}}
     <h3>Not questions avariable</h3>
   {{/if}}
 </div>
 
-<a class="homelink" href="/">Back Home</a>
+<p>
+  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+</p>

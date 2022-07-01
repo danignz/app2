@@ -1,7 +1,7 @@
 <h1 class="title">Question Details</h1>
 
-<div>
-  <h3>ID: {{this._id}}</h3>
+<div class="card-container">
+  <div class="card">
   <h3>Question: {{this.question}}</h3>
   <h4>Correct answer: {{this.correct_answer}}</h4>
   <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
@@ -13,8 +13,11 @@
   {{else}}
     <img src="/images/questions/default.jpg" alt="Not image avariable" />
   {{/if}}
+  </div>
 </div>
 
+
+<div class="action-buttons">
 <form method="POST" action="/questions/{{this._id}}/delete">
   <button type="submit">Delete</button>
 </form>
@@ -23,5 +26,8 @@
   onclick="location.href='/questions/{{this._id}}/edit'"
   type="button"
 >Edit</button>
+</div>
 
-<a class="homelink" href="/">Back Home</a>
+<p>
+  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+</p>
