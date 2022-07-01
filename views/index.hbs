@@ -1,20 +1,17 @@
 <div class="container">
-  <h1 class="title">Home</h1>
+<h1 class="title">Home</h1> 
 
-  <nav>
-    <ul>
-      <a href="/quizzes/create">New Quiz</a>
-      <a href="/quizzes">List Quizzes</a>
-    </ul>
-    <ul>
-      <a href="/">Home</a>
-      <a href="/questions/create">New Question</a>
-      <a href="/questions">List Questions</a>
-    </ul>
-    <ul>
-      <a href="/auth/signup">Sign Up</a>
-      <a href="/auth/login">Login</a>
-    </ul>
+  <p>
+    <a href="/quizzes/create">New Quiz</a>
+    <a href="/quizzes">List Quizzes</a>
+    <a href="/questions/create">New Question</a>
+    <a href="/questions">List Questions</a>
+  </p>
+  <p>
+    <a class="signup-login" href="/auth/signup">Sign Up</a>
+    <a class="signup-login" href="/auth/login">Login</a>
+  </p>
+  <p>
     <form action="/auth/logout" method="POST"><button class= "login" type="submit">Log out</button></form>
-  </nav>
+  </p>
 </div>

@@ -63,8 +63,9 @@ h6 {
 }
 
 a {
+  display: block;
   text-decoration: none;
-  text-align: justify;
+  text-align: center;
   color: #6d37ff;
   font-weight: bold;
 }
