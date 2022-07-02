@@ -76,10 +76,6 @@ h4 {
   text-align: center;
 }
 
-/* form {
-  margin: 10px 0 10px 10%;
-} */
-
 label {
   display: block;
   margin-top: 15px;
@@ -161,11 +157,9 @@ input.input-check {
   margin-left: 10px;
 }
 
-
 .action-buttons button[type="submit"],
-button[type="button"]
- {
-  background-color: #04AA6D;
+button[type="button"] {
+  background-color: #04aa6d;
   border: none;
   color: white;
   padding: 10px 15px;
@@ -175,6 +169,15 @@ button[type="button"]
   font-size: 1em;
 }
 
+/* Quiz Info*/
+.quiz-container {
+  width: 85%;
+  height: 50%;
+  border-radius: 5%;
+  background-color: orange;
+  margin: 15px;
+  border: black solid 2px;
+}
 
 /* 
 @media (max-width: 400px) {
