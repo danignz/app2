@@ -1,3 +1,4 @@
+<div class="container">
 <h1 class="title">Edit Quizzes</h1>
 
 <form method="POST" action="/quizzes/{{quiz._id}}/edit">
@@ -52,7 +53,7 @@
     value="{{quiz.points_required}}"
   />
 
-  <label>Num Questions (It will be randomly chosen)</label>
+  <label>Num Questions (randomly chosen)</label>
   <input
     type="number"
     name="num_questions"
@@ -60,13 +61,8 @@
     value="{{quiz.num_questions}}"
   />
 
-  <label><input
-      type="checkbox"
-      name="isVisible"
-      {{#if quiz.isVisible}}
-      checked="{{quiz.isVisible}}"
-      {{/if}}
-    />Visible</label>
+    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+
 
   <label>Image</label>
   <input
@@ -82,7 +78,7 @@
   {{/if}}
 
 <div class="action-buttons">
-  <button type="submit">Save changes</button>
+  <button type="submit">Save</button>
 </div>
 
 </form>
@@ -90,3 +86,4 @@
 <p>
   <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
 </p>
+</div>

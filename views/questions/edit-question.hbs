@@ -1,3 +1,4 @@
+<div class="container">
 <h1 class="title">Edit Questions</h1>
 
 <form method="POST" action="/questions/{{question._id}}/edit">
@@ -58,13 +59,8 @@
       {{/each}}
   </select>
 
-  <label><input
-      type="checkbox"
-      name="isVisible"
-      {{#if question.isVisible}}
-      checked="{{question.isVisible}}"
-      {{/if}}
-    />Visible</label>
+    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+
 
   <label>Image</label>
   <input
@@ -85,3 +81,4 @@
 <p>
   <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
 </p>
+</div>
