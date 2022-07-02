@@ -124,7 +124,16 @@ router.post("/create", async (req, res, next) => {
 router.get("/:quizId", async (req, res, next) => {
   const { quizId } = req.params;
   try {
-    const quiz = await Quiz.findById(quizId).populate("question");
+    const quiz = await Quiz.findById(quizId).populate("question").lean();
+
+    const indexOfQuestions = quiz.question.map((question, index) => {
+        return index+1;
+    });
+
+    quiz.question.forEach((question,index) => {
+      quiz.question[index].indexOfQuestions = indexOfQuestions[index];
+    });
+
     res.render("quizzes/quiz-details", quiz);
   } catch (error) {
     next(error);
