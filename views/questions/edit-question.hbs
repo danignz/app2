@@ -1,44 +1,44 @@
 <div class="container">
-<h1 class="title">Edit Questions</h1>
+  <h1 class="title">Edit Questions</h1>
 
-<form method="POST" action="/questions/{{question._id}}/edit">
+  <form method="POST" action="/questions/{{question._id}}/edit">
 
-  <label>Question</label>
-  <input
-    type="text"
-    name="question"
-    required
-    minlength="3"
-    maxlength="50"
-    value="{{question.question}}"
-  />
+    <label>Question</label>
+    <input
+      type="text"
+      name="question"
+      required
+      minlength="3"
+      maxlength="50"
+      value="{{question.question}}"
+    />
 
-  <label>Correct Answer</label>
-  <input
-    type="text"
-    name="correct_answer"
-    maxlength="20"
-    value="{{question.correct_answer}}"
-  />
+    <label>Correct Answer</label>
+    <input
+      type="text"
+      name="correct_answer"
+      maxlength="20"
+      value="{{question.correct_answer}}"
+    />
 
-  <label>Incorrect Answer1</label>
-  <input
-    type="text"
-    name="incorrect_answers_0"
-    maxlength="20"
-    value="{{question.incorrect_answers.[0]}}"
-  />
+    <label>Incorrect Answer1</label>
+    <input
+      type="text"
+      name="incorrect_answers_0"
+      maxlength="20"
+      value="{{question.incorrect_answers.[0]}}"
+    />
 
-  <label>Incorrect Answer2</label>
-  <input
-    type="text"
-    name="incorrect_answers_1"
-    maxlength="20"
-    value="{{question.incorrect_answers.[1]}}"
-  />
+    <label>Incorrect Answer2</label>
+    <input
+      type="text"
+      name="incorrect_answers_1"
+      maxlength="20"
+      value="{{question.incorrect_answers.[1]}}"
+    />
 
-  <label>Category</label>
-  <select name="category" id="category-select">
+    <label>Category</label>
+    <select name="category" id="category-select">
       {{#each arrayCurrentCategory}}
         {{#if this.isCurrent}}
           <option value={{this.category}} selected>{{this.category}}</option>
@@ -46,39 +46,47 @@
           <option value={{this.category}}>{{this.category}}</option>
         {{/if}}
       {{/each}}
-  </select>
+    </select>
 
-  <label>Difficulty</label>
-  <select name="difficulty" id="difficulty-select">
+    <label>Difficulty</label>
+    <select name="difficulty" id="difficulty-select">
       {{#each arrayCurrentDifficulty}}
         {{#if this.isCurrent}}
-          <option value={{this.difficulty}} selected>{{this.difficulty}}</option>
+          <option
+            value={{this.difficulty}}
+            selected
+          >{{this.difficulty}}</option>
         {{else}}
           <option value={{this.difficulty}}>{{this.difficulty}}</option>
         {{/if}}
       {{/each}}
-  </select>
+    </select>
 
-    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible</label>
+    <label class="check-label"><input class="input-check"
+        type="checkbox"
+        name="isVisible"
+        {{#if question.isVisible}}
+        checked="{{question.isVisible}}"
+        {{/if}}
+    />Visible for users</label>
 
+    <label>Image</label>
+    <input
+      type="text"
+      name="question_img"
+      maxlength="80"
+      value="{{question.question_img}}"
+    />
 
-  <label>Image</label>
-  <input
-    type="text"
-    name="question_img"
-    maxlength="80"
-    value="{{question.question_img}}"
-  />
+    {{#if error}}
+      <p style="color: red;">{{error}}</p>
+    {{/if}}
+    <div class="action-buttons">
+      <button type="submit">Save changes</button>
+    </div>
+  </form>
 
-  {{#if error}}
-    <p style="color: red;">{{error}}</p>
-  {{/if}}
-<div class="action-buttons">
-  <button type="submit">Save changes</button>
-</div>
-</form>
-
-<p>
-  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
-</p>
+  <p>
+    <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+  </p>
 </div>
