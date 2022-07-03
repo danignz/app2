@@ -116,7 +116,7 @@ mongoose
         difficulty: "BASICS",
         points_required: 100,
         num_questions: 5,
-        quiz_img: "/images/quizzes/JS-BASICS.jpg",
+        quiz_img: "/images/quizzes/js.png",
         isVisible: true,
         question: [
           arrayQuestionsID[5],
@@ -133,7 +133,7 @@ mongoose
         difficulty: "INTERMEDIATE",
         points_required: 250,
         num_questions: 10,
-        quiz_img: "/images/quizzes/JS-INTERMEDIATE.jpg",
+        quiz_img: "/images/quizzes/js.png",
         isVisible: true,
         question: [
           arrayQuestionsID[0],

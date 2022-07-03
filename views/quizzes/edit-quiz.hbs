@@ -75,13 +75,18 @@
     />Visible for users</label>
 
     <label>Image</label>
-    <input
-      type="text"
-      name="quiz_img"
-      placeholder="An image is needed"
-      value="{{quiz.quiz_img}}"
-      maxlength="100"
-    />
+    <select name="images" id="images-select">
+      {{#each arrayCurrentImages}}
+        {{#if this.isCurrent}}
+          <option
+            value={{this.quiz_img}}
+            selected
+          >{{this.quiz_img}}</option>
+        {{else}}
+          <option value={{this.quiz_img}}>{{this.quiz_img}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
 
     {{#if error}}
       <p style="color: red;">{{error}}</p>

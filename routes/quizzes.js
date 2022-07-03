@@ -20,7 +20,7 @@ router.get("/", async (req, res, next) => {
 router.get("/create", (req, res, next) => {
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumImages;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   const enumValues = {
     category: enumValuesCategory,
@@ -49,7 +49,7 @@ router.post("/create", async (req, res, next) => {
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumImages;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   // Check if admin introduced all values
   if (
@@ -96,7 +96,7 @@ router.post("/create", async (req, res, next) => {
   try {
     questions = await Question.find(
       {
-        $and: [{ category: category }, { difficulty: difficulty }, { images: quiz_img }],
+        $and: [{ category: category }, { difficulty: difficulty }],
       },
       { _id: 1 }
     ).limit(num_questions);
@@ -166,7 +166,7 @@ router.get("/:quizId/edit", async (req, res, next) => {
 
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumImages;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   try {
     const quiz = await Quiz.findById(quizId).populate("question");
@@ -188,10 +188,10 @@ router.get("/:quizId/edit", async (req, res, next) => {
     });
 
     const arrayCurrentImages = enumValuesImages.map((quiz_img) => {
-      if (images === quiz.quiz_img) {
-        return { images: quiz_img, isCurrent: true };
+      if (quiz_img === quiz.quiz_img) {
+        return { quiz_img: quiz_img, isCurrent: true };
       } else {
-        return { images: quiz_img, isCurrent: false };
+        return { quiz_img: quiz_img, isCurrent: false };
       }
     });
 
@@ -225,7 +225,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumImages;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   let quiz, arrayCurrentCategory, arrayCurrentDifficulty, arrayCurrentImages ;
 
@@ -249,11 +249,11 @@ router.post("/:quizId/edit", async (req, res, next) => {
       
     });
 
-    const arrayCurrentImages = enumValuesImages.map((quiz_img) => {
-      if (images === quiz.quiz_img) {
-        return { images: quiz_img, isCurrent: true };
+    arrayCurrentImages = enumValuesImages.map((quiz_img) => {
+      if (quiz_img === quiz.quiz_img) {
+        return { quiz_img: quiz_img, isCurrent: true };
       } else {
-        return { images: quiz_img, isCurrent: false };
+        return { quiz_img: quiz_img, isCurrent: false };
       }
     });
 
@@ -268,8 +268,8 @@ router.post("/:quizId/edit", async (req, res, next) => {
     !category ||
     !difficulty ||
     !points_required ||
-    !num_questions ||
-    !quiz_img
+    !num_questions 
+
   ) {
     res.render("quizzes/edit-quiz", {
       error:
@@ -292,6 +292,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
           error: "Title its busy, try a new one.",
           arrayCurrentCategory: arrayCurrentCategory,
           arrayCurrentDifficulty: arrayCurrentDifficulty,
+          arrayCurrentImages: arrayCurrentImages,
           quiz: quiz,
         });
         return;
@@ -307,7 +308,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
     try {
       questions = await Question.find(
         {
-          $and: [{ category: category }, { difficulty: difficulty },  { images: quiz_img }],
+          $and: [{ category: category }, { difficulty: difficulty }],
         },
         { _id: 1 }
       ).limit(num_questions);

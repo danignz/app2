@@ -30,7 +30,7 @@ const quizSchema = new Schema({
   },
   quiz_img: {
     type: String,
-    enum: ["js.png", "css.png", "html.png"],
+    enum: ["/images/quizzes/js.png", "/images/quizzes/css.png", "/images/quizzes/html.png"],
     required: [true, "Images are required"],
   },
   isVisible: {
