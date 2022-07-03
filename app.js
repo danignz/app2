@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const questionRouter = require('./routes/questions');
 const quizRouter = require('./routes/quizzes');
+const gameRouter = require('./routes/game');
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/questions', questionRouter);
 app.use('/quizzes', quizRouter);
+app.use('/game', gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

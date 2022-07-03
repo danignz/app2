@@ -1,0 +1,30 @@
+<div class="card-container">
+  <div class="card">
+
+    <h3>{{current_question}} / {{total_questions}}</h3>
+
+    <h3>{{question.question}}</h3>
+    {{#if question.question_img}}
+      <img src="{{question.question_img}}" alt="Image of question" />
+    {{else}}
+      <img src="/images/questions/default.jpg" alt="Not image avariable" />
+    {{/if}}
+
+    <form method="POST" action="/game/{{question._id}}/check">
+      <button type="submit" name="answer" value="{{possibleAnswers.[0]}}">{{possibleAnswers.[0]}}</button>
+    </form>
+
+    <form method="POST" action="/game/{{question._id}}/check">
+      <button type="submit" name="answer" value="{{possibleAnswers.[1]}}">{{possibleAnswers.[1]}}</button>
+    </form>
+
+    <form method="POST" action="/game/{{question._id}}/check">
+      <button type="submit" name="answer" value="{{possibleAnswers.[2]}}">{{possibleAnswers.[2]}}</button>
+    </form>
+
+  </div>
+</div>
+
+<p>
+  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+</p>

@@ -1,0 +1,26 @@
+<h4>You have {{ user.points }} points in your account</h4>
+
+<h4>You have enough points to play to the following Quizzes:</h4>
+
+<div class="card-container">
+  {{#if quizzes}}
+    {{#each quizzes}}
+      <div class="card">
+        <h4><a href="/game/{{this._id}}">{{this.title}}</a></h4>
+        {{#if this.quiz_img}}
+          <a href="/game/{{this._id}}"><img
+              src="{{this.quiz_img}}"
+              alt="Image of quiz"
+            /></a>
+        {{else}}
+          <img src="/images/quizzes/default.jpg" alt="Not image avariable" />
+        {{/if}}
+        <h6>Questions: {{this.num_questions}}</h6>
+      </div>
+    {{/each}}
+  {{else}}
+    <h3>Not quizzes avariable</h3>
+  {{/if}}
+</div>
+
+<h4>You don't have enough points to play to the following Quizzes:</h4>
