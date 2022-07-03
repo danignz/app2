@@ -20,10 +20,12 @@ router.get("/", async (req, res, next) => {
 router.get("/create", (req, res, next) => {
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   const enumValues = {
     category: enumValuesCategory,
     difficulty: enumValuesDifficulty,
+    quiz_img: enumValuesImages
   };
 
   res.render("quizzes/new-quiz", { enumValues });
@@ -47,6 +49,7 @@ router.post("/create", async (req, res, next) => {
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   // Check if admin introduced all values
   if (
@@ -64,6 +67,7 @@ router.post("/create", async (req, res, next) => {
       enumValues: {
         category: enumValuesCategory,
         difficulty: enumValuesDifficulty,
+        quiz_img: enumValuesImages
       },
     });
     return;
@@ -79,6 +83,7 @@ router.post("/create", async (req, res, next) => {
         enumValues: {
           category: enumValuesCategory,
           difficulty: enumValuesDifficulty,
+          quiz_img: enumValuesImages,
         },
       });
       return;
@@ -161,6 +166,7 @@ router.get("/:quizId/edit", async (req, res, next) => {
 
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   try {
     const quiz = await Quiz.findById(quizId).populate("question");
@@ -181,10 +187,19 @@ router.get("/:quizId/edit", async (req, res, next) => {
       }
     });
 
+    const arrayCurrentImages = enumValuesImages.map((quiz_img) => {
+      if (quiz_img === quiz.quiz_img) {
+        return { quiz_img: quiz_img, isCurrent: true };
+      } else {
+        return { quiz_img: quiz_img, isCurrent: false };
+      }
+    });
+
     res.render("quizzes/edit-quiz", {
       quiz,
       arrayCurrentCategory,
       arrayCurrentDifficulty,
+      arrayCurrentImages,
     });
   } catch (error) {
     next(error);
@@ -210,8 +225,9 @@ router.post("/:quizId/edit", async (req, res, next) => {
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
+  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
-  let quiz, arrayCurrentCategory, arrayCurrentDifficulty;
+  let quiz, arrayCurrentCategory, arrayCurrentDifficulty, arrayCurrentImages ;
 
   try {
     quiz = await Quiz.findById(quizId).populate("question");
@@ -231,6 +247,15 @@ router.post("/:quizId/edit", async (req, res, next) => {
         return { difficulty: difficulty, isCurrent: false };
       }
     });
+
+    arrayCurrentImages = enumValuesImages.map((quiz_img) => {
+      if (quiz_img === quiz.quiz_img) {
+        return { quiz_img: quiz_img, isCurrent: true };
+      } else {
+        return { quiz_img: quiz_img, isCurrent: false };
+      }
+    });
+
   } catch (error) {
     next(error);
   }
@@ -250,6 +275,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
         "All fields (except Visible) are mandatory. Please fill them before submitting.",
       arrayCurrentCategory: arrayCurrentCategory,
       arrayCurrentDifficulty: arrayCurrentDifficulty,
+      arrayCurrentImages: arrayCurrentImages,
       quiz: quiz,
     });
     return;
@@ -265,6 +291,7 @@ router.post("/:quizId/edit", async (req, res, next) => {
           error: "Title its busy, try a new one.",
           arrayCurrentCategory: arrayCurrentCategory,
           arrayCurrentDifficulty: arrayCurrentDifficulty,
+          arrayCurrentImages: arrayCurrentImages,
           quiz: quiz,
         });
         return;
