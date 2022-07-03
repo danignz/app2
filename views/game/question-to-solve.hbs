@@ -10,15 +10,15 @@
       <img src="/images/questions/default.jpg" alt="Not image avariable" />
     {{/if}}
 
-    <form method="POST" action="/game/{{question._id}}/check">
+    <form method="POST" action="/game/{{question._id}}/{{quizId}}/{{current_question}}/check">
       <button type="submit" name="answer" value="{{possibleAnswers.[0]}}">{{possibleAnswers.[0]}}</button>
     </form>
 
-    <form method="POST" action="/game/{{question._id}}/check">
+    <form method="POST" action="/game/{{question._id}}/{{quizId}}/{{current_question}}/check">
       <button type="submit" name="answer" value="{{possibleAnswers.[1]}}">{{possibleAnswers.[1]}}</button>
     </form>
 
-    <form method="POST" action="/game/{{question._id}}/check">
+    <form method="POST" action="/game/{{question._id}}/{{quizId}}/{{current_question}}/check">
       <button type="submit" name="answer" value="{{possibleAnswers.[2]}}">{{possibleAnswers.[2]}}</button>
     </form>
 

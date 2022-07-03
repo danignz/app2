@@ -24,18 +24,46 @@ router.get("/:quizId", async (req, res, next) => {
   const userId = req.session.currentUser._id;
   const { quizId } = req.params;
 
-  let game;
-  let current_question = 0;
+  console.log(userId);
+  console.log(quizId);
+
+  //check if a the user have the Quiz IN PROGRESS
+  let gameInProgress;
+  let current_question;
   try {
-    game= await Game.create({
-      user: userId,
-      quiz: quizId,
-      status: "NOT INIT",
-      current_question: current_question,
-    });
+    gameInProgress = await Game.find(
+      {
+        $and: [{ user: userId }, { quiz: quizId }, { status: "IN PROGRESS" }],
+      },
+      { _id: 1 }
+    );
+
+    if(gameInProgress.length){
+      current_question = gameInProgress.current_question;
+    }
   } catch (error) {
     next(error);
   }
+
+  console.log(gameInProgress);
+  let game;
+  //if there is not game in progress
+    if(!gameInProgress.length){
+console.log("pacoo");
+    current_question = 0;
+    try {
+      game= await Game.create({
+        user: userId,
+        quiz: quizId,
+        status: "NOT INIT",
+        current_question: current_question,
+      });
+    } catch (error) {
+      next(error);
+    }
+
+  }
+
 //  console.log(game.current_question);
 
   let total_questions;
@@ -56,7 +84,6 @@ router.get("/:quizId", async (req, res, next) => {
     possibleAnswers[shuffledIndexArray[2]] = quiz.question[game.current_question].incorrect_answers[1];
     
     console.log(possibleAnswers);
-
     /*
       const indexOfQuestions = quiz.question.map((question, index) => {
           return index+1;
@@ -70,7 +97,7 @@ router.get("/:quizId", async (req, res, next) => {
     //Need to increase because index array starts from 0
 
     current_question++;
-    res.render("game/question-to-solve", {question, total_questions, current_question, possibleAnswers});
+    res.render("game/question-to-solve", {question, total_questions, current_question, possibleAnswers, quizId});
   } catch (error) {
     next(error);
   }
@@ -79,10 +106,13 @@ router.get("/:quizId", async (req, res, next) => {
 // @desc    Delete the question indicated by the ID from DB
 // @route   POST /questions/questionId/delete
 // @access  Restricted to Admin role
-router.post("/:questionId/check", async (req, res, next) => {
+router.post("/:questionId/:quizid/:current_question/check", async (req, res, next) => {
   const { questionId } = req.params;
+  const { quizid } =  req.params;
+  const { current_question } =  req.params;
   const { answer } = req.body;
-
+  console.log("quiz id; ", quizid);
+  console.log("current cuestion; ", current_question);
   console.log("User choose; ", answer);
   try {
     const {correct_answer} = await Question.findById(questionId);
@@ -94,11 +124,18 @@ router.post("/:questionId/check", async (req, res, next) => {
       console.log("You fail!!!!!!!!"); 
     }
 
-  
+    res.redirect(`/game/${quizid}`);
 
   } catch (error) {
     next(error);
   }
+
+  try {
+
+  } catch (error) {
+    next(error);
+  }
+
 
 });
 
