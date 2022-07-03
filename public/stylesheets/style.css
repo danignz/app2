@@ -54,6 +54,14 @@ h3 {
   font-size: medium;
 }
 
+.pointsCard {
+  column-count: 2;
+  font-family: "Krona One", sans-serif;
+  color: #212121;
+  text-align: center;
+  font-size: 18px;
+}
+
 .homelink {
   font-family: "Krona One", sans-serif;
   color: #6d37ff;
@@ -137,6 +145,7 @@ input.input-check {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px #6d37ff;
 }
 
 .card > a img {

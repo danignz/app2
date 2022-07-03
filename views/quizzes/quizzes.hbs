@@ -15,10 +15,13 @@
         {{/if}}
         <!-- <h6>{{this.category}} | {{this.difficulty}}</h6> -->
         <h6 class="difficultyCard">{{this.difficulty}}</h6>
-        <h6>Points Required:
-          {{this.points_required}}
-          | Questions:
-          {{this.num_questions}}</h6>
+        <div>
+          <h6 class="pointsCard">Points Required:
+            {{this.points_required}}
+            <br>
+            Questions:
+            {{this.num_questions}}</h6>
+        </div>
       </div>
     {{/each}}
   {{else}}
