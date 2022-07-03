@@ -246,7 +246,6 @@ router.post("/:quizId/edit", async (req, res, next) => {
       } else {
         return { difficulty: difficulty, isCurrent: false };
       }
-      
     });
 
     arrayCurrentImages = enumValuesImages.map((quiz_img) => {
@@ -268,8 +267,8 @@ router.post("/:quizId/edit", async (req, res, next) => {
     !category ||
     !difficulty ||
     !points_required ||
-    !num_questions 
-
+    !num_questions ||
+    !quiz_img
   ) {
     res.render("quizzes/edit-quiz", {
       error:

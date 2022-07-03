@@ -3,7 +3,7 @@
 <div class="card-container">
   {{#if quizzes}}
     {{#each quizzes}}
-        <div class="card">
+      <div class="card">
         <h4><a href="/quizzes/{{this._id}}">{{this.title}}</a></h4>
         {{#if this.quiz_img}}
           <a href="/quizzes/{{this._id}}"><img
@@ -13,9 +13,12 @@
         {{else}}
           <img src="/images/quizzes/default.jpg" alt="Not image avariable" />
         {{/if}}
-           <h6>{{this.category}} | {{this.difficulty}}</h6>
-           <h6>Points Required: {{this.points_required}} | Questions: {{this.num_questions}}</h6>
-        </div>
+        <h6>{{this.category}} | {{this.difficulty}}</h6>
+        <h6>Points Required:
+          {{this.points_required}}
+          | Questions:
+          {{this.num_questions}}</h6>
+      </div>
     {{/each}}
   {{else}}
     <h3>Not quizzes avariable</h3>

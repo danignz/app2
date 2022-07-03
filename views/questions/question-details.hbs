@@ -2,30 +2,29 @@
 
 <div class="card-container">
   <div class="card">
-  <h3>{{this.question}}</h3>
+    <h3>{{this.question}}</h3>
     {{#if this.question_img}}
-    <img src="{{this.question_img}}" alt="Image of question" />
-  {{else}}
-    <img src="/images/questions/default.jpg" alt="Not image avariable" />
-  {{/if}}
-  <h4>Correct answer: {{this.correct_answer}}</h4>
-  <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
-  <h4>{{this.category}}</h4>
-  <h4>{{this.difficulty}}</h4>
-  <h4>Visibility: {{this.isVisible}}</h4>
+      <img src="{{this.question_img}}" alt="Image of question" />
+    {{else}}
+      <img src="/images/questions/default.jpg" alt="Not image avariable" />
+    {{/if}}
+    <h4>Correct answer: {{this.correct_answer}}</h4>
+    <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
+    <h4>{{this.category}}</h4>
+    <h4>{{this.difficulty}}</h4>
+    <h4>Visibility: {{this.isVisible}}</h4>
   </div>
 </div>
 
-
 <div class="action-buttons">
-<form method="POST" action="/questions/{{this._id}}/delete">
-  <button type="submit">Delete</button>
-</form>
+  <form method="POST" action="/questions/{{this._id}}/delete">
+    <button type="submit">Delete</button>
+  </form>
 
-<button
-  onclick="location.href='/questions/{{this._id}}/edit'"
-  type="button"
->Edit</button>
+  <button
+    onclick="location.href='/questions/{{this._id}}/edit'"
+    type="button"
+  >Edit</button>
 </div>
 
 <p>
