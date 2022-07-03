@@ -4,8 +4,6 @@ const isLoggedIn = require("../middlewares");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const Question = require("../models/Question");
-const Quiz = require("../models/Quiz");
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -99,15 +97,7 @@ router.post("/login", async (req, res, next) => {
       const match = await bcrypt.compare(password, user.hashedPassword);
       if (match) {
         req.session.currentUser = user;
-
-        let quizzes;
-        try {
-          quizzes = await Quiz.find({}).populate("question");
-        } catch (error) {
-          next(error);
-        }
-
-        res.render("auth/profile", { user, quizzes });
+        res.render("auth/profile", { user });
       } else {
         res.render("auth/login", { error: "Unable to authenticate user" });
       }
