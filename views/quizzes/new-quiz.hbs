@@ -52,13 +52,11 @@
     <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible for users</label>
 
     <label>Image</label>
-    <input
-      type="text"
-      name="quiz_img"
-      placeholder="An image is needed"
-      value="/images/quizzes/default.jpg"
-      maxlength="100"
-    />
+    <select name="images" id="images-select">
+        {{#each enumImages.quiz_img}}
+            <option value={{this}}>{{this}}</option>
+        {{/each}}
+    </select>
 
     {{#if error}}
       <p style="color: red;">{{error}}</p>
