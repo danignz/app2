@@ -3,7 +3,7 @@
 <div class="card-container">
   {{#if quizzes}}
     {{#each quizzes}}
-        <div class="quiz-container">
+        <div class="card">
         <h4><a href="/quizzes/{{this._id}}">{{this.title}}</a></h4>
            <h6>{{this.category}} | {{this.difficulty}}</h6>
            <h6>Points Required: {{this.points_required}} | Questions: {{this.num_questions}}</h6>

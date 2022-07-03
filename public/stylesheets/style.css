@@ -174,9 +174,9 @@ button[type="button"] {
   width: 85%;
   height: 50%;
   border-radius: 5%;
-  background-color: orange;
+  background-color: #fffed5;
   margin: 15px;
-  border: black solid 2px;
+  border: none;
 }
 
 /* 
