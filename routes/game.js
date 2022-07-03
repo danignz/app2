@@ -27,44 +27,43 @@ router.get("/:quizId", async (req, res, next) => {
   console.log(userId);
   console.log(quizId);
 
-  //check if a the user have the Quiz IN PROGRESS
-  let gameInProgress;
-  let current_question;
-  try {
-    gameInProgress = await Game.find(
-      {
-        $and: [{ user: userId }, { quiz: quizId }, { status: "IN PROGRESS" }],
-      },
-      { _id: 1 }
-    );
+  let current_question, gameId, game;
 
-    if(gameInProgress.length){
-      current_question = gameInProgress.current_question;
+  //check if a the user have the Quiz IN PROGRESS
+  try {
+    game = await Game.findOne({
+      $and: [{ user: userId }, { quiz: quizId }, { status: "IN PROGRESS" }],
+    });
+
+    if (game) {
+      current_question = game.current_question;
+      gameId = game._id;
     }
   } catch (error) {
     next(error);
   }
 
-  console.log(gameInProgress);
-  let game;
+  //console.log(game);
+  //console.log(current_question);
+
   //if there is not game in progress
-    if(!gameInProgress.length){
-console.log("pacoo");
+  if (!game) {
+    console.log("pacoo");
     current_question = 0;
     try {
-      game= await Game.create({
+      game = await Game.create({
         user: userId,
         quiz: quizId,
         status: "NOT INIT",
         current_question: current_question,
       });
+      gameId = game._id;
     } catch (error) {
       next(error);
     }
-
   }
 
-//  console.log(game.current_question);
+  //  console.log(game.current_question);
 
   let total_questions;
   try {
@@ -73,16 +72,23 @@ console.log("pacoo");
     const question = quiz.question[game.current_question];
     console.log(question);
 
-    let possibleAnswers = [quiz.question[game.current_question].correct_answer, quiz.question[game.current_question].incorrect_answers[0], quiz.question[game.current_question].incorrect_answers[1]];
+    let possibleAnswers = [
+      quiz.question[game.current_question].correct_answer,
+      quiz.question[game.current_question].incorrect_answers[0],
+      quiz.question[game.current_question].incorrect_answers[1],
+    ];
     console.log(possibleAnswers);
 
     const shuffledIndexArray = [0, 1, 2].sort((a, b) => 0.5 - Math.random());
     console.log(shuffledIndexArray);
 
-    possibleAnswers[shuffledIndexArray[0]] = quiz.question[game.current_question].correct_answer;
-    possibleAnswers[shuffledIndexArray[1]] = quiz.question[game.current_question].incorrect_answers[0];
-    possibleAnswers[shuffledIndexArray[2]] = quiz.question[game.current_question].incorrect_answers[1];
-    
+    possibleAnswers[shuffledIndexArray[0]] =
+      quiz.question[game.current_question].correct_answer;
+    possibleAnswers[shuffledIndexArray[1]] =
+      quiz.question[game.current_question].incorrect_answers[0];
+    possibleAnswers[shuffledIndexArray[2]] =
+      quiz.question[game.current_question].incorrect_answers[1];
+
     console.log(possibleAnswers);
     /*
       const indexOfQuestions = quiz.question.map((question, index) => {
@@ -93,11 +99,18 @@ console.log("pacoo");
         quiz.question[index].indexOfQuestions = indexOfQuestions[index];
       });
     */
-    
+
     //Need to increase because index array starts from 0
 
     current_question++;
-    res.render("game/question-to-solve", {question, total_questions, current_question, possibleAnswers, quizId});
+    res.render("game/question-to-solve", {
+      question,
+      total_questions,
+      current_question,
+      possibleAnswers,
+      quizId,
+      gameId,
+    });
   } catch (error) {
     next(error);
   }
@@ -106,37 +119,89 @@ console.log("pacoo");
 // @desc    Delete the question indicated by the ID from DB
 // @route   POST /questions/questionId/delete
 // @access  Restricted to Admin role
-router.post("/:questionId/:quizid/:current_question/check", async (req, res, next) => {
+router.post("/:questionId/:gameId/check", async (req, res, next) => {
   const { questionId } = req.params;
-  const { quizid } =  req.params;
-  const { current_question } =  req.params;
+  const { gameId } = req.params;
   const { answer } = req.body;
-  console.log("quiz id; ", quizid);
-  console.log("current cuestion; ", current_question);
+  let game;
+  try {
+    game = await Game.findById(gameId).populate("quiz").lean();
+  } catch (error) {
+    next(error);
+  }
+
+  console.log("lololo");
+  console.log(game);
+  let { current_question } = game;
+  const num_questions = game.quiz.num_questions;
+  const quizid = game.quiz._id;
+
+  console.log("current question", current_question);
+  console.log(num_questions);
+
+  if(current_question === 0){
+    try {
+      const updatedGame = await Game.findByIdAndUpdate(
+        gameId,
+        {
+          status: "IN PROGRESS",
+        },
+        { new: true }
+      );
+      console.log("Just updated:", updatedGame);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  current_question++;
+  try {
+    const updatedGame = await Game.findByIdAndUpdate(
+      gameId,
+      {
+        current_question: current_question,
+      },
+      { new: true }
+    );
+    console.log("Just updated:", updatedGame);
+  } catch (error) {
+    next(error);
+  }
+
+  //  console.log("current cuestion; ", current_question);
   console.log("User choose; ", answer);
   try {
-    const {correct_answer} = await Question.findById(questionId);
-    console.log("DB value; ",correct_answer);
+    const { correct_answer } = await Question.findById(questionId);
+    console.log("DB value; ", correct_answer);
 
-    if(answer === correct_answer){
+    if (answer === correct_answer) {
       console.log("Right Answer, well done!!!!!!!!!!");
-    }else{
-      console.log("You fail!!!!!!!!"); 
+    } else {
+      console.log("You fail!!!!!!!!");
     }
 
-    res.redirect(`/game/${quizid}`);
+    if (num_questions <= current_question) {
 
+      try {
+        const updatedGame = await Game.findByIdAndUpdate(
+          gameId,
+          {
+            status: "DONE",
+          },
+          { new: true }
+        );
+        console.log("Just updated:", updatedGame);
+      } catch (error) {
+        next(error);
+      }
+
+      res.render("game/results");
+    } else {
+      res.redirect(`/game/${quizid}`);
+    }
   } catch (error) {
     next(error);
   }
-
-  try {
-
-  } catch (error) {
-    next(error);
-  }
-
-
 });
 
 module.exports = router;
