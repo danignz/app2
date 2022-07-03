@@ -34,10 +34,24 @@ h3 {
   text-align: center;
 }
 
-.title {
+.title{
   font-family: "Krona One", sans-serif;
   color: #212121;
   text-align: center;
+}
+
+.titleCard {
+  font-family: "Krona One", sans-serif;
+  color: #6d37ff;
+  text-align: center;
+  font-size: large;
+}
+
+.difficultyCard {
+  font-family: "Krona One", sans-serif;
+  color: #212121;
+  text-align: center;
+  font-size: medium;
 }
 
 .homelink {
@@ -68,12 +82,6 @@ a {
   text-align: center;
   color: #6d37ff;
   font-weight: bold;
-}
-
-h4 {
-  border-radius: 70%;
-  color: #212121;
-  text-align: center;
 }
 
 label {
