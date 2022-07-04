@@ -19,6 +19,17 @@ const gameSchema = new Schema(
       type: Number,
       default: -1,
     },
+    answers: {
+      type: [Boolean],
+    },
+    total_right_answers: {
+      type: Number,
+      default: -1,
+    },
+    total_wrong_answers: {
+      type: Number,
+      default: -1,
+    },
   },
   {
     timestamps: true,

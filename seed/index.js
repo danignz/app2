@@ -28,7 +28,7 @@ const questions = [
     correct_answer: "string",
     incorrect_answers: ["number", "true"],
     category: "JAVASCRIPT",
-    difficulty: "ADVANCED",
+    difficulty: "INTERMEDIATE",
     question_img: "/images/questions/JS-3.jpg",
     isVisible: true,
   },
