@@ -17,24 +17,21 @@ router.get("/select", async (req, res, next) => {
   res.render("game/select", { user, quizzes });
 });
 
-// @desc    Get ready for starting to play a game
+// @desc    Send to the view all the data needed to render a question
 // @route   GET /game/quizId
 // @access  User role
 router.get("/:quizId", async (req, res, next) => {
   const userId = req.session.currentUser._id;
   const { quizId } = req.params;
 
-  console.log(userId);
-  console.log(quizId);
-
   let current_question, gameId, game;
 
-  //check if a the user have the Quiz IN PROGRESS
+  //check if the user have the same Quiz IN PROGRESS
   try {
     game = await Game.findOne({
       $and: [{ user: userId }, { quiz: quizId }, { status: "IN PROGRESS" }],
     });
-
+    //restore the game point of last game
     if (game) {
       current_question = game.current_question;
       gameId = game._id;
@@ -43,13 +40,10 @@ router.get("/:quizId", async (req, res, next) => {
     next(error);
   }
 
-  //console.log(game);
-  //console.log(current_question);
-
-  //if there is not game in progress
+  //if there is not a game IN PROGRESS for that Quiz
   if (!game) {
-    console.log("pacoo");
     current_question = 0;
+    //creates a new Game
     try {
       game = await Game.create({
         user: userId,
@@ -63,25 +57,23 @@ router.get("/:quizId", async (req, res, next) => {
     }
   }
 
-  //  console.log(game.current_question);
-
   let total_questions;
   try {
     const quiz = await Quiz.findById(quizId).populate("question").lean();
     total_questions = quiz.num_questions;
     const question = quiz.question[game.current_question];
-    console.log(question);
 
+    //Obtain all possible answers for that question
     let possibleAnswers = [
       quiz.question[game.current_question].correct_answer,
       quiz.question[game.current_question].incorrect_answers[0],
       quiz.question[game.current_question].incorrect_answers[1],
     ];
-    console.log(possibleAnswers);
 
+    //Generate a random unordered values for use as index of a array
     const shuffledIndexArray = [0, 1, 2].sort((a, b) => 0.5 - Math.random());
-    console.log(shuffledIndexArray);
 
+    //Shuffle the possible answers getting a different order to answer in every Game
     possibleAnswers[shuffledIndexArray[0]] =
       quiz.question[game.current_question].correct_answer;
     possibleAnswers[shuffledIndexArray[1]] =
@@ -89,8 +81,7 @@ router.get("/:quizId", async (req, res, next) => {
     possibleAnswers[shuffledIndexArray[2]] =
       quiz.question[game.current_question].incorrect_answers[1];
 
-    console.log(possibleAnswers);
-
+    //increase the current question to present to the player as Question 1 instead of Question 0
     current_question++;
     res.render("game/question-to-solve", {
       question,
@@ -197,11 +188,12 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
 
       const answersArray = updatedGame.answers;
       const total_right_answers = answersArray.filter(
-        (element) => element === true ).length;
+        (element) => element === true
+      ).length;
       const total_wrong_answers = answersArray.length - total_right_answers;
 
       const answersArrObject = answersArray.map((question, index) => {
-          return { answersArray: question, index: index+1 }
+        return { answersArray: question, index: index + 1 };
       });
 
       console.log(answersArrObject);
