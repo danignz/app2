@@ -96,51 +96,42 @@ router.get("/:quizId", async (req, res, next) => {
   }
 });
 
-// @desc    Delete the question indicated by the ID from DB
-// @route   POST /questions/questionId/delete
-// @access  Restricted to Admin role
+// @desc    Manage the response received from de player
+// @route   POST /game/questionId/gameId/check
+// @access  User role
 router.post("/:questionId/:gameId/check", async (req, res, next) => {
   const { questionId } = req.params;
   const { gameId } = req.params;
   const { answer } = req.body;
   let game;
+
+  //Obtain all the data from DB relative to the current Game and Quiz
   try {
     game = await Game.findById(gameId).populate("quiz").lean();
   } catch (error) {
     next(error);
   }
 
-  console.log("lololo");
-  console.log(game);
   let { current_question } = game;
   const num_questions = game.quiz.num_questions;
   const quizid = game.quiz._id;
 
-  console.log("current question", current_question);
-  console.log(num_questions);
-
+  //if it's the first question of the Quiz, change the status to IN PROGRESS
   if (current_question === 0) {
     try {
-      const updatedGame = await Game.findByIdAndUpdate(
-        gameId,
-        {
-          status: "IN PROGRESS",
-        },
-        { new: true }
-      );
-      console.log("Just updated:", updatedGame);
+      await Game.findByIdAndUpdate(gameId, {
+        status: "IN PROGRESS",
+      });
     } catch (error) {
       next(error);
     }
   }
 
-  //  console.log("current cuestion; ", current_question);
-  console.log("User choose; ", answer);
   try {
     const { correct_answer } = await Question.findById(questionId);
-    console.log("DB value; ", correct_answer);
-
+    //Compare the answer value from DB vs the player input ones
     if (answer === correct_answer) {
+      //if its right, save it on DB as true
       try {
         await Game.findByIdAndUpdate(gameId, {
           $push: { answers: [true] },
@@ -149,6 +140,7 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
         next(error);
       }
     } else {
+      //if its incorrect, save it on DB as false
       try {
         await Game.findByIdAndUpdate(gameId, {
           $push: { answers: [false] },
@@ -158,22 +150,20 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
       }
     }
 
+    //increase on the DB the current question variable, to get ready for a new question
     current_question++;
     try {
-      const updatedGame = await Game.findByIdAndUpdate(
-        gameId,
-        {
-          current_question: current_question,
-        },
-        { new: true }
-      );
-      console.log("Just updated:", updatedGame);
+      await Game.findByIdAndUpdate(gameId, {
+        current_question: current_question,
+      });
     } catch (error) {
       next(error);
     }
 
+    //if it's the last question then manage the end of the game
     let updatedGame;
     if (num_questions <= current_question) {
+      //mark as DONE in DB
       try {
         updatedGame = await Game.findByIdAndUpdate(
           gameId,
@@ -186,38 +176,41 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
         next(error);
       }
 
+      //get in an array all the answers that the player sended
       const answersArray = updatedGame.answers;
+      //get the number of right answers
       const total_right_answers = answersArray.filter(
         (element) => element === true
       ).length;
+      //get the number of incorrect answers
       const total_wrong_answers = answersArray.length - total_right_answers;
 
+      //Generate a new object with the answers and the right index to pass it to handlebars view
       const answersArrObject = answersArray.map((question, index) => {
         return { answersArray: question, index: index + 1 };
       });
 
-      console.log(answersArrObject);
-
+      //Update DB with the total right/wrong answers number
       try {
-        const updatedGame = await Game.findByIdAndUpdate(
+        await Game.findByIdAndUpdate(
           gameId,
           {
             total_right_answers: total_right_answers,
             total_wrong_answers: total_wrong_answers,
-          },
-          { new: true }
+          }
         );
-        console.log("Just updated:", updatedGame);
       } catch (error) {
         next(error);
       }
 
+      //Render the results view
       res.render("game/results", {
         answersArrObject,
         total_right_answers,
         total_wrong_answers,
         num_questions,
       });
+    //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
     } else {
       res.redirect(`/game/${quizid}`);
     }
