@@ -12,21 +12,15 @@ body {
   padding: 10%;
 }
 
-.logo-png {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 15% 0 0 34%;
+.logo-text {
+  width: auto;
+  height: auto;
+  text-align:center;
 }
 
-/* .mobile {
-  position: relative;
-  display: flex;
-  margin: auto;
-  height: auto;
-  justify-content: center;
-  flex-wrap: wrap;
-} */
+.logo-png {
+  display:inline-block;
+}
 
 h3 {
   margin-top: 10px;
@@ -52,6 +46,14 @@ h3 {
   color: #212121;
   text-align: center;
   font-size: medium;
+}
+
+.pointsCard {
+  column-count: 2;
+  font-family: "Krona One", sans-serif;
+  color: #212121;
+  text-align: center;
+  font-size: 18px;
 }
 
 .homelink {
@@ -137,6 +139,7 @@ input.input-check {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px #6d37ff;
 }
 
 .card > a img {
@@ -165,18 +168,6 @@ input.input-check {
   margin-left: 10px;
 }
 
-/* .action-buttons button[type="submit"],
-button[type="button"] {
-  background-color: #04aa6d;
-  border: none;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  margin: 4px 2px;
-  border-radius: 15%;
-  font-size: 1em;
-} */
-
 .action-buttons button[type="submit"],
 button[type="button"] {
   padding: 10px 15px;
@@ -199,16 +190,33 @@ button[type="button"] {
   border: none;
 }
 
-/* 
-@media (max-width: 400px) {
-  body {
-    width: 90%;
-
-  }
+/* Profile*/
+.profile-info > img {
+  width: 32%;
 }
 
-@media (min-width: 401px) {
-  body {
-    width: 80%;
-  }
-} */
+.fab{
+	height:64px;
+	width:64px;
+	background-color: #ebfcf4;
+	border-radius:100%;
+	border : 6px solid white;
+	margin: auto;
+	position: relative;
+	top:-42px;
+	text-align: center;
+	line-height : 64px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #6d37ff;
+  opacity: 0.8;
+  width: 100%;
+}
+
+.footer a {
+color: #ebfcf4;
+}
