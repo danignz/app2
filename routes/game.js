@@ -90,17 +90,6 @@ router.get("/:quizId", async (req, res, next) => {
       quiz.question[game.current_question].incorrect_answers[1];
 
     console.log(possibleAnswers);
-    /*
-      const indexOfQuestions = quiz.question.map((question, index) => {
-          return index+1;
-      });
-  
-      quiz.question.forEach((question,index) => {
-        quiz.question[index].indexOfQuestions = indexOfQuestions[index];
-      });
-    */
-
-    //Need to increase because index array starts from 0
 
     current_question++;
     res.render("game/question-to-solve", {
@@ -139,7 +128,7 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
   console.log("current question", current_question);
   console.log(num_questions);
 
-  if(current_question === 0){
+  if (current_question === 0) {
     try {
       const updatedGame = await Game.findByIdAndUpdate(
         gameId,
@@ -154,20 +143,6 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
     }
   }
 
-  current_question++;
-  try {
-    const updatedGame = await Game.findByIdAndUpdate(
-      gameId,
-      {
-        current_question: current_question,
-      },
-      { new: true }
-    );
-    console.log("Just updated:", updatedGame);
-  } catch (error) {
-    next(error);
-  }
-
   //  console.log("current cuestion; ", current_question);
   console.log("User choose; ", answer);
   try {
@@ -175,18 +150,68 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
     console.log("DB value; ", correct_answer);
 
     if (answer === correct_answer) {
-      console.log("Right Answer, well done!!!!!!!!!!");
+      try {
+        await Game.findByIdAndUpdate(gameId, {
+          $push: { answers: [true] },
+        });
+      } catch (error) {
+        next(error);
+      }
     } else {
-      console.log("You fail!!!!!!!!");
+      try {
+        await Game.findByIdAndUpdate(gameId, {
+          $push: { answers: [false] },
+        });
+      } catch (error) {
+        next(error);
+      }
     }
 
+    current_question++;
+    try {
+      const updatedGame = await Game.findByIdAndUpdate(
+        gameId,
+        {
+          current_question: current_question,
+        },
+        { new: true }
+      );
+      console.log("Just updated:", updatedGame);
+    } catch (error) {
+      next(error);
+    }
+
+    let updatedGame;
     if (num_questions <= current_question) {
+      try {
+        updatedGame = await Game.findByIdAndUpdate(
+          gameId,
+          {
+            status: "DONE",
+          },
+          { new: true }
+        );
+      } catch (error) {
+        next(error);
+      }
+
+      const answersArray = updatedGame.answers;
+      const total_right_answers = answersArray.filter(
+        (element) => element === true ).length;
+      const total_wrong_answers = answersArray.length - total_right_answers;
+
+      const answersArrObject = answersArray.map((question, index) => {
+          return { answersArray: question, index: index+1 }
+      });
+
+      console.log(answersArrObject);
 
       try {
         const updatedGame = await Game.findByIdAndUpdate(
           gameId,
           {
-            status: "DONE",
+            total_right_answers: total_right_answers,
+            total_wrong_answers: total_wrong_answers,
           },
           { new: true }
         );
@@ -195,7 +220,12 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
         next(error);
       }
 
-      res.render("game/results");
+      res.render("game/results", {
+        answersArrObject,
+        total_right_answers,
+        total_wrong_answers,
+        num_questions,
+      });
     } else {
       res.redirect(`/game/${quizid}`);
     }

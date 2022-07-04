@@ -1,4 +1,15 @@
-<h1>game is over</h1>
+<h1>Game is over</h1>
+
+<h2>Total right answers: {{total_right_answers}} / {{num_questions}}</h2>
+<h2>Total incorrect answers: {{total_wrong_answers}} / {{num_questions}}</h2>
+
+{{#each answersArrObject}}
+  {{#if this.answersArray}}
+    <h2>Question {{index}} is correct!</h2>
+  {{else}}
+    <h2>Question {{index}} is wrong!</h2>
+  {{/if}}
+{{/each}}
 
 <p>
   <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
