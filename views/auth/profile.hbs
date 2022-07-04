@@ -1,12 +1,10 @@
-<h1>PROFILE</h1>
-<h4>Welcome {{ user.username }}</h4>
+<div class="container">
+  <img src="/images/styles/logo.png" class="logo-png"/>
+  <h4 class="title">Hi {{user.username}} !</h4>
+</div>
 
-  <button
-    onclick="location.href='/game/select'"
-    type="button"
-  >PLAY!</button>
-
-<p>
-  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
-</p>
-
+<footer class="footer">
+  <!-- <button onclick="location.href='/game/select'" type="button">PLAY!</button> -->
+  <a class="navbar" href='/game/select'>PLAY!</a>
+  <a class="navbar" href="/">Home</a>
+</footer>
