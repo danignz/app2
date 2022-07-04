@@ -56,18 +56,6 @@ h3 {
   font-size: 18px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  background: #6d37ff;
-  opacity: 0.6;
-  font-weight: bold;
-  padding: 15px;
-  width: 500px;
-}
-
-
 .homelink {
   font-family: "Krona One", sans-serif;
   color: #6d37ff;
@@ -88,14 +76,6 @@ h4 {
 h6 {
   margin-top: 10px;
   text-align: center;
-}
-
-a .navbar{
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  font-weight: bold;
 }
 
 a {
@@ -210,16 +190,33 @@ button[type="button"] {
   border: none;
 }
 
-/* 
-@media (max-width: 400px) {
-  body {
-    width: 90%;
-
-  }
+/* Profile*/
+.profile-info > img {
+  width: 32%;
 }
 
-@media (min-width: 401px) {
-  body {
-    width: 80%;
-  }
-} */
+.fab{
+	height:64px;
+	width:64px;
+	background-color: #ebfcf4;
+	border-radius:100%;
+	border : 6px solid white;
+	margin: auto;
+	position: relative;
+	top:-42px;
+	text-align: center;
+	line-height : 64px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #6d37ff;
+  opacity: 0.8;
+  width: 100%;
+}
+
+.footer a {
+color: #ebfcf4;
+}
