@@ -1,6 +1,9 @@
-<h4>You have {{ user.points }} points in your account</h4>
+<div class="container">
 
-<h4>You have enough points to play to the following Quizzes:</h4>
+<h1 class="title">Select your Quiz!</h1>
+<h4>Total Points: {{ user.points }}</h4>
+<h6>(unlocked games)</h6>
+
 
 <div class="card-container">
   {{#if quizzes}}
@@ -23,4 +26,8 @@
   {{/if}}
 </div>
 
-<h4>You don't have enough points to play to the following Quizzes:</h4>
+<!-- <h4>You don't have enough points to play to the following Quizzes:</h4> -->
+<p>
+  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+</p>
+</div>
