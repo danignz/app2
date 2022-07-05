@@ -24,7 +24,14 @@ body {
 
 h3 {
   margin-top: 10px;
-  color: #6f7180;
+  color: #6d37ff;;
+  text-align: center;
+  font-weight: lighter;
+}
+
+h2 { 
+  margin-top: 10px;
+  color: #343434;
   text-align: center;
 }
 
@@ -206,6 +213,7 @@ button[type="button"] {
 	top:-42px;
 	text-align: center;
 	line-height : 64px;
+  text-decoration: none;
 }
 
 .footer {
@@ -213,10 +221,17 @@ button[type="button"] {
   bottom: 0;
   right: 0;
   background: #6d37ff;
-  opacity: 0.8;
-  width: 100%;
+  opacity: 0.6;
+  width: 100%; 
 }
 
-.footer a {
-color: #ebfcf4;
+.footer li {
+	display: inline-block;
+  padding: 24px 14px;
 }
+
+.footer li a {
+color: #ebfcf4;
+text-decoration: none;
+}
+
