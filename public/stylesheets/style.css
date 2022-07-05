@@ -1,10 +1,13 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  background: radial-gradient(
-    circle,
-    rgba(34, 193, 195, 0.6210526315789473) 0%,
-    rgba(253, 187, 45, 0.4421052631578948) 100%
-  );
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle,
+      rgba(34, 193, 195, 0.6210526315789473) 0%,
+      rgba(253, 187, 45, 0.4421052631578948) 100%);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -15,27 +18,28 @@ body {
 .logo-text {
   width: auto;
   height: auto;
-  text-align:center;
+  text-align: center;
 }
 
 .logo-png {
-  display:inline-block;
+  display: inline-block;
 }
 
 h3 {
   margin-top: 10px;
-  color: #6d37ff;;
+  color: #6d37ff;
+  ;
   text-align: center;
   font-weight: lighter;
 }
 
-h2 { 
+h2 {
   margin-top: 10px;
   color: #343434;
   text-align: center;
 }
 
-.title{
+.title {
   font-family: "Krona One", sans-serif;
   color: #212121;
   text-align: center;
@@ -149,15 +153,15 @@ input.input-check {
   box-shadow: 2px 2px #6d37ff;
 }
 
-.card > a img {
+.card>a img {
   width: 80%;
 }
 
-.card > img {
+.card>img {
   width: 100%;
 }
 
-.card > a {
+.card>a {
   display: flex;
   justify-content: center;
 }
@@ -171,6 +175,7 @@ input.input-check {
   display: flex;
   justify-content: start;
 }
+
 .action-buttons button:nth-child(2) {
   margin-left: 10px;
 }
@@ -185,7 +190,7 @@ button[type="button"] {
   border: none;
   background: -webkit-linear-gradient(left top, rgb(102, 102, 255), #6d37ff);
   box-shadow: 2px 2px #fffed5;
-} 
+}
 
 /* Quiz Info*/
 .quiz-container {
@@ -198,40 +203,42 @@ button[type="button"] {
 }
 
 /* Profile*/
-.profile-info > img {
+.profile-info>img {
   width: 32%;
 }
 
-.fab{
-	height:64px;
-	width:64px;
-	background-color: #ebfcf4;
-	border-radius:100%;
-	border : 6px solid white;
-	margin: auto;
-	position: relative;
-	top:-42px;
-	text-align: center;
-	line-height : 64px;
+.fab {
+  height: 64px;
+  width: 64px;
+  background-color: #ebfcf4;
+  border-radius: 100%;
+  border: 6px solid white;
+  margin: auto;
+  position: relative;
+  top: -42px;
+  text-align: center;
+  line-height: 64px;
   text-decoration: none;
 }
 
 .footer {
+  padding: 20px;
   position: fixed;
   bottom: 0;
   right: 0;
   background: #6d37ff;
   opacity: 0.6;
-  width: 100%; 
+  width: 100%;
 }
 
-.footer li {
-	display: inline-block;
-  padding: 24px 14px;
+footer ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
 }
 
 .footer li a {
-color: #ebfcf4;
-text-decoration: none;
+  color: #ebfcf4;
+  text-decoration: none;
 }
-
