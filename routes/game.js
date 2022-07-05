@@ -60,6 +60,14 @@ router.get("/:quizId", async (req, res, next) => {
   let total_questions;
   try {
     const quiz = await Quiz.findById(quizId).populate("question").lean();
+
+    if (quiz.question.length === 0) {
+      res.render("game/error", {
+        error: "This Quiz have not questions. Please try another one",
+      });
+      return;
+    }
+
     total_questions = quiz.num_questions;
     const question = quiz.question[game.current_question];
 
@@ -192,13 +200,10 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
 
       //Update DB with the total right/wrong answers number
       try {
-        await Game.findByIdAndUpdate(
-          gameId,
-          {
-            total_right_answers: total_right_answers,
-            total_wrong_answers: total_wrong_answers,
-          }
-        );
+        await Game.findByIdAndUpdate(gameId, {
+          total_right_answers: total_right_answers,
+          total_wrong_answers: total_wrong_answers,
+        });
       } catch (error) {
         next(error);
       }
@@ -210,7 +215,7 @@ router.post("/:questionId/:gameId/check", async (req, res, next) => {
         total_wrong_answers,
         num_questions,
       });
-    //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
+      //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
     } else {
       res.redirect(`/game/${quizid}`);
     }
