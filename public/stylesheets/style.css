@@ -43,6 +43,7 @@ h2 {
   font-family: "Krona One", sans-serif;
   color: #212121;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .titleCard {
@@ -71,6 +72,7 @@ h2 {
   font-family: "Krona One", sans-serif;
   color: #6d37ff;
   text-align: center;
+  margin-top: 15px;
 }
 
 .details {
@@ -104,7 +106,7 @@ label {
 }
 
 input {
-  width: 94%;
+  width: 100%;
   border: none;
   outline: none;
   padding: 10px;
@@ -141,11 +143,12 @@ input.input-check {
 }
 
 .card {
-  width: 80%;
+  width: 100%;
   background-color: #ebfcf4;
-  padding: 10px;
-  border-radius: 25px;
-  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,7 +206,7 @@ button[type="button"] {
 }
 
 /* Profile*/
-.profile-info>img {
+.profile-info > img {
   width: 32%;
 }
 
