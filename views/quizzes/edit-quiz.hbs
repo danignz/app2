@@ -74,20 +74,6 @@
         {{/if}}
     />Visible for users</label>
 
-    <label>Image</label>
-    <select name="quiz_img" id="quiz_img-select">
-      {{#each arrayCurrentImages}}
-        {{#if this.isCurrent}}
-          <option
-            value={{this.quiz_img}}
-            selected
-          >{{this.quiz_img}}</option>
-        {{else}}
-          <option value={{this.quiz_img}}>{{this.quiz_img}}</option>
-        {{/if}}
-      {{/each}}
-    </select>
-
     {{#if error}}
       <p style="color: red;">{{error}}</p>
     {{/if}}

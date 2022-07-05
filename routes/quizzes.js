@@ -20,12 +20,10 @@ router.get("/", async (req, res, next) => {
 router.get("/create", (req, res, next) => {
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   const enumValues = {
     category: enumValuesCategory,
     difficulty: enumValuesDifficulty,
-    quiz_img: enumValuesImages
   };
 
   res.render("quizzes/new-quiz", { enumValues });
@@ -42,14 +40,12 @@ router.post("/create", async (req, res, next) => {
     difficulty,
     points_required,
     num_questions,
-    quiz_img,
     isVisible,
   } = req.body;
 
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   // Check if admin introduced all values
   if (
@@ -58,8 +54,7 @@ router.post("/create", async (req, res, next) => {
     !category ||
     !difficulty ||
     !points_required ||
-    !num_questions ||
-    !quiz_img
+    !num_questions
   ) {
     res.render("quizzes/new-quiz", {
       error:
@@ -67,7 +62,6 @@ router.post("/create", async (req, res, next) => {
       enumValues: {
         category: enumValuesCategory,
         difficulty: enumValuesDifficulty,
-        quiz_img: enumValuesImages
       },
     });
     return;
@@ -83,7 +77,6 @@ router.post("/create", async (req, res, next) => {
         enumValues: {
           category: enumValuesCategory,
           difficulty: enumValuesDifficulty,
-          quiz_img: enumValuesImages,
         },
       });
       return;
@@ -102,6 +95,20 @@ router.post("/create", async (req, res, next) => {
     ).limit(num_questions);
   } catch (error) {
     next(error);
+  }
+
+  let quiz_img;
+  switch (category) {
+    case "JAVASCRIPT":
+      quiz_img = "/images/quizzes/js.png";
+      break;
+    case "CSS":
+      quiz_img = "/images/quizzes/css.png";
+      break;
+    case "HTML":
+      quiz_img = "/images/quizzes/html.png";
+      break;
+    default:
   }
 
   try {
@@ -132,10 +139,10 @@ router.get("/:quizId", async (req, res, next) => {
     const quiz = await Quiz.findById(quizId).populate("question").lean();
 
     const indexOfQuestions = quiz.question.map((question, index) => {
-        return index+1;
+      return index + 1;
     });
 
-    quiz.question.forEach((question,index) => {
+    quiz.question.forEach((question, index) => {
       quiz.question[index].indexOfQuestions = indexOfQuestions[index];
     });
 
@@ -166,7 +173,6 @@ router.get("/:quizId/edit", async (req, res, next) => {
 
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
   try {
     const quiz = await Quiz.findById(quizId).populate("question");
@@ -187,19 +193,10 @@ router.get("/:quizId/edit", async (req, res, next) => {
       }
     });
 
-    const arrayCurrentImages = enumValuesImages.map((quiz_img) => {
-      if (quiz_img === quiz.quiz_img) {
-        return { quiz_img: quiz_img, isCurrent: true };
-      } else {
-        return { quiz_img: quiz_img, isCurrent: false };
-      }
-    });
-
     res.render("quizzes/edit-quiz", {
       quiz,
       arrayCurrentCategory,
-      arrayCurrentDifficulty,
-      arrayCurrentImages,
+      arrayCurrentDifficulty
     });
   } catch (error) {
     next(error);
@@ -218,16 +215,14 @@ router.post("/:quizId/edit", async (req, res, next) => {
     difficulty,
     points_required,
     num_questions,
-    quiz_img,
     isVisible,
   } = req.body;
 
   //Needed values to pass to the view if an error occurs to reload select input correctly
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
-  const enumValuesImages = Quiz.schema.path("quiz_img").enumValues;
 
-  let quiz, arrayCurrentCategory, arrayCurrentDifficulty, arrayCurrentImages ;
+  let quiz, arrayCurrentCategory, arrayCurrentDifficulty;
 
   try {
     quiz = await Quiz.findById(quizId).populate("question");
@@ -248,14 +243,6 @@ router.post("/:quizId/edit", async (req, res, next) => {
       }
     });
 
-    arrayCurrentImages = enumValuesImages.map((quiz_img) => {
-      if (quiz_img === quiz.quiz_img) {
-        return { quiz_img: quiz_img, isCurrent: true };
-      } else {
-        return { quiz_img: quiz_img, isCurrent: false };
-      }
-    });
-
   } catch (error) {
     next(error);
   }
@@ -267,21 +254,19 @@ router.post("/:quizId/edit", async (req, res, next) => {
     !category ||
     !difficulty ||
     !points_required ||
-    !num_questions ||
-    !quiz_img
+    !num_questions
   ) {
     res.render("quizzes/edit-quiz", {
       error:
         "All fields (except Visible) are mandatory. Please fill them before submitting.",
       arrayCurrentCategory: arrayCurrentCategory,
       arrayCurrentDifficulty: arrayCurrentDifficulty,
-      arrayCurrentImages: arrayCurrentImages,
       quiz: quiz,
     });
     return;
   }
 
-  if(quiz.title !== title){
+  if (quiz.title !== title) {
     try {
       // Check if new title exists on our DB
       const quizByTitle = await Quiz.findOne({ title: title });
@@ -291,7 +276,6 @@ router.post("/:quizId/edit", async (req, res, next) => {
           error: "Title its busy, try a new one.",
           arrayCurrentCategory: arrayCurrentCategory,
           arrayCurrentDifficulty: arrayCurrentDifficulty,
-          arrayCurrentImages: arrayCurrentImages,
           quiz: quiz,
         });
         return;
@@ -316,6 +300,20 @@ router.post("/:quizId/edit", async (req, res, next) => {
     }
   } else {
     questions = quiz.question;
+  }
+
+  let quiz_img;
+  switch (category) {
+    case "JAVASCRIPT":
+      quiz_img = "/images/quizzes/js.png";
+      break;
+    case "CSS":
+      quiz_img = "/images/quizzes/css.png";
+      break;
+    case "HTML":
+      quiz_img = "/images/quizzes/html.png";
+      break;
+    default:
   }
 
   try {
