@@ -19,6 +19,9 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
+    user_img: {
+      type: String,
+    },
     points: {
       type: Number,
       required: [true, "Points are required"],
