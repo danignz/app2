@@ -180,7 +180,7 @@ input.input-check {
 }
 
 .card {
-  width: 100%;
+  width: 115%;
   background-color: #ebfcf4;
   padding: 15px;
   border-radius: 20px;
@@ -243,7 +243,7 @@ button[type="button"] {
 }
 
 /* Profile*/
-.profile-info > img {
+.profile-info>img {
   width: 32%;
 }
 
