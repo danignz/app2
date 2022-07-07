@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
+const { isLoggedIn, checkRoles } = require("../middlewares");
 
 // @desc    Displays List of all Quizzes
 // @route   GET /quizzes
 // @access  Restricted to Admin role
-router.get("/", async (req, res, next) => {
+router.get("/", checkRoles("admin"), async (req, res, next) => {
   try {
     const quizzes = await Quiz.find({}).populate("question");
     res.render("quizzes/quizzes", { quizzes });
@@ -17,7 +18,7 @@ router.get("/", async (req, res, next) => {
 // @desc    Displays form to add new quizzes to DB
 // @route   GET /quizzes/create
 // @access  Restricted to Admin role
-router.get("/create", (req, res, next) => {
+router.get("/create", checkRoles("admin"), (req, res, next) => {
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
   const enumValuesDifficulty = Quiz.schema.path("difficulty").enumValues;
 
@@ -32,7 +33,7 @@ router.get("/create", (req, res, next) => {
 // @desc    Sends data fields related to a quiz to DB to create a new quiz
 // @route   POST /quizzes/create
 // @access  Restricted to Admin role
-router.post("/create", async (req, res, next) => {
+router.post("/create", checkRoles("admin"), async (req, res, next) => {
   const {
     title,
     description,
@@ -133,7 +134,7 @@ router.post("/create", async (req, res, next) => {
 // @desc    Show all data fields related to a quiz indicated by the ID
 // @route   GET /quizzes/quizId
 // @access  Restricted to Admin role
-router.get("/:quizId", async (req, res, next) => {
+router.get("/:quizId", checkRoles("admin"), async (req, res, next) => {
   const { quizId } = req.params;
   try {
     const quiz = await Quiz.findById(quizId).populate("question").lean();
@@ -155,7 +156,7 @@ router.get("/:quizId", async (req, res, next) => {
 // @desc    Delete the quiz indicated by the ID from DB
 // @route   POST /quizzes/quizId/delete
 // @access  Restricted to Admin role
-router.post("/:quizId/delete", async (req, res, next) => {
+router.post("/:quizId/delete", checkRoles("admin"), async (req, res, next) => {
   const { quizId } = req.params;
   try {
     await Quiz.findByIdAndRemove(quizId);
@@ -168,7 +169,7 @@ router.post("/:quizId/delete", async (req, res, next) => {
 // @desc    Displays form to edit all the possible data fields of a quiz
 // @route   GET /quizzes/quizId/edit
 // @access  Restricted to Admin role
-router.get("/:quizId/edit", async (req, res, next) => {
+router.get("/:quizId/edit", checkRoles("admin"), async (req, res, next) => {
   const { quizId } = req.params;
 
   const enumValuesCategory = Quiz.schema.path("category").enumValues;
@@ -196,7 +197,7 @@ router.get("/:quizId/edit", async (req, res, next) => {
     res.render("quizzes/edit-quiz", {
       quiz,
       arrayCurrentCategory,
-      arrayCurrentDifficulty
+      arrayCurrentDifficulty,
     });
   } catch (error) {
     next(error);
@@ -206,7 +207,7 @@ router.get("/:quizId/edit", async (req, res, next) => {
 // @desc    Sends data fields related to a quiz to store the new data in the DB
 // @route   POST /quizzes/quizId/edit
 // @access  Restricted to Admin role
-router.post("/:quizId/edit", async (req, res, next) => {
+router.post("/:quizId/edit", checkRoles("admin"), async (req, res, next) => {
   const { quizId } = req.params;
   const {
     title,
@@ -242,7 +243,6 @@ router.post("/:quizId/edit", async (req, res, next) => {
         return { difficulty: difficulty, isCurrent: false };
       }
     });
-
   } catch (error) {
     next(error);
   }

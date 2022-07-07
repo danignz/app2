@@ -24,6 +24,11 @@ const userSchema = new Schema(
       required: [true, "Points are required"],
       default: 100,
     },
+    role: {
+      type: String,
+      enum: ["player", "admin"],
+      default: "player",
+    },
   },
   {
     timestamps: true,

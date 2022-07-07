@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
+const { isLoggedIn, checkRoles } = require("../middlewares");
 
 // @desc    Displays List of all Questions
 // @route   GET /questions
 // @access  Restricted to Admin role
-router.get("/", async (req, res, next) => {
+router.get("/", checkRoles("admin"), async (req, res, next) => {
   try {
     const questions = await Question.find({});
     res.render("questions/questions", { questions });
@@ -16,23 +17,22 @@ router.get("/", async (req, res, next) => {
 // @desc    Displays form to add new questions to DB
 // @route   GET /questions/create
 // @access  Restricted to Admin role
-router.get("/create", (req, res, next) => {
-
-  const enumValuesCategory= Question.schema.path('category').enumValues;
-  const enumValuesDifficulty= Question.schema.path('difficulty').enumValues;
+router.get("/create", checkRoles("admin"), (req, res, next) => {
+  const enumValuesCategory = Question.schema.path("category").enumValues;
+  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
 
   const enumValues = {
     category: enumValuesCategory,
-    difficulty: enumValuesDifficulty 
-  }
+    difficulty: enumValuesDifficulty,
+  };
 
-  res.render("questions/new-question", {enumValues});
+  res.render("questions/new-question", { enumValues });
 });
 
 // @desc    Sends data fields related to a question to DB to create a new question
 // @route   POST /questions/create
 // @access  Restricted to Admin role
-router.post("/create", async (req, res, next) => {
+router.post("/create", checkRoles("admin"), async (req, res, next) => {
   const {
     question,
     correct_answer,
@@ -63,10 +63,10 @@ router.post("/create", async (req, res, next) => {
     res.render("questions/new-question", {
       error:
         "All fields (except Visible) are mandatory. Please fill them before submitting.",
-        enumValues : {
-          category: enumValuesCategory,
-          difficulty: enumValuesDifficulty,
-        }
+      enumValues: {
+        category: enumValuesCategory,
+        difficulty: enumValuesDifficulty,
+      },
     });
     return;
   }
@@ -91,7 +91,7 @@ router.post("/create", async (req, res, next) => {
 // @desc    Show all data fields related to a question indicated by the ID
 // @route   GET /questions/questionId
 // @access  Restricted to Admin role
-router.get("/:questionId", async (req, res, next) => {
+router.get("/:questionId", checkRoles("admin"), async (req, res, next) => {
   const { questionId } = req.params;
   try {
     const question = await Question.findById(questionId);
@@ -104,47 +104,53 @@ router.get("/:questionId", async (req, res, next) => {
 // @desc    Delete the question indicated by the ID from DB
 // @route   POST /questions/questionId/delete
 // @access  Restricted to Admin role
-router.post("/:questionId/delete", async (req, res, next) => {
-  const { questionId } = req.params;
-  try {
-    await Question.findByIdAndRemove(questionId);
-    res.redirect("/questions");
-  } catch (error) {
-    next(error);
+router.post(
+  "/:questionId/delete",
+  checkRoles("admin"),
+  async (req, res, next) => {
+    const { questionId } = req.params;
+    try {
+      await Question.findByIdAndRemove(questionId);
+      res.redirect("/questions");
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Displays form to edit all the possible data fields of a question
 // @route   GET /questions/questionId/edit
 // @access  Restricted to Admin role
-router.get("/:questionId/edit", async (req, res, next) => {
+router.get("/:questionId/edit", checkRoles("admin"), async (req, res, next) => {
   const { questionId } = req.params;
 
-  const enumValuesCategory= Question.schema.path('category').enumValues;
-  const enumValuesDifficulty= Question.schema.path('difficulty').enumValues;
+  const enumValuesCategory = Question.schema.path("category").enumValues;
+  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
 
   try {
     const question = await Question.findById(questionId);
 
-    const arrayCurrentCategory = enumValuesCategory.map(category => {
-
-      if(category === question.category) {
-        return {category: category, isCurrent : true}
-      }else{
-        return {category: category, isCurrent : false}
-      }      
+    const arrayCurrentCategory = enumValuesCategory.map((category) => {
+      if (category === question.category) {
+        return { category: category, isCurrent: true };
+      } else {
+        return { category: category, isCurrent: false };
+      }
     });
 
-    const arrayCurrentDifficulty = enumValuesDifficulty.map(difficulty => {
-
-      if(difficulty === question.difficulty) {
-        return {difficulty: difficulty, isCurrent : true}
-      }else{
-        return {difficulty: difficulty, isCurrent : false}
-      }      
+    const arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
+      if (difficulty === question.difficulty) {
+        return { difficulty: difficulty, isCurrent: true };
+      } else {
+        return { difficulty: difficulty, isCurrent: false };
+      }
     });
 
-    res.render("questions/edit-question", {question, arrayCurrentCategory, arrayCurrentDifficulty});
+    res.render("questions/edit-question", {
+      question,
+      arrayCurrentCategory,
+      arrayCurrentDifficulty,
+    });
   } catch (error) {
     next(error);
   }
@@ -153,57 +159,61 @@ router.get("/:questionId/edit", async (req, res, next) => {
 // @desc    Sends data fields related to a question to store the new data in the DB
 // @route   POST /questions/questionId/edit
 // @access  Restricted to Admin role
-router.post("/:questionId/edit", async (req, res, next) => {
-  const { questionId } = req.params;
-  const {
-    question,
-    correct_answer,
-    incorrect_answers_0,
-    incorrect_answers_1,
-    category,
-    difficulty,
-    question_img,
-    isVisible,
-  } = req.body;
+router.post(
+  "/:questionId/edit",
+  checkRoles("admin"),
+  async (req, res, next) => {
+    const { questionId } = req.params;
+    const {
+      question,
+      correct_answer,
+      incorrect_answers_0,
+      incorrect_answers_1,
+      category,
+      difficulty,
+      question_img,
+      isVisible,
+    } = req.body;
 
-  const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
+    const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
-  // Check if admin introduced all values
-  if (
-    !question ||
-    !correct_answer ||
-    !incorrect_answers_0 ||
-    !incorrect_answers_1 ||
-    !category ||
-    !difficulty ||
-    !question_img
-  ) {
-    res.render("questions/edit-question", {
-      error:
-        "All fields (except Visible) are mandatory. Please fill them before submitting.",
-    });
-    return;
+    // Check if admin introduced all values
+    if (
+      !question ||
+      !correct_answer ||
+      !incorrect_answers_0 ||
+      !incorrect_answers_1 ||
+      !category ||
+      !difficulty ||
+      !question_img
+    ) {
+      res.render("questions/edit-question", {
+        error:
+          "All fields (except Visible) are mandatory. Please fill them before submitting.",
+      });
+      return;
+    }
+
+    try {
+      const updatedQuestion = await Question.findByIdAndUpdate(
+        questionId,
+        {
+          question,
+          correct_answer,
+          incorrect_answers,
+          category,
+          difficulty,
+          question_img,
+          isVisible: Boolean(isVisible),
+        },
+        { new: true }
+      );
+      console.log("Just updated:", updatedQuestion);
+      res.redirect(`/questions/${questionId}`);
+    } catch (error) {
+      next(error);
+    }
   }
-
-  try {
-    const updatedQuestion = await Question.findByIdAndUpdate(
-      questionId,
-      {
-        question,
-        correct_answer,
-        incorrect_answers,
-        category,
-        difficulty,
-        question_img,
-        isVisible: Boolean(isVisible),
-      },
-      { new: true }
-    );
-    console.log("Just updated:", updatedQuestion);
-    res.redirect(`/questions/${questionId}`);
-  } catch (error) {
-    next(error);
-  }
-});
+);
 
 module.exports = router;
