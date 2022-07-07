@@ -25,6 +25,13 @@ body {
   display: inline-block;
 }
 
+h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #343434;
+  text-align: center;
+}
+
 h3 {
   margin-top: 10px;
   color: #6d37ff;
@@ -33,17 +40,36 @@ h3 {
   font-weight: lighter;
 }
 
-h2 {
-  margin-top: 10px;
-  color: #343434;
+h4 {
+  border-radius: 70%;
+  color: #212121;
   text-align: center;
 }
 
+h6 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: #6d37ff;
+  font-weight: bold;
+}
+
+p {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .title {
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-family: "Krona One", sans-serif;
   color: #212121;
   text-align: center;
-  margin-bottom: 10px;
 }
 
 .titleCard {
@@ -78,25 +104,6 @@ h2 {
 .details {
   color: #6d37ff;
   text-align: center;
-}
-
-h4 {
-  border-radius: 70%;
-  color: #212121;
-  text-align: center;
-}
-
-h6 {
-  margin-top: 10px;
-  text-align: center;
-}
-
-a {
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  color: #6d37ff;
-  font-weight: bold;
 }
 
 label {
@@ -210,6 +217,7 @@ button[type="button"] {
   width: 32%;
 }
 
+/* Navbar*/
 .fab {
   height: 64px;
   width: 64px;
