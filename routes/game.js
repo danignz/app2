@@ -202,11 +202,28 @@ router.post(
           return { answersArray: question, index: index + 1 };
         });
 
+        //Calcule the total points won in Game
+
+        let total_points = 0;
+        switch (game.quiz.difficulty) {
+          case "BASICS":
+            total_points = total_right_answers * 2;
+            break;
+          case "INTERMEDIATE":
+            total_points = total_right_answers * 3;
+            break;
+          case "ADVANCED":
+            total_points = total_right_answers * 4;
+            break;
+          default:
+        }
+
         //Update DB with the total right/wrong answers number
         try {
           await Game.findByIdAndUpdate(gameId, {
             total_right_answers: total_right_answers,
             total_wrong_answers: total_wrong_answers,
+            total_points: total_points,
           });
         } catch (error) {
           next(error);
@@ -218,6 +235,7 @@ router.post(
           total_right_answers,
           total_wrong_answers,
           num_questions,
+          total_points
         });
         //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
       } else {

@@ -30,6 +30,10 @@ const gameSchema = new Schema(
       type: Number,
       default: -1,
     },
+    total_points: {
+      type: Number,
+      default: -1,
+    },
   },
   {
     timestamps: true,
