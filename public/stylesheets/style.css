@@ -8,7 +8,7 @@ body {
   background: radial-gradient(circle,
       rgba(34, 193, 195, 0.6210526315789473) 0%,
       rgba(253, 187, 45, 0.4421052631578948) 100%);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .container {
@@ -130,8 +130,9 @@ select {
   width: 100%;
   color: white;
   border: none;
+  border-radius: 50px;
   margin: 20px 0 0 0;
-  padding: 8px;
+  padding: 10px;
   background: -webkit-linear-gradient(left top, rgb(102, 102, 255), #6d37ff);
   box-shadow: 2px 2px #fffed5;
 }
@@ -144,34 +145,41 @@ select {
 }
 
 .answer1 {
-  font-family: "Krona One", sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
   width: 100%;
-  color: #212121;
+  color: #343434;
   border: none;
+  border-radius: 50px;
   margin: 10px 120px 10px 0px;
-  padding: 8px;
+  padding: 10px;
   background-color: #ff5d5c;
   box-shadow: 2px 2px #343434
 }
 
 .answer2 {
-  font-family: "Krona One", sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
   width: 100%;
-  color: #212121;
+  color: #343434;
   border: none;
+  border-radius: 50px;
   margin: 10px 120px 10px 0px;
-  padding: 8px;
+  padding: 10px;
   background-color: #ffbd2e;
   box-shadow: 2px 2px #343434;
 }
 
 .answer3 {
-  font-family: "Krona One", sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
   width: 100%;
-  color: #212121;
+  color: #343434;
   border: none;
+  border-radius: 50px;
   margin: 10px 120px 10px 0px;
-  padding: 8px;
+  padding: 10px;
   background-color: #2aca44;
   box-shadow: 2px 2px #343434;
 }
@@ -200,7 +208,7 @@ input.input-check {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 2px #6d37ff;
+  box-shadow: 2px 2px #343434;
 }
 
 .card>a img {
@@ -209,6 +217,7 @@ input.input-check {
 
 .card>img {
   width: 100%;
+  margin-bottom: 15px;
 }
 
 .card>a {
