@@ -279,22 +279,31 @@ button[type="button"] {
 }
 
 /* Navbar*/
-.fab {
-  height: 64px;
-  width: 64px;
+.playButton {
+  height: 70px;
+  width: 70px;
   background-color: #ebfcf4;
   border-radius: 100%;
-  border: 6px solid white;
+  border: 3px solid #6d37ff;
   margin: auto;
   position: relative;
   top: -42px;
-  text-align: center;
-  line-height: 64px;
   text-decoration: none;
+  box-shadow: 0px 0px 2px 2px #5b5b5b;
 }
 
 .footer {
   padding: 20px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #ebfcf4;
+  width: 100%;
+  box-shadow: 2px 2px 2px 2px #343434;
+}
+
+.footer-game {
+  padding: 7px;
   position: fixed;
   bottom: 0;
   right: 0;
