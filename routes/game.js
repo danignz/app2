@@ -124,6 +124,14 @@ router.post(
       next(error);
     }
 
+    //if game is over show message in view
+    if (game.status === "DONE") {
+      res.render("game/error", {
+        error: "This Game is Over, please start a new one",
+      });
+      return;
+    }
+
     let { current_question } = game;
     const num_questions = game.quiz.num_questions;
     const quizid = game.quiz._id;
@@ -235,7 +243,7 @@ router.post(
           total_right_answers,
           total_wrong_answers,
           num_questions,
-          total_points
+          total_points,
         });
         //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
       } else {
