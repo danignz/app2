@@ -143,7 +143,7 @@ const questions = [
   {
     question: "what is the solution?",
     correct_answer: "true",
-    incorrect_answers: ["false'", "ERROR"],
+    incorrect_answers: ["false", "ERROR"],
     category: "JAVASCRIPT",
     difficulty: "BASICS",
     question_img: "/images/questions/JS-16.jpg",
@@ -152,7 +152,7 @@ const questions = [
   {
     question: "what is the solution?",
     correct_answer: "Sandra",
-    incorrect_answers: ["SANDRA'", "SAndra"],
+    incorrect_answers: ["SANDRA", "SAndra"],
     category: "JAVASCRIPT",
     difficulty: "INTERMEDIATE",
     question_img: "/images/questions/JS-17.jpg",

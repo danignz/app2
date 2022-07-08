@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
 const Game = require("../models/Game");
+const User = require("../models/User");
 const { isLoggedIn, checkRoles } = require("../middlewares");
 
 // @desc    Show all quizzes that are able to be played for the user
@@ -116,6 +117,7 @@ router.post(
     const { gameId } = req.params;
     const { answer } = req.body;
     let game;
+    const userId = req.session.currentUser._id;
 
     //Obtain all the data from DB relative to the current Game and Quiz
     try {
@@ -232,6 +234,24 @@ router.post(
             total_right_answers: total_right_answers,
             total_wrong_answers: total_wrong_answers,
             total_points: total_points,
+          });
+        } catch (error) {
+          next(error);
+        }
+
+        //Obtain user points.
+        let userPoints
+        try {
+          userPoints = await User.findById(userId, { _id: 0, points: 1 });
+        } catch (error) {
+          next(error);
+        }
+
+        const newPoints = userPoints.points + total_points;
+        //Added points won.
+        try {
+          await User.findByIdAndUpdate(userId, {
+            points: newPoints,
           });
         } catch (error) {
           next(error);
