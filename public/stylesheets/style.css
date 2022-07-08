@@ -94,6 +94,12 @@ p {
   font-size: 18px;
 }
 
+.profile-points {
+  font-family: "Krona One", sans-serif;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
 .homelink {
   font-family: "Krona One", sans-serif;
   color: #6d37ff;
@@ -229,6 +235,11 @@ input.input-check {
   padding: 0 10%;
 }
 
+button {
+  border: none;
+  background-color: #ebfcf4;
+}
+
 .action-buttons {
   padding-left: 10%;
   display: flex;
@@ -264,6 +275,7 @@ button[type="button"] {
 /* Profile*/
 .profile-info>img {
   width: 32%;
+  margin-top: 20px;
 }
 
 /* Navbar*/
@@ -286,9 +298,9 @@ button[type="button"] {
   position: fixed;
   bottom: 0;
   right: 0;
-  background: #6d37ff;
-  opacity: 0.6;
+  background: #ebfcf4;
   width: 100%;
+  box-shadow: 2px 2px 2px 2px #343434;
 }
 
 footer ul {
@@ -301,4 +313,8 @@ footer ul {
 .footer li a {
   color: #ebfcf4;
   text-decoration: none;
+}
+
+footer img {
+  size-adjust: 2px;
 }
