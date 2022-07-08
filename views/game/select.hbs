@@ -1,15 +1,14 @@
 <div class="container">
 
-<h1 class="title">Select your Quiz!</h1>
-<h4>Total Points: {{ user.points }}</h4>
-<h6>(unlocked games)</h6>
+<h1 class="title">Select to Play!</h1>
+<h3 class="profile-points">{{ user.points }} POINTS</h3>
+<!-- <h6>(unlocked games)</h6> -->
 
 
 <div class="card-container">
   {{#if quizzes}}
     {{#each quizzes}}
-      <div class="card">
-        <h4><a href="/game/{{this._id}}">{{this.title}}</a></h4>
+      <div class="card-select">
         {{#if this.quiz_img}}
           <a href="/game/{{this._id}}"><img
               src="{{this.quiz_img}}"
@@ -18,7 +17,8 @@
         {{else}}
           <img src="/images/quizzes/default.jpg" alt="Not image avariable" />
         {{/if}}
-        <h6>Questions: {{this.num_questions}}</h6>
+        <h2><a href="/game/{{this._id}}">{{this.title}}</a></h2>
+        <h4>{{this.num_questions}} questions</h4>
       </div>
     {{/each}}
   {{else}}

@@ -1,22 +1,28 @@
 <div class="container">
 
-<h1 class="title">Finish!</h1>
+  <h1 class="title">Finish!</h1>
 
-<h2>Total right answers: {{total_right_answers}} / {{num_questions}}</h2>
-<h2>Total incorrect answers: {{total_wrong_answers}} / {{num_questions}}</h2>
-<h2>Points Won in Game: {{total_points}}</h2>
-<br>
+  <h3 class="question">Right answers:
+    {{total_right_answers}}
+    /
+    {{num_questions}}</h3>
+  <!-- <h2>Total incorrect answers: {{total_wrong_answers}} / {{num_questions}}</h2> -->
+  <h3 class="profile-points">{{total_points}} WON POINTS</h3>
+  <br />
 
-{{#each answersArrObject}}
-  {{#if this.answersArray}}
-    <h2>Question {{index}} is correct!</h2>
-  {{else}}
-    <h2>Question {{index}} is wrong!</h2>
-  {{/if}}
-{{/each}}
-
-<p>
-  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
-</p>
+  <div class="card-container">
+    <div class="card-select">
+      {{#each answersArrObject}}
+        {{#if this.answersArray}}
+          <h3 class="qCorrect">Q{{index}} Correct!</h3>
+        {{else}}
+          <h3 class="qWrong">Q{{index}} Wrong!</h3>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+  <p>
+    <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
+  </p>
 
 </div>
