@@ -3,8 +3,10 @@
     <img src="/images/styles/logo.png" class="logo-png"/>
     <h1 class="title">Hi {{user.username}} !</h1>
   </div>
+
+    <h3 class="profile-points">{{user.points}} POINTS</h3>
+
   <div class="profile-info">
-    <h4 class="title">total points -> {{user.points}}</h4>
     <img src="/images/quizzes/js.png" />
     <img src="/images/quizzes/css.png" />
     <img src="/images/quizzes/html.png" />
@@ -13,10 +15,11 @@
 
 <footer class="footer">
   <ul>
-    <li><a>Ranking</a></li>
-    <li><a href="/game/select">PLAY!</a></li>
+    <li><a><img width = "45" height = "45" src="/navbar/ranking.png"></a></li>
+    <li><a class="playButton" href="/game/select"><img width = "50" height = "50" src="/navbar/play2.png"></a></li>
     <li>
-      <form action="/auth/logout" method="POST"><button type="submit">Log out</button></form>
+      <form action="/auth/logout" method="POST"><button type="submit"><img width = "45" height = "45" src="/navbar/logout.png"></button></form>
     </li>
   </ul>
 </footer>
+
