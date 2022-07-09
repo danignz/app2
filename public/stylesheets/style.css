@@ -150,6 +150,10 @@ select {
   text-align: center;
 }
 
+div .answer {
+  width: 100%;
+}
+
 .answer1 {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
@@ -157,7 +161,7 @@ select {
   color: #343434;
   border: none;
   border-radius: 50px;
-  margin: 10px 120px 10px 0px;
+  margin: 10px 10px 10px 0px;
   padding: 10px;
   background-color: #ff5d5c;
   box-shadow: 2px 2px #343434
@@ -171,7 +175,7 @@ select {
   color: #343434;
   border: none;
   border-radius: 50px;
-  margin: 10px 120px 10px 0px;
+  margin: 10px 10px 10px 0px;
   padding: 10px;
   background-color: #ffbd2e;
   box-shadow: 2px 2px #343434;
@@ -184,7 +188,7 @@ select {
   color: #343434;
   border: none;
   border-radius: 50px;
-  margin: 10px 120px 10px 0px;
+  margin: 10px 10px 10px 0px;
   padding: 10px;
   background-color: #2aca44;
   box-shadow: 2px 2px #343434;
