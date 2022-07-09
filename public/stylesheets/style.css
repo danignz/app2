@@ -360,3 +360,7 @@ footer ul {
 footer img {
   size-adjust: 2px;
 }
+
+.signup a{
+  display: inline;
+}
