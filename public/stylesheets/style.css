@@ -254,6 +254,11 @@ input.input-check {
   margin-bottom: 15px;
 }
 
+.card>a>img {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
 .card>a {
   display: flex;
   justify-content: center;
