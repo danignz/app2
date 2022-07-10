@@ -240,14 +240,14 @@ router.post(
         }
 
         //Obtain user points.
-        let userPoints
+        let userData
         try {
-          userPoints = await User.findById(userId, { _id: 0, points: 1 });
+          userData = await User.findById(userId, {});
         } catch (error) {
           next(error);
         }
 
-        const newPoints = userPoints.points + total_points;
+        const newPoints = userData.points + total_points;
         //Added points won.
         try {
           await User.findByIdAndUpdate(userId, {
@@ -264,6 +264,7 @@ router.post(
           total_wrong_answers,
           num_questions,
           total_points,
+          userData
         });
         //if its not the end of the game, redirect to the GET /game/quizid route to continue playing
       } else {

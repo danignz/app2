@@ -125,4 +125,32 @@ router.post("/logout", isLoggedIn, (req, res, next) => {
   });
 });
 
+// @desc    Manage the data received from the form to upload user profile's picture in DB
+// @route   POST /auth/userId/edit
+// @access  Private
+router.post("/:userId/edit", isLoggedIn, fileUploader.single('user_img'), async (req, res, next) => {
+  const { userId } = req.params;
+  const { existingImage } = req.body;
+  
+  let user_img;
+  if (req.file) {
+    user_img = req.file.path;
+  } else {
+    user_img = existingImage;
+  }
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        user_img: user_img
+      },
+      { new: true }
+    );
+    res.render("auth/profile", { user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
