@@ -57,7 +57,8 @@ router.post("/create", checkRoles("admin"), fileUploader.single('question_img'),
     !incorrect_answers_0 ||
     !incorrect_answers_1 ||
     !category ||
-    !difficulty
+    !difficulty || 
+    !req.file
   ) {
     res.render("questions/new-question", {
       error:
@@ -183,7 +184,8 @@ router.post(
       !incorrect_answers_0 ||
       !incorrect_answers_1 ||
       !category ||
-      !difficulty
+      !difficulty || 
+      !req.file
     ) {
       res.render("questions/edit-question", {
         error:
