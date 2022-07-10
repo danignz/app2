@@ -332,6 +332,18 @@ button {
   box-shadow: 2px 2px #fffed5;
 }
 
+.action-buttons button.save-changes {
+  padding: 10px 40px;
+  text-decoration: none;
+  border-radius: 20px;
+  margin: 20px 2px;
+  font-size: 1em;
+  color: white;
+  border: none;
+  background: #5c98ff;
+  box-shadow: 2px 2px #fffed5;
+}
+
 /* Quiz Info*/
 .quiz-container {
   width: 85%;
