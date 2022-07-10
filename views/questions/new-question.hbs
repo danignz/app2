@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="title">New Questions</h1>
 
-  <form method="POST" action="/questions/create">
+  <form method="POST" action="/questions/create" enctype="multipart/form-data">
 
     <label>Question</label>
     <input
@@ -53,15 +53,8 @@
 
     <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible for users</label>
 
-
     <label>Image</label>
-    <input
-      type="text"
-      name="question_img"
-      placeholder="An image is needed"
-      value="/images/questions/default.jpg"
-      maxlength="100"
-    />
+    <input type="file" name="question_img" />
 
     {{#if error}}
       <p style="color: red;">{{error}}</p>

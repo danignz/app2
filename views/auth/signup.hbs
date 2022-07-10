@@ -6,7 +6,7 @@
 </div>
 
 <div id="form">
-  <form action="/auth/signup" method="POST">
+  <form action="/auth/signup" method="POST"  enctype="multipart/form-data">
 
     <label>Username</label>
     <input
@@ -37,6 +37,9 @@
       minlength="6"
       maxlength="20"
     />
+
+    <label>Profile Image</label>
+    <input type="file" name="user_img" />
 
     {{#if error}}
       <p style="color: red;">{{error}}</p>

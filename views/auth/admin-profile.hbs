@@ -3,6 +3,12 @@
     <img src="/images/styles/logo.png" class="logo-png" />
     <h4 class="title">Hi {{user.username}} !</h4>
   </div>
+  {{#if user.user_img}}
+    <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
+  {{else}}
+    <img id="profileimg" src="/images/profile/default.jpg" alt="Not image avariable" />
+  {{/if}}
+
   <div class="profile-info">
     <img src="/images/quizzes/js.png" />
     <img src="/images/quizzes/css.png" />

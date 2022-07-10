@@ -21,6 +21,7 @@ const userSchema = new Schema(
     },
     user_img: {
       type: String,
+      default: "/images/profile/default.jpg",
     },
     points: {
       type: Number,

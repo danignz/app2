@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="title">Edit Questions</h1>
 
-  <form method="POST" action="/questions/{{question._id}}/edit">
+  <form method="POST" action="/questions/{{question._id}}/edit"  enctype="multipart/form-data">
 
     <label>Question</label>
     <input
@@ -71,12 +71,7 @@
     />Visible for users</label>
 
     <label>Image</label>
-    <input
-      type="text"
-      name="question_img"
-      maxlength="80"
-      value="{{question.question_img}}"
-    />
+    <input type="file" name="question_img" />
 
     {{#if error}}
       <p style="color: red;">{{error}}</p>

@@ -1,10 +1,16 @@
 <div class="container">
   <div class="logo-text">
-    <img src="/images/styles/logo.png" class="logo-png"/>
+    <img src="/images/styles/logo.png" class="logo-png" />
     <h1 class="title">Hi {{user.username}} !</h1>
   </div>
 
-    <h3 class="profile-points">{{user.points}} POINTS</h3>
+  {{#if user.user_img}}
+    <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
+  {{else}}
+    <img id="profileimg" src="/images/profile/default.jpg" alt="Not image avariable" />
+  {{/if}}
+
+  <h3 class="profile-points">{{user.points}} POINTS</h3>
 
   <div class="profile-info">
     <img src="/images/quizzes/js.png" />
@@ -15,11 +21,18 @@
 
 <footer class="footer">
   <ul>
-    <li><a><img width = "45" height = "45" src="/navbar/ranking.png"></a></li>
-    <li><a class="playButton" href="/game/select"><img width = "50" height = "50" src="/navbar/play2.png"></a></li>
+    <li><a><img width="45" height="45" src="/navbar/ranking.png" /></a></li>
+    <li><a class="playButton" href="/game/select"><img
+          width="50"
+          height="50"
+          src="/navbar/play2.png"
+        /></a></li>
     <li>
-      <form action="/auth/logout" method="POST"><button type="submit"><img width = "45" height = "45" src="/navbar/logout.png"></button></form>
+      <form action="/auth/logout" method="POST"><button type="submit"><img
+            width="45"
+            height="45"
+            src="/navbar/logout.png"
+          /></button></form>
     </li>
   </ul>
 </footer>
-

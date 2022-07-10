@@ -368,3 +368,9 @@ footer img {
 .signup a{
   display: inline;
 }
+
+#profileimg{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}

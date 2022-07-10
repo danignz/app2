@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
 const { isLoggedIn, checkRoles } = require("../middlewares");
+const fileUploader = require('../config/cloudinary.config');
 
 // @desc    Displays List of all Questions
 // @route   GET /questions
@@ -32,7 +33,7 @@ router.get("/create", checkRoles("admin"), (req, res, next) => {
 // @desc    Sends data fields related to a question to DB to create a new question
 // @route   POST /questions/create
 // @access  Restricted to Admin role
-router.post("/create", checkRoles("admin"), async (req, res, next) => {
+router.post("/create", checkRoles("admin"), fileUploader.single('question_img'), async (req, res, next) => {
   const {
     question,
     correct_answer,
@@ -40,7 +41,6 @@ router.post("/create", checkRoles("admin"), async (req, res, next) => {
     incorrect_answers_1,
     category,
     difficulty,
-    question_img,
     isVisible,
   } = req.body;
 
@@ -57,8 +57,7 @@ router.post("/create", checkRoles("admin"), async (req, res, next) => {
     !incorrect_answers_0 ||
     !incorrect_answers_1 ||
     !category ||
-    !difficulty ||
-    !question_img
+    !difficulty
   ) {
     res.render("questions/new-question", {
       error:
@@ -78,7 +77,7 @@ router.post("/create", checkRoles("admin"), async (req, res, next) => {
       incorrect_answers,
       category,
       difficulty,
-      question_img,
+      question_img: req.file.path,
       isVisible: Boolean(isVisible),
     });
     res.redirect("/questions");
@@ -162,6 +161,7 @@ router.get("/:questionId/edit", checkRoles("admin"), async (req, res, next) => {
 router.post(
   "/:questionId/edit",
   checkRoles("admin"),
+  fileUploader.single('question_img'),
   async (req, res, next) => {
     const { questionId } = req.params;
     const {
@@ -171,7 +171,6 @@ router.post(
       incorrect_answers_1,
       category,
       difficulty,
-      question_img,
       isVisible,
     } = req.body;
 
@@ -184,8 +183,7 @@ router.post(
       !incorrect_answers_0 ||
       !incorrect_answers_1 ||
       !category ||
-      !difficulty ||
-      !question_img
+      !difficulty
     ) {
       res.render("questions/edit-question", {
         error:
@@ -203,7 +201,7 @@ router.post(
           incorrect_answers,
           category,
           difficulty,
-          question_img,
+          question_img: req.file.path,
           isVisible: Boolean(isVisible),
         },
         { new: true }
