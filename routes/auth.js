@@ -42,6 +42,14 @@ router.post("/signup", fileUploader.single('user_img'), async (req, res, next) =
     });
     return;
   }
+
+  let user_img;
+  if (req.file) {
+    user_img = req.file.path;
+  } else {
+    user_img = "/images/profile/default.jpg";
+  }
+
   try {
     // Check if email exists on our DB
     const emailFromDB = await User.findOne({ email: email });
@@ -66,7 +74,7 @@ router.post("/signup", fileUploader.single('user_img'), async (req, res, next) =
       const salt = await bcrypt.genSalt(saltRounds);
       // Use salt to hash password
       const hashedPassword = await bcrypt.hash(password, salt);
-      const user = await User.create({ username, email, hashedPassword, user_img: req.file.path });
+      const user = await User.create({ username, email, hashedPassword, user_img: user_img });
       res.redirect("/auth/login");
     }
   } catch (error) {
