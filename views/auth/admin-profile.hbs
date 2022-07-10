@@ -1,46 +1,34 @@
 <div class="container">
-  <div class="logo-text">
+  <div class="logo-text card-container-admin">
     <img src="/images/styles/logo.png" class="logo-png" />
     <h2 class="title">Hi {{user.username}} !</h2>
-  </div>
 
-  {{#if user.user_img}}
-    <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
-  {{else}}
-    <img id="profileimg" src="/images/profile/default.jpg" alt="Not image avariable" />
-  {{/if}}
-
-  <div class="changeprofileimg">
-    <form
-      method="POST"
-      action="/auth/{{user._id}}/edit"
-      enctype="multipart/form-data"
-    >
-      <label class="custom-file-upload">
-        <img src="/images/profile/change.png" alt="Not image avariable" />
-        Change Image
-        <input type="file" name="user_img" />
-        <input type="text" name="existingImage" hidden value="{{user.user_img}}">
-      </label>
-      <button class="save-changes" type="submit">Save changes</button>
-    </form>
+    {{#if user.user_img}}
+      <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
+    {{else}}
+      <img
+        id="profileimg"
+        src="/images/profile/default.jpg"
+        alt="Not image avariable"
+      />
+    {{/if}}
   </div>
 
   <div class="card-container-admin">
     <div class="card-select-admin">
-      <img width="45" height="45" src="/images/admin/new.png"/>
+      <img width="45" height="45" src="/images/admin/new.png" />
       <a style="color: #1f9b33;" href="/quizzes/create">New Quiz</a>
     </div>
     <div class="card-select-admin">
-      <img width="45" height="45" src="/images/admin/list.png"/>
+      <img width="45" height="45" src="/images/admin/list.png" />
       <a style="color: #1f9b33;" href="/quizzes">List Quizzes</a>
     </div>
     <div class="card-select-admin">
-      <img width="45" height="45" src="/images/admin/new.png"/>
+      <img width="45" height="45" src="/images/admin/new.png" />
       <a style="color: #ff5d5c;" href="/questions/create">New Question</a>
     </div>
     <div class="card-select-admin">
-      <img width="45" height="45" src="/images/admin/list.png"/>
+      <img width="45" height="45" src="/images/admin/list.png" />
       <a style="color: #ff5d5c;" href="/questions">List Questions</a>
     </div>
 

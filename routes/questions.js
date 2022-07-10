@@ -177,6 +177,34 @@ router.post(
 
     const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
+  //Needed values to pass to the view if an error occurs to reload select input correctly
+  const enumValuesCategory = Question.schema.path("category").enumValues;
+  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
+
+  let questionDB, arrayCurrentCategory, arrayCurrentDifficulty;
+
+  try {
+    questionDB = await Question.findById(questionId);
+
+    arrayCurrentCategory = enumValuesCategory.map((category) => {
+      if (category === questionDB.category) {
+        return { category: category, isCurrent: true };
+      } else {
+        return { category: category, isCurrent: false };
+      }
+    });
+
+    arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
+      if (difficulty === questionDB.difficulty) {
+        return { difficulty: difficulty, isCurrent: true };
+      } else {
+        return { difficulty: difficulty, isCurrent: false };
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+
     // Check if admin introduced all values
     if (
       !question ||
@@ -189,9 +217,12 @@ router.post(
     ) {
       res.render("questions/edit-question", {
         error:
-          "All fields (except Visible) are mandatory. Please fill them before submitting.",
-      });
-      return;
+        "All fields (except Visible) are mandatory. Please fill them before submitting.",
+      arrayCurrentCategory: arrayCurrentCategory,
+      arrayCurrentDifficulty: arrayCurrentDifficulty,
+      question: questionDB,
+    });
+    return;
     }
 
     try {

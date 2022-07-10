@@ -8,13 +8,6 @@
   <!-- <h2>Total incorrect answers: {{total_wrong_answers}} / {{num_questions}}</h2> -->
   <h3 class="profile-points"> {{userData.username}} {{total_points}} POINTS WON!</h3>
 
-  {{#if userData.user_img}}
-    <img id="resultImgProfile" src={{userData.user_img}} alt="Not image avariable" />
-  {{else}}
-    <img id="resultImgProfile" src="/images/profile/default.jpg" alt="Not image avariable" />
-  {{/if}}
-
-  
   <div class="card-container">
     <div class="card-select">
       {{#each answersArrObject}}
