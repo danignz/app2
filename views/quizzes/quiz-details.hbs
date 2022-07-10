@@ -2,21 +2,24 @@
   <h1 class="title">Detail of a Quiz</h1>
   
   <div class="card-container">
-    <div class="card">
+    <div class="card-detail-quiz">
       <h2 class="titleCard">{{this.title}}</h2>
-      <h4>{{this.description}}</h4>
-      <h2 class="difficultyCard" >{{this.category}} | {{this.difficulty}}</h2>
+      <h3 class="question">{{this.description}}</h>
+      <h4>- {{this.category}} | {{this.difficulty}} -</h4>
+      <br>
       <h4 class="rofile-points" >Points required: {{this.points_required}}</h4>
       <h4>{{this.num_questions}} questions</h4>
       <h4>Visibility: {{this.isVisible}}</h4>
+      <br>
       <h4>List of Questions:</h4>
-      {{#each this.question}}
-        <h4><a href="/questions/{{this._id}}">Question
+      <br>
+        {{#each this.question}}
+          <h4><a href="/questions/{{this._id}}">Question
             {{indexOfQuestions}}
           </a></h4>
-      {{/each}}
+        {{/each}}
+        <br>
     </div>
-
   </div>
 
   <div class="action-buttons">
@@ -30,8 +33,21 @@
     >Edit</button>
   </div>
 
-</div>
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
 
-<p>
-  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
-</p>
+</div>

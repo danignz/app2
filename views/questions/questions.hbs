@@ -1,21 +1,38 @@
 <div class="container">
-<h1 class="title">List of Questions</h1>
+  <h1 class="title">List of Questions</h1>
 
-<div class="card-container">
-  {{#if questions}}
-    {{#each questions}}
-      <div class="card">
-        <h4> ·{{this.question}}</h4>
-        <h6> - {{this.category}} - </h6>
-        <h3><a class="details" href="/questions/{{this._id}}">See details</a></h3>
-      </div>
-    {{/each}}
-  {{else}}
-    <h3>Not questions avariable</h3>
-  {{/if}}
-</div>
+  <div class="card-container">
+    {{#if questions}}
+      {{#each questions}}
+        <div class="card-list-questions">
+          <h3 class="question">{{this.question}}</h3>
+          <h4> - {{this.category}} - </h4>
+          <div class="see-details">
+            <img width = "40" height = "40" src="images/admin/eye.png">
+            <h3><a class="details" href="/questions/{{this._id}}">See details</a></h3>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <h3>Not questions avariable</h3>
+    {{/if}}
+  </div>
 
-<p>
-  <a class="homelink noformcontainer" href="/">&larr; Back Home</a>
-</p>
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
+
 </div>
