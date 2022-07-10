@@ -247,6 +247,20 @@ input.input-check {
   box-shadow: 2px 2px #343434;
 }
 
+.card-detail-quiz {
+  width: 100%;
+  background-color: #ebfcf4;
+  padding: 15px;
+  border-radius: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px #343434;
+}
+
 .card-list-questions {
   width: 90%;
   background-color: #ebfcf4;
@@ -288,6 +302,8 @@ input.input-check {
   box-shadow: 2px 2px #343434;
 }
 
+
+
 .see-details {
   width: 90%;
   padding: 8px 40px;
@@ -328,7 +344,6 @@ button {
 }
 
 .action-buttons {
-
   display: flex;
   justify-content: center;
 }
