@@ -57,8 +57,13 @@
 
     <button class= "login" type="submit">Create</button>
 
-  </form>
-  <p>
-  <a class="homelink" href="/">&larr; Back Home</a>
-  </p>
+ <footer class="footer">
+  <ul>
+    <li><button onclick="history.back()"><img width = "45" height = "45" src="/navbar/back.png"></button></li>
+    <li>
+      <form action="/auth/logout" method="POST"><button type="submit"><img width = "45" height = "45" src="/navbar/logout.png"></button></form>
+    </li>
+  </ul>
+ </footer>
+
 </div>
