@@ -1,7 +1,14 @@
-{{#if error}}
-  <p style="color: red;">{{error}}</p>
-{{/if}}
+<div class="container">
+  <div class="logo-text">
+    <img src="/images/styles/logo.png" class="logo-png" />
+    <h2>Guess What</h2>
+  </div>
 
-<p>
-  <a class="homelink" href="/">&larr; Back Home</a>
-</p>
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+
+  <p>
+    <a class="homelink noformcontainer" href="/profile">&larr; Back Home</a>
+  </p>
+</div>

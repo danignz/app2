@@ -470,12 +470,14 @@ footer img {
 }
 
 .custom-file-upload {
-  border: 1px solid #ccc;
+  background-color: #ecf8f3;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
 }
 
+/* Profile*/
+/* button edit image*/
 .image {
   width: 40px;
   height: 40px;
