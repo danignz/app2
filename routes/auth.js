@@ -3,8 +3,8 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const {isLoggedIn, checkRoles} = require('../middlewares');
-const fileUploader = require('../config/cloudinary.config');
+const { isLoggedIn, checkRoles } = require("../middlewares");
+const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -23,64 +23,73 @@ router.get("/login", async (req, res, next) => {
 // @desc    Sends user auth data to database to create a new user
 // @route   POST /auth/signup
 // @access  Public
-router.post("/signup", fileUploader.single('user_img'), async (req, res, next) => {
-  const { email, password, username } = req.body;
+router.post(
+  "/signup",
+  fileUploader.single("user_img"),
+  async (req, res, next) => {
+    const { email, password, username } = req.body;
 
-  // Check if user introduced all values
-  if (!email || !username || !password) {
-    res.render("auth/signup", {
-      error: "All fields are mandatory. Please fill them before submitting.",
-    });
-    return;
-  }
-  // Check is password meets requirements
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!regex.test(password)) {
-    res.render("auth/signup", {
-      error:
-        "Password must have lowercase letters, uppercase letters and at least one number.",
-    });
-    return;
-  }
-
-  let user_img;
-  if (req.file) {
-    user_img = req.file.path;
-  } else {
-    user_img = "/images/profile/default.jpg";
-  }
-
-  try {
-    // Check if email exists on our DB
-    const emailFromDB = await User.findOne({ email: email });
-    // email can't be repeated
-    if (emailFromDB) {
+    // Check if user introduced all values
+    if (!email || !username || !password) {
       res.render("auth/signup", {
-        error: "Email is not avariable. Try with another one.",
+        error: "All fields are mandatory. Please fill them before submitting.",
+      });
+      return;
+    }
+    // Check is password meets requirements
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(password)) {
+      res.render("auth/signup", {
+        error:
+          "Password must have lowercase letters, uppercase letters and at least one number.",
       });
       return;
     }
 
-    // Check if user exists on our DB
-    const user = await User.findOne({ username: username });
-    // Username can't be repeated
-    if (user) {
-      res.render("auth/signup", {
-        error: "Username is not avariable. Try with another one.",
-      });
-      return;
+    let user_img;
+    if (req.file) {
+      user_img = req.file.path;
     } else {
-      // Generate salt
-      const salt = await bcrypt.genSalt(saltRounds);
-      // Use salt to hash password
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const user = await User.create({ username, email, hashedPassword, user_img: user_img });
-      res.redirect("/auth/login");
+      user_img = "/images/profile/default.jpg";
     }
-  } catch (error) {
-    next(error);
+
+    try {
+      // Check if email exists on our DB
+      const emailFromDB = await User.findOne({ email: email });
+      // email can't be repeated
+      if (emailFromDB) {
+        res.render("auth/signup", {
+          error: "Email is not avariable. Try with another one.",
+        });
+        return;
+      }
+
+      // Check if user exists on our DB
+      const user = await User.findOne({ username: username });
+      // Username can't be repeated
+      if (user) {
+        res.render("auth/signup", {
+          error: "Username is not avariable. Try with another one.",
+        });
+        return;
+      } else {
+        // Generate salt
+        const salt = await bcrypt.genSalt(saltRounds);
+        // Use salt to hash password
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const user = await User.create({
+          username,
+          email,
+          hashedPassword,
+          user_img: user_img,
+        });
+        res.redirect("/auth/login");
+      }
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Sends user auth data to database to authenticate user
 // @route   POST /auth/login
@@ -127,34 +136,6 @@ router.post("/logout", isLoggedIn, (req, res, next) => {
       res.redirect("/");
     }
   });
-});
-
-// @desc    Manage the data received from the form to upload user profile's picture in DB
-// @route   POST /auth/userId/edit
-// @access  Private
-router.post("/:userId/edit", isLoggedIn, fileUploader.single('user_img'), async (req, res, next) => {
-  const { userId } = req.params;
-  const { existingImage } = req.body;
-  
-  let user_img;
-  if (req.file) {
-    user_img = req.file.path;
-  } else {
-    user_img = existingImage;
-  }
-
-  try {
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        user_img: user_img
-      },
-      { new: true }
-    );
-    res.render("auth/profile", { user });
-  } catch (error) {
-    next(error);
-  }
 });
 
 module.exports = router;

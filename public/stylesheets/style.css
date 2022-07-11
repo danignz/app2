@@ -5,10 +5,12 @@
 }
 
 body {
-  background: radial-gradient(circle,
-      rgba(34, 193, 195, 0.6210526315789473) 0%,
-      rgba(253, 187, 45, 0.4421052631578948) 100%);
-  font-family: 'Nunito', sans-serif;
+  background: radial-gradient(
+    circle,
+    rgba(34, 193, 195, 0.6210526315789473) 0%,
+    rgba(253, 187, 45, 0.4421052631578948) 100%
+  );
+  font-family: "Nunito", sans-serif;
 }
 
 .container {
@@ -35,7 +37,6 @@ h2 {
 h3 {
   margin-top: 10px;
   color: #6d37ff;
-  ;
   text-align: center;
   font-weight: lighter;
 }
@@ -159,7 +160,7 @@ div .answer {
 }
 
 .answer1 {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 20px;
   width: 100%;
   color: #343434;
@@ -168,11 +169,11 @@ div .answer {
   margin: 10px 10px 10px 0px;
   padding: 10px;
   background-color: #ff5d5c;
-  box-shadow: 2px 2px #343434
+  box-shadow: 2px 2px #343434;
 }
 
 .answer2 {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 20px;
   font-weight: bolder;
   width: 100%;
@@ -186,7 +187,7 @@ div .answer {
 }
 
 .answer3 {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 20px;
   width: 100%;
   color: #343434;
@@ -302,8 +303,6 @@ input.input-check {
   box-shadow: 2px 2px #343434;
 }
 
-
-
 .see-details {
   width: 90%;
   padding: 8px 40px;
@@ -312,24 +311,23 @@ input.input-check {
   margin-bottom: 5px;
   display: flex;
   justify-content: space-evenly;
-
 }
 
-.card-select>a img {
+.card-select > a img {
   width: 60%;
 }
 
-.card>img {
+.card > img {
   width: 100%;
   margin-bottom: 15px;
 }
 
-.card>a>img {
+.card > a > img {
   width: 100%;
   margin-bottom: 15px;
 }
 
-.card>a {
+.card > a {
   display: flex;
   justify-content: center;
 }
@@ -399,7 +397,7 @@ button {
 }
 
 /* Profile*/
-.profile-info>img {
+.profile-info > img {
   width: 32%;
   margin-top: 20px;
 }
@@ -454,18 +452,18 @@ footer img {
   size-adjust: 2px;
 }
 
-.signup a{
+.signup a {
   display: inline;
 }
 
-#profileimg{
-  width: 90px;
-  height: 90px;
+#profileimg {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  display: block;
+  display: inline-block;
 }
 
-.changeprofileimg img{
+.changeprofileimg img {
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -476,4 +474,11 @@ footer img {
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+form .change-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  position: absolute;
 }
