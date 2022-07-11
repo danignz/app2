@@ -1,10 +1,23 @@
 <div class="container">
   <div class="logo-text">
-    <img src="/images/styles/logo.png" class="logo-png" />
+
+    <form class="change-img" action="/profile/edit-profile" method="POST"><button type="submit">+</button></form>
+
+    {{#if user.user_img}}
+      <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
+    {{else}}
+      <img
+        id="profileimg"
+        src="/images/profile/default.jpg"
+        alt="Not image avariable"
+      />
+    {{/if}}
+
+    <!-- <img src="/images/styles/logo.png" class="logo-png" /> -->
     <h1 class="title">Hi {{user.username}} !</h1>
   </div>
 
-  {{#if user.user_img}}
+  <!-- {{#if user.user_img}}
     <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
   {{else}}
     <img
@@ -24,11 +37,16 @@
         <img src="/images/profile/change.png" alt="Not image avariable" />
         Change Image
         <input type="file" name="user_img" />
-        <input type="text" name="existingImage" hidden value="{{user.user_img}}">
+        <input
+          type="text"
+          name="existingImage"
+          hidden
+          value="{{user.user_img}}"
+        />
       </label>
       <button class="save-changes" type="submit">Save changes</button>
     </form>
-  </div>
+  </div>  -->
 
   <h3 class="profile-points">{{user.points}} POINTS</h3>
 

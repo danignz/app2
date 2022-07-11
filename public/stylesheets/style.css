@@ -458,11 +458,18 @@ footer img {
   display: inline;
 }
 
+form .change-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  position:absolute;
+} 
+
 #profileimg{
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  display: block;
+  display: inline-block;
 }
 
 .changeprofileimg img{

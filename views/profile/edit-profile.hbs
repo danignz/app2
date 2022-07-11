@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="title">Edit Profile</h1>
+
+    <div class="changeprofileimg">
+      <form
+        method="POST"
+        action="/auth/{{user._id}}/edit"
+        enctype="multipart/form-data"
+      >
+        <label class="custom-file-upload">
+          <img src="/images/profile/change.png" alt="Not image avariable" />
+          Change Image
+          <input type="file" name="user_img" />
+          <input
+            type="text"
+            name="existingImage"
+            hidden
+            value="{{user.user_img}}"
+          />
+        </label>
+        <button class="save-changes" type="submit">Save changes</button>
+      </form>
+    </div>
+
+    {{#if error}}
+      <p style="color: red;">{{error}}</p>
+    {{/if}}
+
+
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
+
+</div>
