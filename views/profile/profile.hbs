@@ -1,23 +1,22 @@
 <div class="container">
   <div class="logo-text">
+
+    <button class="image" onclick="location.href='/profile/{{user._id}}/edit'"
+      type="button"
+    >Edit</button>
+
+    {{#if user.user_img}}
+      <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
+    {{else}}
+      <img
+        id="profileimg"
+        src="/images/profile/default.jpg"
+        alt="Not image avariable"
+      />
+    {{/if}}
     <!--<img src="/images/styles/logo.png" class="logo-png" />-->
     <h1 class="title">Hi {{user.username}} !</h1>
   </div>
-
-  <button
-    onclick="location.href='/profile/{{user._id}}/edit'"
-    type="button"
-  >Edit</button>
-
-  {{#if user.user_img}}
-    <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
-  {{else}}
-    <img
-      id="profileimg"
-      src="/images/profile/default.jpg"
-      alt="Not image avariable"
-    />
-  {{/if}}
 
   <!-- <div class="changeprofileimg">
     <form
