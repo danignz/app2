@@ -476,6 +476,13 @@ footer img {
   cursor: pointer;
 }
 
+.image-extra {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  z-index: auto;
+}
+
 /* Profile*/
 /* button edit image*/
 .image {
