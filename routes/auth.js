@@ -106,11 +106,7 @@ router.post("/login", async (req, res, next) => {
       const match = await bcrypt.compare(password, user.hashedPassword);
       if (match) {
         req.session.currentUser = user;
-        if(user.role === "admin"){
-          res.render("auth/admin-profile", { user });
-        }else{
-          res.render("auth/profile", { user });
-        }
+        res.redirect("/profile");
       } else {
         res.render("auth/login", { error: "Unable to authenticate user" });
       }
