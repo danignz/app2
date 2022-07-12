@@ -1,22 +1,25 @@
 <div class="container">
   <h1 class="title">Ranking</h1>
 
-  <h2>{{userDataByCategory.0.category}}</h2>
+  <h3>{{userDataByCategory.0.category}}</h3>
   {{#if userDataByCategory}}
     {{#each userDataByCategory}}
       <div class="card">
-        <h2>Position: {{this.position}} | {{this.username}} 
-        {{#if this.user_img}}
-          <img
-            style="width:50px;height:60px;"
-            src="{{this.user_img}}"
-            alt="Image of profile"
-          />
-        {{else}}
-          <img src="/images/profile/default.jpg" alt="Not image avariable" />
-        {{/if}}
+        <h3>{{this.position}}
+          -
+          {{this.username}}
+          {{#if this.user_img}}
+            <img
+              style="width:50px;height:60px;"
+              src="{{this.user_img}}"
+              alt="Image of profile"
+            />
+          {{else}}
+            <img src="/images/profile/default.jpg" alt="Not image avariable" />
+          {{/if}}
 
-        Points: {{this.total_points}}</h2>
+          Points:
+          {{this.total_points}}</h3>
 
       </div>
     {{/each}}

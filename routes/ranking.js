@@ -4,20 +4,23 @@ const User = require("../models/User");
 const Quiz = require("../models/Quiz");
 const { isLoggedIn, checkRoles } = require("../middlewares");
 
+// @desc    App home page
+// @route   GET /
+// @access  Public
+router.get("/", (req, res, next) => {
+  res.render("ranking/ranking-selection");
+});
+
 //isLoggedIn,
 // @desc    Displays the ranking
 // @route   GET /ranking
 // @access  Private
-router.get("/", async (req, res, next) => {
-  //const enumValuesCategory = Quiz.schema.path("category").enumValues;
+router.get("/:category", async (req, res, next) => {
+  const { category } = req.params;
 
-  const category = "JAVASCRIPT";
+  console.log(category);
 
-  //   enumValuesCategory.forEach(category => {
-  //     console.log(category);
-
-  //   });
-
+  // const enumValuesCategory = Quiz.schema.path("category").enumValues;
   let gamesPerUserAndCategory;
   const userDataByCategory = [];
 
@@ -26,7 +29,11 @@ router.get("/", async (req, res, next) => {
       .populate({ path: "user" })
       .populate({ path: "quiz" });
 
-    const allUsers = await User.find({role: "player"});
+    const allUsers = await User.find({ role: "player" });
+
+    // enumValuesCategory.forEach(category => {
+
+    // });
 
     allUsers.forEach((user) => {
       //console.log(user.id);
@@ -58,7 +65,7 @@ router.get("/", async (req, res, next) => {
       },
       0);
 
-     // console.log(userTotalPoints);
+      // console.log(userTotalPoints);
 
       userDataByCategory.push({
         username: user.username,
@@ -67,7 +74,6 @@ router.get("/", async (req, res, next) => {
         category: category,
       });
     });
-
 
     console.log(userDataByCategory);
 
@@ -85,16 +91,12 @@ router.get("/", async (req, res, next) => {
     console.log(userDataByCategory);
 
     userDataByCategory.forEach((user, index) => {
-      userDataByCategory[index].position = index+1;
+      userDataByCategory[index].position = index + 1;
     });
 
     console.log(userDataByCategory);
 
     res.render("ranking/ranking", { userDataByCategory });
-
-
-    // console.log(games);
-    //   res.render("quizzes/quizzes", { quizzes });
   } catch (error) {
     next(error);
   }
