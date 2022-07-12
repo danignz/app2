@@ -1,0 +1,44 @@
+<div class="container">
+  <h1 class="title">Ranking</h1>
+
+  <h2>{{userDataByCategory.0.category}}</h2>
+  {{#if userDataByCategory}}
+    {{#each userDataByCategory}}
+      <div class="card">
+        <h2>Position: {{this.position}} | {{this.username}} 
+        {{#if this.user_img}}
+          <img
+            style="width:50px;height:60px;"
+            src="{{this.user_img}}"
+            alt="Image of profile"
+          />
+        {{else}}
+          <img src="/images/profile/default.jpg" alt="Not image avariable" />
+        {{/if}}
+
+        Points: {{this.total_points}}</h2>
+
+      </div>
+    {{/each}}
+  {{else}}
+    <h3>Not games has been player yet</h3>
+  {{/if}}
+
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
+
+</div>

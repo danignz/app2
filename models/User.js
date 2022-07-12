@@ -26,7 +26,7 @@ const userSchema = new Schema(
     points: {
       type: Number,
       required: [true, "Points are required"],
-      default: 100,
+      default: 0,
     },
     role: {
       type: String,
