@@ -5,12 +5,11 @@
 }
 
 body {
-  background: radial-gradient(
-    circle,
-    rgba(34, 193, 195, 0.6210526315789473) 0%,
-    rgba(253, 187, 45, 0.4421052631578948) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(34, 193, 195, 0.6210526315789473) 0%,
+      rgba(253, 187, 45, 0.4421052631578948) 100%);
   font-family: "Nunito", sans-serif;
+  margin-bottom: 80px;
 }
 
 .container {
@@ -313,21 +312,21 @@ input.input-check {
   justify-content: space-evenly;
 }
 
-.card-select > a img {
+.card-select>a img {
   width: 60%;
 }
 
-.card > img {
+.card>img {
   width: 100%;
   margin-bottom: 15px;
 }
 
-.card > a > img {
+.card>a>img {
   width: 100%;
   margin-bottom: 15px;
 }
 
-.card > a {
+.card>a {
   display: flex;
   justify-content: center;
 }
@@ -397,7 +396,7 @@ button {
 }
 
 /* Profile*/
-.profile-info > img {
+.profile-info>img {
   width: 32%;
   margin-top: 20px;
 }
