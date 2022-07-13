@@ -4,80 +4,58 @@ const User = require("../models/User");
 const Quiz = require("../models/Quiz");
 const { isLoggedIn, checkRoles } = require("../middlewares");
 
-// @desc    App home page
-// @route   GET /
-// @access  Public
-router.get("/", (req, res, next) => {
+// @desc    Displays ranking by category page
+// @route   GET /ranking
+// @access  Private
+router.get("/", isLoggedIn, (req, res, next) => {
   res.render("ranking/ranking-selection");
 });
 
-//isLoggedIn,
-// @desc    Displays the ranking
-// @route   GET /ranking
+// @desc    Displays the ranking of a concrete category
+// @route   GET /ranking/:category
 // @access  Private
-router.get("/:category", async (req, res, next) => {
+router.get("/:category", isLoggedIn, async (req, res, next) => {
   const { category } = req.params;
 
-  console.log(category);
-
-  // const enumValuesCategory = Quiz.schema.path("category").enumValues;
   let gamesPerUserAndCategory;
   const userDataByCategory = [];
 
   try {
+    //Get all the finished Games in DB
     const games = await Game.find({ status: "DONE" })
       .populate({ path: "user" })
       .populate({ path: "quiz" });
 
+    //Get all the players in DB
     const allUsers = await User.find({ role: "player" });
 
-    // enumValuesCategory.forEach(category => {
-
-    // });
-
+    //For every player
     allUsers.forEach((user) => {
-      //console.log(user.id);
-
+      //Generate an array of objects with the data of every Game for a concrete category
       gamesPerUserAndCategory = games.filter(function (game) {
-        //console.log(game.user.id, user.id);
         return game.user.id === user.id && game.quiz.category === category;
       });
 
-      //      console.log(game.user.username);
-      //      console.log(game.total_points);
-      // console.log(game.id);
-
-      //console.log(usersWithPointsAdded);
-
+      //Calculate the sum of total points of all the Games of a concret user and category
       const userTotalPoints = gamesPerUserAndCategory.reduce(function (
         sum,
         game
       ) {
-        // console.log(
-        //   "accumulator is: ",
-        //   sum,
-        //   "and current value is: ",
-        //   game.total_points,
-        //   "return is: ",
-        //   sum + game.total_points
-        // );
         return sum + game.total_points;
       },
       0);
 
-      // console.log(userTotalPoints);
-
+      //Generate an array of objects with all the necessary data of a user to display in the ranking
       userDataByCategory.push({
         username: user.username,
         user_img: user.user_img,
         total_points: userTotalPoints,
         category: category,
-        num_quizzes: gamesPerUserAndCategory.length
+        num_quizzes: gamesPerUserAndCategory.length,
       });
     });
 
-    console.log(userDataByCategory);
-
+    //Order in descending order by number of points
     userDataByCategory.sort((a, b) => {
       if (a.total_points < b.total_points) {
         return 1;
@@ -89,13 +67,11 @@ router.get("/:category", async (req, res, next) => {
         return 0;
       }
     });
-    console.log(userDataByCategory);
 
+    //Need to aggregate position attribute due in arrays the index starts by 0 and we need by 1
     userDataByCategory.forEach((user, index) => {
       userDataByCategory[index].position = index + 1;
     });
-
-    console.log(userDataByCategory);
 
     res.render("ranking/ranking", { userDataByCategory });
   } catch (error) {
