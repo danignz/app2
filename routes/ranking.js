@@ -72,6 +72,7 @@ router.get("/:category", async (req, res, next) => {
         user_img: user.user_img,
         total_points: userTotalPoints,
         category: category,
+        num_quizzes: gamesPerUserAndCategory.length
       });
     });
 
