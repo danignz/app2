@@ -492,6 +492,14 @@ footer img {
   position: absolute;
 }
 
+#instructions {
+  width: 100%;
+  display: inline-block;
+  border-radius: 15px;
+  box-shadow: 4px 4px #ebfcf4;
+  margin-top: 15px;
+}
+
 /* Ranking*/
 .ranking-select {
 display: flex;
