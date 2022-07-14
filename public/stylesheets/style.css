@@ -397,7 +397,8 @@ button {
 
 /* Profile*/
 .profile-info>img {
-  width: 32%;
+  /* width: 32%; */
+  width: 50%;
   margin-top: 20px;
 }
 
@@ -489,4 +490,17 @@ footer img {
   height: 40px;
   border-radius: 100%;
   position: absolute;
+}
+
+/* Ranking*/
+.ranking-select {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 30px;
+}
+
+.ranking-select img {
+  width: 50%;
 }
