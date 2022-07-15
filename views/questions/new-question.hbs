@@ -51,7 +51,13 @@
       {{/each}}
     </select>
 
-    <label class="check-label"><input class="input-check" type="checkbox" name="isVisible" value="true" checked="true"/>Visible for users</label>
+    <label class="check-label"><input
+        class="input-check"
+        type="checkbox"
+        name="isVisible"
+        value="true"
+        checked="true"
+      />Visible for users</label>
 
     <label>Image</label>
     <input type="file" name="question_img" />
@@ -64,13 +70,21 @@
 
   </form>
 
- <footer class="footer">
-  <ul>
-    <li><button onclick="history.back()"><img width = "45" height = "45" src="/navbar/back.png"></button></li>
-    <li>
-      <form action="/auth/logout" method="POST"><button type="submit"><img width = "45" height = "45" src="/navbar/logout.png"></button></form>
-    </li>
-  </ul>
- </footer>
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
 
 </div>

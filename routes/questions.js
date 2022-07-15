@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Question = require("../models/Question");
-const { isLoggedIn, checkRoles } = require("../middlewares");
-const fileUploader = require('../config/cloudinary.config');
+const { checkRoles } = require("../middlewares");
+const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Displays List of all Questions
 // @route   GET /questions
@@ -33,60 +33,65 @@ router.get("/create", checkRoles("admin"), (req, res, next) => {
 // @desc    Sends data fields related to a question to DB to create a new question
 // @route   POST /questions/create
 // @access  Restricted to Admin role
-router.post("/create", checkRoles("admin"), fileUploader.single('question_img'), async (req, res, next) => {
-  const {
-    question,
-    correct_answer,
-    incorrect_answers_0,
-    incorrect_answers_1,
-    category,
-    difficulty,
-    isVisible,
-  } = req.body;
-
-  const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
-
-  //Needed values to pass to the view if an error occurs to reload select input correctly
-  const enumValuesCategory = Question.schema.path("category").enumValues;
-  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
-
-  // Check if admin introduced all values
-  if (
-    !question ||
-    !correct_answer ||
-    !incorrect_answers_0 ||
-    !incorrect_answers_1 ||
-    !category ||
-    !difficulty || 
-    !req.file
-  ) {
-    res.render("questions/new-question", {
-      error:
-        "All fields (except Visible) are mandatory. Please fill them before submitting.",
-      enumValues: {
-        category: enumValuesCategory,
-        difficulty: enumValuesDifficulty,
-      },
-    });
-    return;
-  }
-
-  try {
-    await Question.create({
+router.post(
+  "/create",
+  checkRoles("admin"),
+  fileUploader.single("question_img"),
+  async (req, res, next) => {
+    const {
       question,
       correct_answer,
-      incorrect_answers,
+      incorrect_answers_0,
+      incorrect_answers_1,
       category,
       difficulty,
-      question_img: req.file.path,
-      isVisible: Boolean(isVisible),
-    });
-    res.redirect("/questions");
-  } catch (error) {
-    next(error);
-    res.redirect("/questions/create");
+      isVisible,
+    } = req.body;
+
+    const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
+
+    //Needed values to pass to the view if an error occurs to reload select input correctly
+    const enumValuesCategory = Question.schema.path("category").enumValues;
+    const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
+
+    // Check if admin introduced all values
+    if (
+      !question ||
+      !correct_answer ||
+      !incorrect_answers_0 ||
+      !incorrect_answers_1 ||
+      !category ||
+      !difficulty ||
+      !req.file
+    ) {
+      res.render("questions/new-question", {
+        error:
+          "All fields (except Visible) are mandatory. Please fill them before submitting.",
+        enumValues: {
+          category: enumValuesCategory,
+          difficulty: enumValuesDifficulty,
+        },
+      });
+      return;
+    }
+
+    try {
+      await Question.create({
+        question,
+        correct_answer,
+        incorrect_answers,
+        category,
+        difficulty,
+        question_img: req.file.path,
+        isVisible: Boolean(isVisible),
+      });
+      res.redirect("/questions");
+    } catch (error) {
+      next(error);
+      res.redirect("/questions/create");
+    }
   }
-});
+);
 
 // @desc    Show all data fields related to a question indicated by the ID
 // @route   GET /questions/questionId
@@ -162,7 +167,7 @@ router.get("/:questionId/edit", checkRoles("admin"), async (req, res, next) => {
 router.post(
   "/:questionId/edit",
   checkRoles("admin"),
-  fileUploader.single('question_img'),
+  fileUploader.single("question_img"),
   async (req, res, next) => {
     const { questionId } = req.params;
     const {
@@ -177,33 +182,33 @@ router.post(
 
     const incorrect_answers = [incorrect_answers_0, incorrect_answers_1];
 
-  //Needed values to pass to the view if an error occurs to reload select input correctly
-  const enumValuesCategory = Question.schema.path("category").enumValues;
-  const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
+    //Needed values to pass to the view if an error occurs to reload select input correctly
+    const enumValuesCategory = Question.schema.path("category").enumValues;
+    const enumValuesDifficulty = Question.schema.path("difficulty").enumValues;
 
-  let questionDB, arrayCurrentCategory, arrayCurrentDifficulty;
+    let questionDB, arrayCurrentCategory, arrayCurrentDifficulty;
 
-  try {
-    questionDB = await Question.findById(questionId);
+    try {
+      questionDB = await Question.findById(questionId);
 
-    arrayCurrentCategory = enumValuesCategory.map((category) => {
-      if (category === questionDB.category) {
-        return { category: category, isCurrent: true };
-      } else {
-        return { category: category, isCurrent: false };
-      }
-    });
+      arrayCurrentCategory = enumValuesCategory.map((category) => {
+        if (category === questionDB.category) {
+          return { category: category, isCurrent: true };
+        } else {
+          return { category: category, isCurrent: false };
+        }
+      });
 
-    arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
-      if (difficulty === questionDB.difficulty) {
-        return { difficulty: difficulty, isCurrent: true };
-      } else {
-        return { difficulty: difficulty, isCurrent: false };
-      }
-    });
-  } catch (error) {
-    next(error);
-  }
+      arrayCurrentDifficulty = enumValuesDifficulty.map((difficulty) => {
+        if (difficulty === questionDB.difficulty) {
+          return { difficulty: difficulty, isCurrent: true };
+        } else {
+          return { difficulty: difficulty, isCurrent: false };
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
 
     // Check if admin introduced all values
     if (
@@ -212,17 +217,17 @@ router.post(
       !incorrect_answers_0 ||
       !incorrect_answers_1 ||
       !category ||
-      !difficulty || 
+      !difficulty ||
       !req.file
     ) {
       res.render("questions/edit-question", {
         error:
-        "All fields (except Visible) are mandatory. Please fill them before submitting.",
-      arrayCurrentCategory: arrayCurrentCategory,
-      arrayCurrentDifficulty: arrayCurrentDifficulty,
-      question: questionDB,
-    });
-    return;
+          "All fields (except Visible) are mandatory. Please fill them before submitting.",
+        arrayCurrentCategory: arrayCurrentCategory,
+        arrayCurrentDifficulty: arrayCurrentDifficulty,
+        question: questionDB,
+      });
+      return;
     }
 
     try {
@@ -239,7 +244,6 @@ router.post(
         },
         { new: true }
       );
-      console.log("Just updated:", updatedQuestion);
       res.redirect(`/questions/${questionId}`);
     } catch (error) {
       next(error);

@@ -399,7 +399,6 @@ button {
 
 /* Profile*/
 .profile-info > img {
-  /* width: 32%; */
   width: 50%;
   margin-top: 20px;
 }
@@ -545,15 +544,3 @@ footer img {
   background-image: url("/images/404.jpg");
   margin-bottom: 50px;
 }
-
-/* div .card-ranking:nth-child(1) {
-  background: rgb(255, 166, 0);
-}
-
-div .card-ranking:nth-child(2) {
-  background:blue;
-}
-
-div .card-ranking:nth-child(3) {
-  background:blue;
-} */

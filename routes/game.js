@@ -3,7 +3,7 @@ const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
 const Game = require("../models/Game");
 const User = require("../models/User");
-const { isLoggedIn, checkRoles } = require("../middlewares");
+const { isLoggedIn } = require("../middlewares");
 
 // @desc    Show all quizzes that are able to be played for the user
 // @route   GET /game/select

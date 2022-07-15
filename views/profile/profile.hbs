@@ -1,7 +1,9 @@
 <div class="container">
   <div class="logo-text">
 
-    <button class="image" onclick="location.href='/profile/{{user._id}}/edit'"
+    <button
+      class="image"
+      onclick="location.href='/profile/{{user._id}}/edit'"
       type="button"
     >Edit</button>
 
@@ -15,13 +17,16 @@
       />
     {{/if}}
     <h1 class="title">Hi {{user.username}} !</h1>
- 
 
-  <h3 class="profile-points">{{user.points}} POINTS</h3>
+    <h3 class="profile-points">{{user.points}} POINTS</h3>
 
-  <img id="instructions" alt="insructions" src="/images/extra/Instructions.jpg">
+    <img
+      id="instructions"
+      alt="insructions"
+      src="/images/extra/Instructions.jpg"
+    />
 
- </div>
+  </div>
 </div>
 
 <footer class="footer">

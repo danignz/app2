@@ -332,7 +332,6 @@ router.post("/:quizId/edit", checkRoles("admin"), async (req, res, next) => {
       },
       { new: true }
     );
-    console.log("Just updated:", updatedQuiz);
     res.redirect(`/quizzes/${quizId}`);
   } catch (error) {
     next(error);

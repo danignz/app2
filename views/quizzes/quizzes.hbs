@@ -6,7 +6,6 @@
     {{#if quizzes}}
       {{#each quizzes}}
         <div class="card-select">
-         <!-- <a class="image-extra"><img src="images/extra/quiz.png" /></a> -->
           {{#if this.quiz_img}}
             <a href="/quizzes/{{this._id}}"><img
                 src="{{this.quiz_img}}"
@@ -17,8 +16,6 @@
           {{/if}}
           <h2><a href="/quizzes/{{this._id}}">{{this.title}}</a></h2>
 
-          <!-- <h6>{{this.category}} | {{this.difficulty}}</h6> -->
-          <!-- <h6 class="difficultyCard">{{this.difficulty}}</h6> -->
           <div>
             <h4>{{this.points_required}} points required </h4>
             <a style="color:#6d37ff;">&#9733;&#9733;&#9733;&#9733;&#9733;</a>

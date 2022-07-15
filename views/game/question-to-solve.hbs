@@ -1,35 +1,50 @@
 <div class="container">
-<div class="card-container">
-  <div class="card">
+  <div class="card-container">
+    <div class="card">
 
-    <h1 class="title">{{current_question}} / {{total_questions}}</h1>
-    <h3 class="question">{{question.question}}</h3>
-    {{#if question.question_img}}
-      <img src="{{question.question_img}}" alt="Image of question" />
-    {{else}}
-      <img src="/images/questions/default.jpg" alt="Not image avariable" />
-    {{/if}}
+      <h1 class="title">{{current_question}} / {{total_questions}}</h1>
+      <h3 class="question">{{question.question}}</h3>
+      {{#if question.question_img}}
+        <img src="{{question.question_img}}" alt="Image of question" />
+      {{else}}
+        <img src="/images/questions/default.jpg" alt="Not image avariable" />
+      {{/if}}
 
-    <div class="answer">
-      <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
-        <button class="answer1" onclick="disablebuttons(); this.form.submit();"  class="answer" type="submit" name="answer" value="{{possibleAnswers.[0]}}">{{possibleAnswers.[0]}}</button>
-      </form>
+      <div class="answer">
+        <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
+          <button
+            class="answer1"
+            onclick="disablebuttons(); this.form.submit();"
+            class="answer"
+            type="submit"
+            name="answer"
+            value="{{possibleAnswers.0}}"
+          >{{possibleAnswers.0}}</button>
+        </form>
 
-      <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
-        <button class="answer2" onclick="disablebuttons(); this.form.submit();" class="answer" type="submit" name="answer" value="{{possibleAnswers.[1]}}">{{possibleAnswers.[1]}}</button>
-      </form>
+        <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
+          <button
+            class="answer2"
+            onclick="disablebuttons(); this.form.submit();"
+            class="answer"
+            type="submit"
+            name="answer"
+            value="{{possibleAnswers.1}}"
+          >{{possibleAnswers.1}}</button>
+        </form>
 
-      <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
-        <button class="answer3" onclick="disablebuttons(); this.form.submit();" class="answer" type="submit" name="answer" value="{{possibleAnswers.[2]}}">{{possibleAnswers.[2]}}</button>
-      </form>
+        <form method="POST" action="/game/{{question._id}}/{{gameId}}/check">
+          <button
+            class="answer3"
+            onclick="disablebuttons(); this.form.submit();"
+            class="answer"
+            type="submit"
+            name="answer"
+            value="{{possibleAnswers.2}}"
+          >{{possibleAnswers.2}}</button>
+        </form>
+      </div>
+
     </div>
-    
   </div>
 </div>
-</div>
-
-<!-- <footer class="footer-game">
-  <ul>
-    <li><a><img width = "50" height = "50" src="/navbar/stop.png"></a></li>
-  </ul>
-</footer> -->

@@ -3,15 +3,6 @@
     <img src="/images/styles/logo.png" class="logo-png" />
     <h2 class="title">Hi {{user.username}} !</h2>
 
-    <!-- {{#if user.user_img}}
-      <img id="profileimg" src="{{user.user_img}}" alt="Profile Image" />
-    {{else}}
-      <img
-        id="profileimg"
-        src="/images/profile/default.jpg"
-        alt="Not image avariable"
-      />
-    {{/if}} -->
   </div>
 
   <div class="card-container-admin">
@@ -38,7 +29,6 @@
 
 <footer class="footer">
   <ul>
-    <!-- <li><button onclick="history.back()"><img width = "45" height = "45" src="/navbar/back.png"></button></li> -->
     <li>
       <form action="/auth/logout" method="POST"><button type="submit"><img
             width="45"

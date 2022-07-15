@@ -4,29 +4,30 @@
   <h3>{{userDataByCategory.0.category}}</h3>
   {{#if userDataByCategory}}
     {{#each userDataByCategory}}
-    <div class="card-container">
-      <div class="card-ranking">
-        <h2 class="title">{{this.position}}</h2>
+      <div class="card-container">
+        <div class="card-ranking">
+          <h2 class="title">{{this.position}}</h2>
 
-         <div class="image-profile-ranking">
-         {{#if this.user_img}}
-            <img
-              src="{{this.user_img}}"
-              alt="Image of profile"
-            />
-          {{else}}
-            <img src="/images/profile/default.jpg" alt="Not image avariable" />
-          {{/if}}
-        </div>
+          <div class="image-profile-ranking">
+            {{#if this.user_img}}
+              <img src="{{this.user_img}}" alt="Image of profile" />
+            {{else}}
+              <img
+                src="/images/profile/default.jpg"
+                alt="Not image avariable"
+              />
+            {{/if}}
+          </div>
 
           <h3 class="title">{{this.username}}
-          {{this.total_points}} pts</h3>
+            {{this.total_points}}
+            pts</h3>
           /
           <h4>{{num_quizzes}}
-          quizzes</h4>
+            quizzes</h4>
 
+        </div>
       </div>
-    </div>
     {{/each}}
   {{else}}
     <h3>Not games has been player yet</h3>

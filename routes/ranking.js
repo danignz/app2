@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Game = require("../models/Game");
 const User = require("../models/User");
 const Quiz = require("../models/Quiz");
-const { isLoggedIn, checkRoles } = require("../middlewares");
+const { isLoggedIn } = require("../middlewares");
 
 // @desc    Displays ranking by category page
 // @route   GET /ranking

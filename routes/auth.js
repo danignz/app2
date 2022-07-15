@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const { isLoggedIn, checkRoles } = require("../middlewares");
+const { isLoggedIn } = require("../middlewares");
 const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Displays form view to sign up
@@ -106,7 +106,6 @@ router.post("/login", async (req, res, next) => {
   }
 
   try {
-    // Remember to assign user to session cookie:
     const user = await User.findOne({ email: email });
     if (!user) {
       res.render("auth/login", { error: "User not found" });

@@ -1,42 +1,50 @@
 <div class="container">
-<h2 class="title">Question Details</h2>
+  <h2 class="title">Question Details</h2>
 
-<div class="card-container">
-  <div class="card">
-     <h3 class="question">{{this.question}}</h3>
-    {{#if this.question_img}}
-      <img src="{{this.question_img}}" alt="Image of question" />
-    {{else}}
-      <img src="/images/questions/default.jpg" alt="Not image avariable" />
-    {{/if}}
-    <h4>Correct answer: {{this.correct_answer}}</h4>
-    <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
-    <h4>{{this.category}}</h4>
-    <h4>{{this.difficulty}}</h4>
-    <h4>Visibility: {{this.isVisible}}</h4>
+  <div class="card-container">
+    <div class="card">
+      <h3 class="question">{{this.question}}</h3>
+      {{#if this.question_img}}
+        <img src="{{this.question_img}}" alt="Image of question" />
+      {{else}}
+        <img src="/images/questions/default.jpg" alt="Not image avariable" />
+      {{/if}}
+      <h4>Correct answer: {{this.correct_answer}}</h4>
+      <h4>Incorrect answers: {{this.incorrect_answers}}</h4>
+      <h4>{{this.category}}</h4>
+      <h4>{{this.difficulty}}</h4>
+      <h4>Visibility: {{this.isVisible}}</h4>
+    </div>
   </div>
-</div>
 
-<div class="action-buttons">
+  <div class="action-buttons">
 
-  <button
-    onclick="location.href='/questions/{{this._id}}/edit'"
-    type="button"
-  >Edit</button>
+    <button
+      onclick="location.href='/questions/{{this._id}}/edit'"
+      type="button"
+    >Edit</button>
 
-  <form method="POST" action="/questions/{{this._id}}/delete">
-    <button type="submit">Delete</button>
-  </form>
+    <form method="POST" action="/questions/{{this._id}}/delete">
+      <button type="submit">Delete</button>
+    </form>
 
-</div>
+  </div>
 
- <footer class="footer">
-  <ul>
-    <li><button onclick="history.back()"><img width = "45" height = "45" src="/navbar/back.png"></button></li>
-    <li>
-      <form action="/auth/logout" method="POST"><button type="submit"><img width = "45" height = "45" src="/navbar/logout.png"></button></form>
-    </li>
-  </ul>
- </footer>
+  <footer class="footer">
+    <ul>
+      <li><button onclick="history.back()"><img
+            width="45"
+            height="45"
+            src="/navbar/back.png"
+          /></button></li>
+      <li>
+        <form action="/auth/logout" method="POST"><button type="submit"><img
+              width="45"
+              height="45"
+              src="/navbar/logout.png"
+            /></button></form>
+      </li>
+    </ul>
+  </footer>
 
 </div>

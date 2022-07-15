@@ -1,44 +1,45 @@
 <div class="container">
-<div class="logo-text">
-  <img src="/images/styles/logo.png" class="logo-png" />
-  <h2>Guess What</h2>
-  <h1 class="title">Login</h1>
-</div>
+  <div class="logo-text">
+    <img src="/images/styles/logo.png" class="logo-png" />
+    <h2>Guess What</h2>
+    <h1 class="title">Login</h1>
+  </div>
 
-<div class="mobile">
-  <form action="/auth/login" method="POST">
+  <div class="mobile">
+    <form action="/auth/login" method="POST">
 
-    <label>Email</label>
-    <input
-      type="email"
-      name="email"
-      placeholder="john@puma.com"
-      required
-      minlength="4"
-      maxlength="40"
-    />
+      <label>Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="john@puma.com"
+        required
+        minlength="4"
+        maxlength="40"
+      />
 
-    <label>Password</label>
-    <input
-      type="password"
-      name="password"
-      placeholder="********"
-      required
-      minlength="6"
-      maxlength="20"
-    />
+      <label>Password</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="********"
+        required
+        minlength="6"
+        maxlength="20"
+      />
 
-    {{#if error}}
-      <p style="color:rgb(218, 90, 90)">{{error}}</p>
-    {{/if}}
+      {{#if error}}
+        <p style="color:rgb(218, 90, 90)">{{error}}</p>
+      {{/if}}
 
-    <button class="login" type="submit">Login</button>
+      <button class="login" type="submit">Login</button>
 
-  </form>
-</div>
+    </form>
+  </div>
 
- <p class="signup">
-  You don't have an account? <a href="/auth/signup"> Sign Up</a>
-</p>
+  <p class="signup">
+    You don't have an account?
+    <a href="/auth/signup"> Sign Up</a>
+  </p>
 
 </div>
